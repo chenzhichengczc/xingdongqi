@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html class="x-strict">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        行动企 - 应聘工作首选
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="../css/all.css" rel="stylesheet" type="text/css">
+    <link href="../css/index.css" type="text/css" rel="stylesheet">
+    <script src="../js/jquery-1.7.2-vsdoc.js" type="text/javascript"></script>
+    <script src="../js/jquery-1.7.2.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/JScalendar.js"></script>
+    <script type="text/javascript" src="../pager/kkpager.js"></script>
+    <link type="text/css" href="../pager/kkpager_blue.css">
+    <style>
+        #kkpager{
+            clear:both;
+            color:#999;
+            padding:5px 0px 5px 0px;
+            font-size:13px;
+        }
+        #kkpager a{
+            float: left;
+            border: 1px solid #ccc;
+            display: inline;
+            padding: 0px 10px;
+            line-height: 21px;
+            margin-right: 5px;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            cursor: pointer;
+            background: #fff;
+            text-decoration:none;
+            color:#999;
+        }
+
+        #kkpager span.disabled{
+            float: left;
+            display: inline;
+            padding: 3px 10px 3px 10px;
+            margin-right: 5px;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border:1px solid #DFDFDF;
+            background-color:#FFF;
+            color:#DFDFDF;
+        }
+        #kkpager span.curr{
+            float: left;
+            border: 1px solid #31ACE2;
+            display: inline;
+            padding: 3px 10px 3px 10px;
+            margin-right: 5px;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            background: #F0FDFF;
+            color: #31ACE2;
+        }
+        #kkpager a:hover{
+            border:1px solid #31ACE2;
+            background-color:#31ACE2;
+            color:#fff;
+        }
+        #kkpager span.normalsize{
+        }
+        #kkpager_gopage_wrap{
+            position:relative;
+            left:0px;
+            top:0px;
+        }
+        #kkpager_btn_go {
+            width:44px;
+            height:18px;
+            border:0px;
+            overflow:hidden;
+            line-height:140%;
+            padding:0px;
+            margin:0px;
+            text-align:center;
+            cursor:pointer;
+            background-color:#31ACE2;
+            color:#FFF;
+            position:absolute;
+            left:0px;
+            top:-2px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            display:none;
+        }
+        #kkpager_btn_go_input{
+            width:36px;
+            height:14px;
+            color:#999;
+            text-align:center;
+            margin-left:1px;
+            margin-right:1px;
+            border:1px solid #DFDFDF;
+            position:relative;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            left:0px;
+            top:0px;
+            outline:none;
+        }
+
+        #kkpager_btn_go_input.focus{
+            border-color:#31ACE2;
+        }
+
+        #kkpager .pageBtnWrap{
+            float:left;
+        }
+        #kkpager .infoTextAndGoPageBtnWrap{
+            float:left;
+        }
+        #kkpager .spanDot{
+            float:left;
+            margin-right:5px;
+        }
+
+        #kkpager .currPageNum{
+            color:#FD7F4D;
+        }
+
+        #kkpager .infoTextAndGoPageBtnWrap{
+            line-height: 23px;
+            padding: 0 5px;
+        }
+        #kkpager .totalRecords{
+            float:right;
+            margin-right:5px;
+        }
+    </style>
+    <style>
+        .jobsearch select, input {
+            width: 150px;
+        }
+        .query{
+            width: 50px;
+        }
+        .x-grid-cell-inner
+        {
+            text-align: center;
+            white-space: inherit;
+            font-weight: 200;
+        }
+        th{
+            width: 85px;
+            height: 35px;
+            border-right: 1px solid;
+            border-bottom: 1px solid;
+        }
+    </style>
+</head>
+<body class="x-body x-webkit x-chrome x-mac f-body f-theme-neptune" id="ext-gen1018">
+<div id="ContainerPanel" style="display:none;">
+    <div id="calendarPanel"
+         style="position: absolute;display: none;z-index: 9999;background-color: #FFFFFF;border: 1px solid #CCCCCC;width:175px;font-size:12px;margin-left:25px;"></div>
+</div>
+
+<script type="text/javascript">
+    function applyFun(pid) {
+        console.log(pid);
+        $.ajax({
+            url: "/verificationPostInfo?id=" + pid,
+            type: 'get',
+            dataType: 'json',
+            success: function (data, status) {
+
+                if(data.code == 500){
+                    alert(data.msg);
+                }else{
+                    window.location.href="/toSignUpInfo"+"?postId="+pid;
+                }
+                //console.log(data)
+            },
+            fail: function (err, status) {
+                console.log(err)
+            }
+        })
+    }
+</script>
+
+<script type="text/javascript">
+
+    function getParameter(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+
+    //init
+    $(function () {
+        var totalPage = '3';
+        //var totalPage = 50;
+        var totalRecords = '25';
+        var pageNo = getParameter('pno');
+        if (!pageNo) {
+            pageNo = 1;
+        }
+        //生成分页
+        //有些参数是可选的，比如lang，若不传有默认值
+        kkpager.generPageHtml({
+            pno: pageNo,//总页码
+            mode: 'click', //设置为click模式
+            total: totalPage,
+            //总数据条数
+            totalRecords: totalRecords,
+            //链接前部
+            hrefFormer: 'pager_test',
+            isShowTotalRecords: true,
+            isShowTotalPage: true,
+            //链接尾部
+            hrefLatter: '.html',
+            click: function (n) {
+                //这里可以做自已的处理
+                //...
+                //处理完后可以手动条用selectPage进行页码选中切换
+                // $("#page").val(n);
+                // $("#pageSize").val(1);
+                // $("#postInfoForm").submit();
+                var postName = $("#postName").val();
+                var departName = $("#departName").val();
+                var postType = $("#postType").val();
+                var educationRequirement = $("#educationRequirement").val();
+                var majorRequirementy = $("#majorRequirementy").val();
+                $.ajax({
+                    url: "/postInfoPage2",
+                    data:{
+                        page:n,pageSize:10,postName:postName,
+                        departName:departName,postType:postType,
+                        educationRequirement:educationRequirement,
+                        majorRequirementy:majorRequirementy},
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data, status) {
+                        if(data.code == 200){
+                            $("#page").val(n);
+                            $("#pageSize").val(1);
+                            var postInfoPage = data.postInfoPage;
+                            totalPage = data.postInfoPage.totalPages;
+                            totalRecords = data.postInfoPage.totalElements;
+                            var htmlStr ="";
+                            var htmlStr1 = "";
+                            for(var i=0;i<postInfoPage.content.length;i++){
+                                var postPagejs = postInfoPage.content[i];
+                                var postType= "";
+                                if(postPagejs.postType!=null){
+                                    postType=postPagejs.postType;
+                                }
+                                htmlStr1+= '<tr  role="row" th:id="gridview-1024-record-ext-record-'+i+'"'
+                                +' data-boundview="gridview-1024"'
+                                +'data-recordid="ext-record-63" data-recordindex="0"'
+                                +'class="x-grid-row f-grid-row x-grid-data-row" tabindex="-1">'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl00 x-grid-cell-row-numberer x-grid-cell-special x-unselectable x-grid-cell-row-numberer x-grid-cell-special"'
+                                +'id="ext-gen1291">'
+                                    +'<div unselectable="on" class="x-grid-cell-inner x-grid-cell-inner-row-numberer"'
+                                +'style="text-align:right;"><span>'+postPagejs.postCode+'</span></div>'
+                                    +'</td>'
+                                    +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl01 x-unselectable "'
+                                +'id="ext-gen1292">'
+                                   +' <div unselectable="on" class="x-grid-cell-inner " style=""><span'
+                                +'>'+postPagejs.postName+'</span></div>'
+                                +'</td>'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable "'
+                               +' id="ext-gen1293">'
+                                    +'<div unselectable="on" class="x-grid-cell-inner " ><span>'+postPagejs.departName+'</span></div>'
+                                +'</td>'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl03 x-unselectable "'
+                               +'id="ext-gen1294">'
+                                +'<div unselectable="on" class="x-grid-cell-inner " ><span>'+postType+'</span></div>'
+                               +' </td>'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl04 x-unselectable "'
+                                +'id="ext-gen1295">'
+                                    +'<div unselectable="on" class="x-grid-cell-inner " style="text-align:center;"><span>'+postPagejs.repuNumber+'</span></div>'
+                                +'</td>'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl05 x-unselectable "'
+                               +'id="ext-gen1296">'
+                                    +'<div unselectable="on" class="x-grid-cell-inner "><span>'+postPagejs.majorRequirementy+'</span></div>'
+                                +'</td>'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl05 x-unselectable ">'
+                                   +'<div unselectable="on" class="x-grid-cell-inner " ><span>'+postPagejs.postResearchDirection+'</span></div>'
+                                +'</td><td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl05 x-unselectable ">'
+                                    +'<div unselectable="on" class="x-grid-cell-inner " ><span>'+postPagejs.postAge+'</span></div>'
+                                +'</td>'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl06 x-unselectable "'
+                                +'id="ext-gen1297">'
+                                    +'<div unselectable="on" class="x-grid-cell-inner " ><span>'+postPagejs.educationRequirement+'</span></div>'
+                                +'</td>'
+                                +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl07 x-unselectable "'
+                                +'id="ext-gen1298">'
+                                +'<div unselectable="on" class="x-grid-cell-inner " ><span>'+postPagejs.otherRequireme+'</span>'
+                                    +'</div></td>'
+                                    +'<td role="gridcell"'
+                            +'class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable "'
+                                +'id="ext-gen1299">'
+                                    +'<div unselectable="on" class="x-grid-cell-inner " ><a'
+                                +' onClick="applyFun(\''+postPagejs.id+'\')">申请</a>'
+                                    +'</div></td></tr>'
+                            }
+                            htmlStr+=htmlStr1;
+                            //htmlStr+='';
+                            $("#gridview-1024-body").html("");
+                            $("#gridview-1024-body").html(htmlStr);
+
+                        }
+                    },
+                    fail: function (err, status) {
+                        console.log(err)
+                    }
+                })
+                this.selectPage(n);
+                console.log('nnnn',n)
+            },
+            //getHref是在click模式下链接算法，一般不需要配置，默认代码如下
+            getHref: function (n) {
+                return '#';
+            }
+        });
+    });
+</script>
+<div class="header">
+</div>
+<div>
+    <div>
+        <table class="daohang">
+            <tbody>
+            <tr>
+                <td align="left" style="width:47%">
+                    &nbsp;&nbsp;&nbsp;
+                    <div id="ctl00_ContentPlaceHolder1_lblInfo_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lblInfo" style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label id="ctl00_ContentPlaceHolder1_lblInfo-labelEl"
+                                                                      for="ctl00_ContentPlaceHolder1_lblInfo-inputEl"
+                                                                      class="x-form-item-label x-unselectable x-form-item-label-left"
+                                                                      style="width:100px;margin-right:5px;"
+                                                                      unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lblInfo-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lblInfo-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><span>陈志成, 您好！</span>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="ctl00_ContentPlaceHolder1_lnkLogout_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lnkLogout" style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label
+                                        id="ctl00_ContentPlaceHolder1_lnkLogout-labelEl"
+                                        for="ctl00_ContentPlaceHolder1_lnkLogout-inputEl"
+                                        class="x-form-item-label x-unselectable x-form-item-label-left"
+                                        style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lnkLogout-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lnkLogout-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><a
+                                            href="/logout">注销</a>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                <td align="center" style="width:18%">
+                    &nbsp;<a href="home.html">返回首页</a></td>
+
+                <td align="center" style="width:18%">
+                    <div id="ctl00_ContentPlaceHolder1_lbtjobquery_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lbtjobquery"
+                               style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label
+                                        id="ctl00_ContentPlaceHolder1_lbtjobquery-labelEl"
+                                        for="ctl00_ContentPlaceHolder1_lbtjobquery-inputEl"
+                                        class="x-form-item-label x-unselectable x-form-item-label-left"
+                                        style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lbtjobquery-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lbtjobquery-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><a href="javascript:;"
+                                    >网上报名</a>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                <td align="center" style="width:17%">
+                    <div id="ctl00_ContentPlaceHolder1_lblPersonInfo_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lblPersonInfo"
+                               style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label
+                                        id="ctl00_ContentPlaceHolder1_lblPersonInfo-labelEl"
+                                        for="ctl00_ContentPlaceHolder1_lblPersonInfo-inputEl"
+                                        class="x-form-item-label x-unselectable x-form-item-label-left"
+                                        style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lblPersonInfo-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lblPersonInfo-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><a href="getUserInfo.html">个人信息</a>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="jobsearch">
+        <fieldset style="width:976px;">
+            <legend>岗位筛选</legend>
+            <table cellpadding="2" cellspacing="1" class="jobsearch" style="width:970px">
+                <form method="get" action="/postInfoPage" id="postInfoForm">
+                    <input name="page" type="hidden" value="1">
+                    <input name="pageSize" type="hidden" value="10">
+                    <tbody>
+                    <tr>
+                        <td style="width: 120px" align="right">
+                            岗位名称：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <select name="postName" class="s_width" id="postName">
+                                <option value="">请选择</option>
+                                <option value="教学科研">教学科研</option>
+                            </select>
+                        </td>
+                        <td style="width: 120px" align="right">
+                            招聘部门：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <select name="departName" id="departName">
+                                <option value="">请选择</option>
+                                <option value="农学学院">农学学院</option>
+                            </select>
+                        </td>
+                        <td style="width: 120px" align="right">
+                            岗位类别：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <select name="postType" id="postType">
+                                <option value="">请选择</option>
+                                <option value="teacher">教师岗</option>
+                                <option value="other_special_plane">其它专机岗</option>
+                            </select>
+                        </td>
+                        <td rowspan="2" align="center">
+                            <div class="f-inline-block">
+                                <input type="submit" value="查询" class="query">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 120px" align="right">
+                            学历：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <div id="ctl00_ContentPlaceHolder1_txtEducation_wrapper" class="f-inline-block">
+                                <table class="x-field x-table-plain x-form-item x-form-type-text x-field-default x-border-box"
+                                       cellpadding="0" id="ctl00_ContentPlaceHolder1_txtEducation"
+                                       style="table-layout: fixed;">
+                                    <tbody>
+                                    <tr role="presentation" id="ctl00_ContentPlaceHolder1_txtEducation-inputRow"
+                                        class="x-form-item-input-row">
+                                        <td role="presentation" id="ctl00_ContentPlaceHolder1_txtEducation-labelCell"
+                                            style="display:none;" valign="top" halign="left" width="105"
+                                            class="x-field-label-cell"><label
+                                                id="ctl00_ContentPlaceHolder1_txtEducation-labelEl"
+                                                class="x-form-item-label x-unselectable x-form-item-label-left"
+                                                style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                        <td role="presentation" class="x-form-item-body  "
+                                            id="ctl00_ContentPlaceHolder1_txtEducation-bodyEl" colspan="3"
+                                            style="width: 150px;"><input value=""
+                                                                         id="educationRequirement" type="text" size="1"
+                                                                         name="educationRequirement"
+                                                                         class="x-form-field x-form-text" autocomplete="off" aria-invalid="false"
+                                                                         style="width: 100%;"></td>
+                                        <td role="presentation"
+                                            id="ctl00_ContentPlaceHolder1_txtEducation-sideErrorCell" valign="middle"
+                                            style="display: none;" width="21">
+                                            <div role="presentation" id="ctl00_ContentPlaceHolder1_txtEducation-errorEl"
+                                                 class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                                 data-errorqtip=""></div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+
+                        <td style="width: 120px" align="right">
+                            专业：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <div id="ctl00_ContentPlaceHolder1_txtProfessional_wrapper" class="f-inline-block">
+                                <table class="x-field x-table-plain x-form-item x-form-type-text x-field-default x-border-box"
+                                       cellpadding="0" id="ctl00_ContentPlaceHolder1_txtProfessional"
+                                       style="table-layout: fixed;">
+                                    <tbody>
+                                    <tr role="presentation" id="ctl00_ContentPlaceHolder1_txtProfessional-inputRow"
+                                        class="x-form-item-input-row">
+                                        <td role="presentation" id="ctl00_ContentPlaceHolder1_txtProfessional-labelCell"
+                                            style="display:none;" valign="top" halign="left" width="105"
+                                            class="x-field-label-cell"><label
+                                                id="ctl00_ContentPlaceHolder1_txtProfessional-labelEl"
+                                                class="x-form-item-label x-unselectable x-form-item-label-left"
+                                                style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                        <td role="presentation" class="x-form-item-body  "
+                                            id="ctl00_ContentPlaceHolder1_txtProfessional-bodyEl" colspan="3"
+                                            style="width: 150px;"><input value=""
+                                                                         id="majorRequirementy" type="majorRequirementy"
+                                                                         size="1" name="majorRequirementy"
+                                                                         class="x-form-field x-form-text" autocomplete="off" aria-invalid="false"
+                                                                         style="width: 100%;"></td>
+                                        <td role="presentation"
+                                            id="ctl00_ContentPlaceHolder1_txtProfessional-sideErrorCell" valign="middle"
+                                            style="display: none;" width="21">
+                                            <div role="presentation"
+                                                 id="ctl00_ContentPlaceHolder1_txtProfessional-errorEl"
+                                                 class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                                 data-errorqtip=""></div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </form>
+            </table>
+        </fieldset>
+    </div>
+    <div class="showdata">
+        <div id="ctl00_ContentPlaceHolder1_Grid1_wrapper" style="
+    width: 1000px;">
+            <div class="x-panel x-grid-with-row-lines x-panel-default x-grid x-border-box"
+                 style="width:1000px;height:395px;" id="ctl00_ContentPlaceHolder1_Grid1">
+                <div class="x-panel-header x-header x-header-horizontal x-docked x-unselectable x-panel-header-default x-horizontal x-panel-header-horizontal x-panel-header-default-horizontal x-top x-panel-header-top x-panel-header-default-top x-docked-top x-panel-header-docked-top x-panel-header-default-docked-top x-panel-default-outer-border-trl"
+                     id="ctl00_ContentPlaceHolder1_Grid1_header"
+                     style="right: auto; left: 0px; top: 0px; width: 1000px;">
+                    <div id="ctl00_ContentPlaceHolder1_Grid1_header-body"
+                         class="x-header-body x-panel-header-body x-panel-header-body-default x-panel-header-body-horizontal x-panel-header-body-default-horizontal x-panel-header-body-top x-panel-header-body-default-top x-panel-header-body-docked-top x-panel-header-body-default-docked-top x-box-layout-ct x-panel-header-body-default-horizontal x-panel-header-body-default-top x-panel-header-body-default-docked-top"
+                         style="width: 1000px;">
+                        <div id="ctl00_ContentPlaceHolder1_Grid1_header-innerCt" class="x-box-inner "
+                             role="presentation" style="width: 1000px; height: 16px;">
+                            <div id="ctl00_ContentPlaceHolder1_Grid1_header-targetEl" class="x-box-target"
+                                 style="width: 1000px;">
+                                <div class="x-component x-header-text-container x-panel-header-text-container x-panel-header-text-container-default x-box-item x-component-default"
+                                     unselectable="on" id="ctl00_ContentPlaceHolder1_Grid1_header_hd"
+                                     style="right: auto; left: 0px; top: 0px; margin: 0px; width: 1000px;"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_header_hd-textEl"
+                                        class="x-header-text x-panel-header-text x-panel-header-text-default"
+                                        unselectable="on">岗位列表</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--列表表头-->
+                <div class="x-grid-header-ct x-docked x-grid-header-ct-default x-docked-top x-grid-header-ct-docked-top x-grid-header-ct-default-docked-top x-box-layout-ct x-panel-default-outer-border-rl"
+                     id="headercontainer-1023" style="right: auto; left: 0px; top: 36px; width: 1000px;display: none;">
+                    <div id="headercontainer-1023-innerCt" class="x-box-inner " role="presentation"
+                         style="width: 1000px; height: 29px;">
+                        <div id="headercontainer-1023-targetEl" class="x-box-target" style="width: 1000px;">
+
+                            <div class="x-column-header x-row-numberer x-column-header-align-right x-box-item x-column-header-default x-unselectable"
+                                 style="width: 100px; right: auto; left: -12px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl00">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl00-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl00-textEl"
+                                        class="x-column-header-text">岗位编码</span></div>
+                            </div>
+
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="width: 100px; right: auto; left: 106px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl01">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl01-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl01-textEl"
+                                        class="x-column-header-text">岗位名称</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl01-triggerEl"
+                                         class="x-column-header-trigger" style=""></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="width: 100px; right: auto; left: 220px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl02">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl02-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl02-textEl"
+                                        class="x-column-header-text">招聘部门</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl02-triggerEl"
+                                         class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="width: 90px; right: auto; left: 327px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl03">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl03-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl03-textEl"
+                                        class="x-column-header-text">岗位类别</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl03-triggerEl"
+                                         class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="width: 80px; right: auto; left: 419px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl04">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl04-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl04-textEl"
+                                        class="x-column-header-text">招聘人数</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl04-triggerEl"
+                                         class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl05"
+                                 style="right: auto; left: 527px; top: 0px; margin: 0px; width: 100px;">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl05-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl05-textEl"
+                                        class="x-column-header-text">学科专业</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl05-triggerEl"
+                                         class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="right: auto; left: 646px; top: 0px; margin: 0px; width: 100px;">
+                                <div
+                                        class="x-column-header-inner"><span
+                                        class="x-column-header-text">研究方向</span>
+                                    <div
+                                            class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="right: auto; left: 773px; top: 0px; margin: 0px; width: 100px;">
+                                <div
+                                        class="x-column-header-inner"><span
+                                        class="x-column-header-text">年龄</span>
+                                    <div
+                                            class="x-column-header-trigger"></div>
+                                </div>
+
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="width: 120px; right: auto; left: 876px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl06">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl06-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl06-textEl"
+                                        class="x-column-header-text">学历要求</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl06-triggerEl"
+                                         class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable"
+                                 style="width: 114px; right: auto; left: 1009px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl07">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl07-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl07-textEl"
+                                        class="x-column-header-text">其他要求</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl07-triggerEl"
+                                         class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                            <div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable x-column-header-last"
+                                 style="width: 50px; right: auto; left: 1134px; top: 0px; margin: 0px;"
+                                 id="ctl00_ContentPlaceHolder1_Grid1_ctl08">
+                                <div id="ctl00_ContentPlaceHolder1_Grid1_ctl08-titleEl"
+                                     class="x-column-header-inner"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_ctl08-textEl"
+                                        class="x-column-header-text">申请</span>
+                                    <div id="ctl00_ContentPlaceHolder1_Grid1_ctl08-triggerEl"
+                                         class="x-column-header-trigger"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--列表数据-->
+                <div id="ctl00_ContentPlaceHolder1_Grid1-body"
+                     class="x-panel-body x-grid-body x-panel-body-default x-layout-fit x-panel-body-default x-panel-default-outer-border-rl"
+                     style="width: 1000px; height: 290px; left: 0px;     top: 36px;">
+                    <div class="x-grid-view x-fit-item x-grid-view-default x-unselectable" id="gridview-1024"
+                         tabindex="-1" style="overflow: auto; width: 1000px; height: 288px; margin: 0px;">
+
+                        <table role="presentation" id="gridview-1024-table"
+                                   class="x-gridview-1024-table x-grid-table x-grid-with-row-lines"
+                                   cellspacing="0" cellpadding="0" tabindex="-1">
+                                <tr style="color: #6a6b6b;">
+                                    <th>
+                                        岗位编码
+                                    </th>
+                                    <th>
+                                        岗位名称
+                                    </th>
+                                    <th>
+                                        招聘部门
+                                    </th>
+                                    <th>
+                                        岗位类别
+                                    </th>
+                                    <th>
+                                        招聘人数
+                                    </th>
+                                    <th>
+                                        学科专业
+                                    </th>
+                                    <th>
+                                        研究方向
+                                    </th>
+                                    <th>
+                                        年龄
+                                    </th>
+                                    <th>
+                                        学历要求
+                                    </th>
+                                    <th>
+                                        其他要求
+                                    </th>
+                                    <th>
+                                        申请
+                                    </th>
+                                </tr>
+                                    <tbody id="gridview-1024-body">
+                                    <div id="pageDataId">
+                                        <tr role="row"
+                                            id="gridview-1024-record-ext-record-1"
+                                            data-boundview="gridview-1024"
+                                            data-recordid="ext-record-63" data-recordindex="0"
+                                            class="x-grid-row f-grid-row x-grid-data-row" tabindex="-1">
+
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl00 x-grid-cell-row-numberer x-grid-cell-special x-unselectable x-grid-cell-row-numberer x-grid-cell-special"
+                                                id="ext-gen1291">
+                                                <div unselectable="on" class="x-grid-cell-inner x-grid-cell-inner-row-numberer"
+                                                     style="text-align:right;">0000001</div>
+                                            </td>
+
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl01 x-unselectable "
+                                                id="ext-gen1292">
+                                                <div unselectable="on" class="x-grid-cell-inner " style=""><span>市场经济</span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable "
+                                                id="ext-gen1293">
+                                                <div unselectable="on" class="x-grid-cell-inner " ><span>马克思主义学院</span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl03 x-unselectable "
+                                                id="ext-gen1294">
+                                                <div unselectable="on" class="x-grid-cell-inner " ><span></span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl04 x-unselectable "
+                                                id="ext-gen1295">
+                                                <div unselectable="on" class="x-grid-cell-inner " style="text-align:center;"><span>3</span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl05 x-unselectable "
+                                                id="ext-gen1296">
+                                                <div unselectable="on" class="x-grid-cell-inner "><span>市场经济学</span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl05 x-unselectable "
+                                            >
+                                                <div unselectable="on" class="x-grid-cell-inner " ><span>市场经济学工作</span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl05 x-unselectable "
+                                            >
+                                                <div unselectable="on" class="x-grid-cell-inner " ><span>40周岁及以下</span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl06 x-unselectable "
+                                                id="ext-gen1297">
+                                                <div unselectable="on" class="x-grid-cell-inner " ><span>大学生</span></div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl07 x-unselectable "
+                                                id="ext-gen1298">
+                                                <div unselectable="on" class="x-grid-cell-inner " ><span></span>
+                                                </div>
+                                            </td>
+                                            <td role="gridcell"
+                                                class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable "
+                                                id="ext-gen1299">
+                                                <div unselectable="on" class="x-grid-cell-inner " ><a
+                                                        onclick="">申请</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                    </tbody>
+
+                            </table>
+
+                    </div>
+                </div>
+
+                <!--分页-->
+                <div class="x-toolbar x-toolbar-paging x-docked x-toolbar-default x-docked-bottom x-toolbar-docked-bottom x-toolbar-default-docked-bottom x-box-layout-ct x-panel-default-outer-border-rbl"
+                     id="ext-comp-1011" style="right: auto; left: 0px; top: 326px; width: 1000px;">
+                    <div id="kkpager"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="f_ajax_loading" class="f-ajax-loading" style="visibility: hidden; display: block;">正在加载...</div>
+
+<div class="botton">版权所有 © 和臣 - 行动企<br> 备案号 ： 粤ICP备19159726号-1 </div>
+
+
+</body>
+</html>
