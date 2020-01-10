@@ -9,6 +9,6 @@ spring:
  #   username: root
  #   password: jckc
 
-    url: jdbc:mysql://123.207.230.97:3306/sign_in_system?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://123.207.230.97:3306/hire_application_system?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: jckc

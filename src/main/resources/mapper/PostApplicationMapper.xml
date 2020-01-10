@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hc.modules.postApplication.mapper.PostApplicationMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.hc.modules.postApplication.entity.PostApplicationEntity" id="postApplicationResultMap">
+                    <result property="id" column="id"/>
+                    <result property="postCode" column="post_code"/>
+                    <result property="postName" column="post_name"/>
+                    <result property="hireDepartment" column="hire_department"/>
+                    <result property="applicationDeadline" column="application_deadline"/>
+                    <result property="postDuty" column="post_duty"/>
+                    <result property="applicationQualifications" column="application_qualifications"/>
+                    <result property="hireAmount" column="hire_amount"/>
+                    <result property="major" column="major"/>
+                    <result property="educationRequirement" column="education_requirement"/>
+                    <result property="age" column="age"/>
+                    <result property="otherRequirement" column="other_requirement"/>
+                    <result property="createTime" column="create_time"/>
+                    <result property="updateTime" column="update_time"/>
+                    <result property="recruitment" column="recruitment"/>
+            </resultMap>
+
+
+    <select id="getPostApplicationList" resultMap="postApplicationResultMap">
+        SELECT
+                    a.id,
+                    a.post_code,
+                    a.post_name,
+                    a.hire_department,
+                    a.application_deadline,
+                    a.post_duty,
+                    a.application_qualifications,
+                    a.hire_amount,
+                    a.major,
+                    a.education_requirement,
+                    a.age,
+                    a.other_requirement,
+                    a.create_time,
+                    a.update_time,
+                    a.recruitment
+                FROM post_application a
+    </select>
+
+    <insert id="insertLesson">
+        INSERT INTO post_application(
+                    id,
+                    post_code,
+                    post_name,
+                    hire_department,
+                    application_deadline,
+                    post_duty,
+                    application_qualifications,
+                    hire_amount,
+                    major,
+                    education_requirement,
+                    age,
+                    other_requirement,
+                    create_time,
+                    update_time,
+                    recruitment
+        )
+        VALUES (
+                    #{id},
+                    #{postCode},
+                    #{postName},
+                    #{hireDepartment},
+                    #{applicationDeadline},
+                    #{postDuty},
+                    #{applicationQualifications},
+                    #{hireAmount},
+                    #{major},
+                    #{educationRequirement},
+                    #{age},
+                    #{otherRequirement},
+                    #{createTime},
+                    #{updateTime},
+                    #{recruitment}
+                )
+    </insert>
+
+
+
+
+    <select id="getPostApplicationById" resultType="com.hc.modules.postApplication.entity.PostApplicationEntity">
+        SELECT
+                    id,
+                    post_code,
+                    post_name,
+                    hire_department,
+                    application_deadline,
+                    post_duty,
+                    application_qualifications,
+                    hire_amount,
+                    major,
+                    education_requirement,
+                    age,
+                    other_requirement,
+                    create_time,
+                    update_time,
+                    recruitment
+        )
+        FROM post_application WHERE id=#{postApplicationId}
+    </select>
+
+
+    <delete id="removeLessonById">
+        DELETE FROM post_application WHERE id=#{postApplicationId}
+    </delete>
+
+</mapper>
