@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hc.modules.userapplication.mapper.UserApplicationMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.hc.modules.userapplication.entity.UserApplicationEntity" id="userApplicationResultMap">
+                    <result property="id" column="id"/>
+                    <result property="userId" column="user_id"/>
+                    <result property="postApplicationId" column="post_application_id"/>
+                    <result property="applicationTime" column="application_time"/>
+                    <result property="createTime" column="create_time"/>
+                    <result property="paymentStatus" column="payment_status"/>
+                    <result property="payId" column="pay_id"/>
+                    <result property="checkResult" column="check_result"/>
+            </resultMap>
+
+
+    <select id="getUserApplicationList" resultMap="userApplicationResultMap">
+        SELECT
+                    a.id,
+                    a.user_id,
+                    a.post_application_id,
+                    a.application_time,
+                    a.create_time,
+                    a.payment_status,
+                    a.pay_id,
+                    a.check_result
+                FROM user_application a
+    </select>
+
+    <insert id="insertUserApplication">
+        INSERT INTO user_application(
+                    id,
+                    user_id,
+                    post_application_id,
+                    application_time,
+                    create_time,
+                    payment_status,
+                    pay_id,
+                    check_result
+        )
+        VALUES (
+                    #{id},
+                    #{userId},
+                    #{postApplicationId},
+                    #{applicationTime},
+                    #{createTime},
+                    #{paymentStatus},
+                    #{payId},
+                    #{checkResult}
+                )
+    </insert>
+
+
+
+
+    <select id="getUserApplicationById" resultType="com.hc.modules.userapplication.entity.UserApplicationEntity">
+        SELECT
+                    id,
+                    user_id,
+                    post_application_id,
+                    application_time,
+                    create_time,
+                    payment_status,
+                    pay_id,
+                    check_result
+        )
+        FROM user_application WHERE id=#{userApplicationId}
+    </select>
+
+
+    <delete id="removeUserApplicationById">
+        DELETE FROM user_application WHERE id=#{userApplicationId}
+    </delete>
+
+</mapper>

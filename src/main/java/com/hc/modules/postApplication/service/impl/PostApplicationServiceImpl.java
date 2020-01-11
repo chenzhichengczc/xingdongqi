@@ -1,13 +1,13 @@
-package com.hc.modules.postApplication.service.impl;
+package com.hc.modules.postapplication.service.impl;
 
 import com.hc.common.exception.JcException;
-import com.hc.modules.postApplication.mapper.PostApplicationMapper;
+import com.hc.modules.postapplication.mapper.PostApplicationMapper;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
-import com.hc.modules.postApplication.entity.PostApplicationEntity;
-import com.hc.modules.postApplication.service.PostApplicationService;
+import com.hc.modules.postapplication.entity.PostApplicationEntity;
+import com.hc.modules.postapplication.service.PostApplicationService;
 
 import javax.annotation.Resource;
 import java.util.List;

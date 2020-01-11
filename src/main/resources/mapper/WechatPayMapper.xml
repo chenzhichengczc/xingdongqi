@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hc.modules.wechatpay.mapper.WechatPayMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.hc.modules.wechatpay.entity.WechatPayEntity" id="wechatPayResultMap">
+                    <result property="transactionId" column="transaction_id"/>
+                    <result property="nonceStr" column="nonce_str"/>
+                    <result property="bankType" column="bank_type"/>
+                    <result property="openid" column="openid"/>
+                    <result property="sign" column="sign"/>
+                    <result property="feeType" column="fee_type"/>
+                    <result property="mchId" column="mch_id"/>
+                    <result property="cashFee" column="cash_fee"/>
+                    <result property="outTradeNo" column="out_trade_no"/>
+                    <result property="appid" column="appid"/>
+                    <result property="totalFee" column="total_fee"/>
+                    <result property="tradeType" column="trade_type"/>
+                    <result property="resultCode" column="result_code"/>
+                    <result property="timeEnd" column="time_end"/>
+                    <result property="isSubscribe" column="is_subscribe"/>
+                    <result property="returnCode" column="return_code"/>
+                    <result property="updateTime" column="update_time"/>
+                    <result property="createTime" column="create_time"/>
+            </resultMap>
+
+
+    <select id="getWechatPayList" resultMap="wechatPayResultMap">
+        SELECT
+                    a.transaction_id,
+                    a.nonce_str,
+                    a.bank_type,
+                    a.openid,
+                    a.sign,
+                    a.fee_type,
+                    a.mch_id,
+                    a.cash_fee,
+                    a.out_trade_no,
+                    a.appid,
+                    a.total_fee,
+                    a.trade_type,
+                    a.result_code,
+                    a.time_end,
+                    a.is_subscribe,
+                    a.return_code,
+                    a.update_time,
+                    a.create_time
+                FROM wechat_pay a
+    </select>
+
+    <insert id="insertLesson">
+        INSERT INTO wechat_pay(
+                    transaction_id,
+                    nonce_str,
+                    bank_type,
+                    openid,
+                    sign,
+                    fee_type,
+                    mch_id,
+                    cash_fee,
+                    out_trade_no,
+                    appid,
+                    total_fee,
+                    trade_type,
+                    result_code,
+                    time_end,
+                    is_subscribe,
+                    return_code,
+                    update_time,
+                    create_time
+        )
+        VALUES (
+                    #{transactionId},
+                    #{nonceStr},
+                    #{bankType},
+                    #{openid},
+                    #{sign},
+                    #{feeType},
+                    #{mchId},
+                    #{cashFee},
+                    #{outTradeNo},
+                    #{appid},
+                    #{totalFee},
+                    #{tradeType},
+                    #{resultCode},
+                    #{timeEnd},
+                    #{isSubscribe},
+                    #{returnCode},
+                    #{updateTime},
+                    #{createTime}
+                )
+    </insert>
+
+
+
+
+    <select id="getWechatPayById" resultType="com.hc.modules.wechatpay.entity.WechatPayEntity">
+        SELECT
+                    transaction_id,
+                    nonce_str,
+                    bank_type,
+                    openid,
+                    sign,
+                    fee_type,
+                    mch_id,
+                    cash_fee,
+                    out_trade_no,
+                    appid,
+                    total_fee,
+                    trade_type,
+                    result_code,
+                    time_end,
+                    is_subscribe,
+                    return_code,
+                    update_time,
+                    create_time
+        )
+        FROM wechat_pay WHERE id=#{wechatPayId}
+    </select>
+
+
+    <delete id="removeLessonById">
+        DELETE FROM wechat_pay WHERE id=#{wechatPayId}
+    </delete>
+
+</mapper>

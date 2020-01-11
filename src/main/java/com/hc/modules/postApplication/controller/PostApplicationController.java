@@ -1,4 +1,4 @@
-package com.hc.modules.postApplication.controller;
+package com.hc.modules.postapplication.controller;
 
 import java.util.Map;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.hc.modules.postApplication.entity.PostApplicationEntity;
-import com.hc.modules.postApplication.service.PostApplicationService;
+import com.hc.modules.postapplication.entity.PostApplicationEntity;
+import com.hc.modules.postapplication.service.PostApplicationService;
 
 
 

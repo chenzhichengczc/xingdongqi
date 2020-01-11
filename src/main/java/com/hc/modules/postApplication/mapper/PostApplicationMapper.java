@@ -1,6 +1,6 @@
-package com.hc.modules.postApplication.mapper;
+package com.hc.modules.postapplication.mapper;
 
-import com.hc.modules.postApplication.entity.PostApplicationEntity;
+import com.hc.modules.postapplication.entity.PostApplicationEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
