@@ -7,6 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.hc.basic.WxAccount;
 import com.hc.common.utils.RedisUtil;
+import com.hc.modules.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -44,17 +45,20 @@ public class JwtConfig {
      * 注 : 这里的token会被缓存到redis中,用作为二次验证
      * redis里面缓存的时间应该和jwt token的过期时间设置相同
      *
-     * @param wxAccount 微信用户信息
+     * @param  username
      * @return 返回 jwt token
      */
-    public String createTokenByWxAccount(WxAccount wxAccount) throws UnsupportedEncodingException {
+    public String createToken(String username)  {
         String jwtId = UUID.randomUUID().toString();   //JWT 随机ID,做为验证的key
         //1 . 加密算法进行签名得到token
-        Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
+        Algorithm algorithm = null;
+        try {
+            algorithm = Algorithm.HMAC256(SECRET_KEY);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String token = JWT.create()
-                .withClaim("wxOpenId", wxAccount.getOpenId())
-                .withClaim("sessionKey", wxAccount.getSessionKey())
-                .withClaim("accessToken", wxAccount.getAccessToken())
+                .withClaim("username", username)
                 .withClaim("jwt-id", jwtId)
                 .withExpiresAt(new Date(System.currentTimeMillis() + expire_time*1000)) //JWT 配置过期时间的正确姿势
                 .sign(algorithm);
@@ -81,9 +85,7 @@ public class JwtConfig {
             //2 . 得到算法相同的JWTVerifier
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
             JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("wxOpenId", getWxOpenIdByToken(redisToken))
-                    .withClaim("sessionKey", getSessionKeyByToken(redisToken))
-                    .withClaim("accessToken", getAccessTokenByToken(redisToken))
+                    .withClaim("username", getUsernameByToken(redisToken))
                     .withClaim("jwt-id", getJwtIdByToken(redisToken))
                     .acceptExpiresAt(System.currentTimeMillis() + expire_time*1000 ) //JWT 正确的配置续期姿势
                     .build();
@@ -97,26 +99,12 @@ public class JwtConfig {
             return false;
         }
     }
-    /**
-     * 根据Token获取wxOpenId(注意坑点 : 就算token不正确，也有可能解密出wxOpenId,同下)
-     */
-    public String getWxOpenIdByToken(String token) throws JWTDecodeException {
-        return JWT.decode(token).getClaim("wxOpenId").asString();
-    }
 
     /**
-     * 根据Token获取sessionKey
+     * 根据Token获取username(注意坑点 : 就算token不正确，也有可能解密出username,同下)
      */
-    public String getSessionKeyByToken(String token) throws JWTDecodeException {
-        return JWT.decode(token).getClaim("sessionKey").asString();
-    }
-
-
-    /**
-     * 根据Token获取wxOpenId(注意坑点 : 就算token不正确，也有可能解密出wxOpenId,同下)
-     */
-    public String getAccessTokenByToken(String token) throws JWTDecodeException {
-        return JWT.decode(token).getClaim("accessToken").asString();
+    public String getUsernameByToken(String token) throws JWTDecodeException {
+        return JWT.decode(token).getClaim("username").asString();
     }
 
     /**

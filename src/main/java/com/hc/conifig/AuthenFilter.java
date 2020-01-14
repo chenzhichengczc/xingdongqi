@@ -42,39 +42,30 @@ public class AuthenFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        try {
-            //过滤不是post的请求
-            if(!request.getMethod().equalsIgnoreCase("post")){
-                filterChain.doFilter(servletRequest, servletResponse);
-                return;
-            }
 
-            String token = request.getHeader("token");
-            //请求头token为空返回
-            if(StringUtils.isEmpty(token)){
-                responseUtil = ResponseUtil.error(HttpStatus.BAD_REQUEST.value(), "无token");
-                logger.info("无token");
-                return;
-            }
-            //token验证
-
-            boolean result = jwtConfig.verifyToken(token);
-            if(!result){
-                responseUtil = ResponseUtil.error(HttpStatus.BAD_REQUEST.value(), "token已过期,请重新登陆");
-                logger.info("token已过期,请重新登陆");
-                return;
-            }
-
+        //过滤不是post的请求
+        /*if(!request.getMethod().equalsIgnoreCase("post")){
             filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }*/
 
-        }catch (Exception e){
-
-        }finally {
-            if(responseUtil != null && !StringUtils.isEmpty((String)responseUtil.get("msg"))){
-                response.setCharacterEncoding("utf-8");
-                response.getWriter().write(JSON.toJSONString(responseUtil));
-            }
+        String token = request.getHeader("token");
+        //请求头token为空返回
+        if (StringUtils.isEmpty(token)) {
+            logger.info("无token");
+            throw new JcException("当前访问拒绝");
         }
+        //token验证
+
+        boolean result = jwtConfig.verifyToken(token);
+        if (!result) {
+            logger.info("token已过期,请重新登陆");
+            System.out.println("result = " + result);
+            throw new JcException("token已过期,请重新登陆");
+        }
+        filterChain.doFilter(servletRequest, servletResponse);
+
 
     }
+
 }

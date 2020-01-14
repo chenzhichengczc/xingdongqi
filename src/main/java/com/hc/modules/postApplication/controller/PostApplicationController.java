@@ -27,6 +27,7 @@ import com.hc.modules.postapplication.service.PostApplicationService;
 @RestController
 public class PostApplicationController {
 
+
     @Autowired
     private PostApplicationService postApplicationService;
 

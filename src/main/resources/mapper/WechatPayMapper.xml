@@ -49,7 +49,7 @@
                 FROM wechat_pay a
     </select>
 
-    <insert id="insertLesson">
+    <insert id="insertWechatPay">
         INSERT INTO wechat_pay(
                     transaction_id,
                     nonce_str,
@@ -120,7 +120,7 @@
     </select>
 
 
-    <delete id="removeLessonById">
+    <delete id="removeWechatPayById">
         DELETE FROM wechat_pay WHERE id=#{wechatPayId}
     </delete>
 

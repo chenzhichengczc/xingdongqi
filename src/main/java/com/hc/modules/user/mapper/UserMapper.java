@@ -9,19 +9,17 @@ import java.util.List;
  * 用户表
  *
  * @author fenghuang
- * @email 
+ * @email
  * @date 2020-01-11 19:16:46
  */
 public interface UserMapper extends BaseMapper<UserEntity> {
 
-    public List<UserEntity> getUserList();
+    /**
+     * 获得密码
+     * @param username 用户名
+     */
+    public String getPassword(@Param(value = "username") String username);
 
-
-    public Integer insertUser(UserEntity userEntity);
-
-
-    public UserEntity getUserById(@Param(value = "userId") Integer userId);
-
-    public Integer removeUserById(@Param(value = "userId") Integer userId);
+    public Integer findByUname(@Param(value = "uname") String uname);
 
 }

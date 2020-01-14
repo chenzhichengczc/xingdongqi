@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hc.modules.postApplication.mapper.PostApplicationMapper">
+<mapper namespace="com.hc.modules.postapplication.mapper.PostApplicationMapper">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.hc.modules.postApplication.entity.PostApplicationEntity" id="postApplicationResultMap">
+    <resultMap type="com.hc.modules.postapplication.entity.PostApplicationEntity" id="postApplicationResultMap">
                     <result property="id" column="id"/>
                     <result property="postCode" column="post_code"/>
                     <result property="postName" column="post_name"/>
@@ -43,7 +43,7 @@
                 FROM post_application a
     </select>
 
-    <insert id="insertLesson">
+    <insert id="insertPostApplication">
         INSERT INTO post_application(
                     id,
                     post_code,
@@ -83,7 +83,7 @@
 
 
 
-    <select id="getPostApplicationById" resultType="com.hc.modules.postApplication.entity.PostApplicationEntity">
+    <select id="getPostApplicationById" resultType="com.hc.modules.postapplication.entity.PostApplicationEntity">
         SELECT
                     id,
                     post_code,
@@ -105,7 +105,7 @@
     </select>
 
 
-    <delete id="removeLessonById">
+    <delete id="removePostApplicationById">
         DELETE FROM post_application WHERE id=#{postApplicationId}
     </delete>
 

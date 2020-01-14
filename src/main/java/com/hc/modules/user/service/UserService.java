@@ -13,20 +13,14 @@ import java.util.List;
  * 用户表
  *
  * @author fenghuang
- * @email 
+ * @email
  * @date 2020-01-11 19:16:46
  */
 public interface UserService extends IService<UserEntity> {
 
-    public List<UserEntity> getUserList();
 
-    public void insertUser(UserEntity userEntity);
+    public void regUser(UserEntity userEntity);
 
-    public UserEntity getUserById(Integer userId);
-
-    public void removeUserById(Integer userId);
-
-    public void updateUser(UserEntity userEntity);
-
+    public String getPassword(String username);
 }
 

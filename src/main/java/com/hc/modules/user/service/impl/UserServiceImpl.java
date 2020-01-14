@@ -18,42 +18,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Resource
     private UserMapper userMapper;
 
-    
-
-
     @Override
-    public List<UserEntity> getUserList(){
-        List<UserEntity> userEntityList = userMapper.getUserList();
-        return userEntityList;
-    }
+    public void regUser(UserEntity userEntity) {
 
-    @Override
-    public void insertUser(UserEntity userEntity){
-        Integer result = userMapper.insertUser(userEntity);
-        if(result == null || result == 0){
-            throw new JcException("");
+        String uname = userEntity.getUserAcountName();
+        //查询是否存在相同用户名
+        Integer result = userMapper.findByUname(uname);
+
+        if(result == 0){
+            Integer newResult = userMapper.insert(userEntity);
+            if(newResult == null || newResult != 1){
+                throw new JcException("创建用户失败");
+            }
+        }else {
+            throw new JcException(332, "当前用户名已存在");
         }
     }
 
     @Override
-    public UserEntity getUserById(Integer userId){
-        UserEntity userEntity = userMapper.getUserById(userId);
-        return userEntity;
-    }
-
-    @Override
-    public void removeUserById(Integer userId){
-        Integer result =  userMapper.removeUserById(userId);
-        if(result == null || result == 0){
-            throw new JcException("");
-        }
-    }
-
-    @Override
-    public void updateUser(UserEntity userEntity){
-        Integer result = userMapper.updateById(userEntity);
-        if(result == null || result == 0){
-            throw new JcException("");
-        }
+    public String getPassword(String username) {
+        String password = userMapper.getPassword(username);
+        return password;
     }
 }

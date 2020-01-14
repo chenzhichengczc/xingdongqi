@@ -27,7 +27,7 @@
         FROM information a
     </select>
 
-    <insert id="insertLesson">
+    <insert id="insertInformation">
         INSERT INTO information(
                     id,
                     information_name,
@@ -66,7 +66,7 @@
     </select>
 
 
-    <delete id="removeLessonById">
+    <delete id="removeInformationById">
         DELETE FROM information WHERE id=#{informationId}
     </delete>
 

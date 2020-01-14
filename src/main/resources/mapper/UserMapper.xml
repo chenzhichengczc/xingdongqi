@@ -19,7 +19,7 @@
             </resultMap>
 
 
-    <select id="getUserList" resultMap="userResultMap">
+    <!--<select id="getUserList" resultMap="userResultMap">
         SELECT
                     a.id,
                     a.user_phone,
@@ -35,7 +35,7 @@
                 FROM user a
     </select>
 
-    <insert id="insertLesson">
+    <insert id="insertUser">
         INSERT INTO user(
                     id,
                     user_phone,
@@ -85,8 +85,18 @@
     </select>
 
 
-    <delete id="removeLessonById">
+    <delete id="removeUserById">
         DELETE FROM user WHERE id=#{userId}
-    </delete>
+    </delete>-->
+
+    <select id="getPassword" parameterType="String" resultType="String">
+        SELECT user_acount_password
+        FROM user
+        WHERE user_acount_name = #{username}
+    </select>
+
+    <select id="findByUname" resultType="Integer">
+        SELECT COUNT(*) FROM user WHERE user_acount_name = #{uname}
+    </select>
 
 </mapper>
