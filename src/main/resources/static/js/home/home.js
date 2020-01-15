@@ -8,6 +8,14 @@ function getParameter(name) {
 //init
 $(function () {
 
+
+    if (getCookie("token")) {
+        $("form").css("visibility", "hidden")
+    }else if(performance.timing.redirectStart > 0){
+        alert("信息存储超时，请重新登录！")
+        $("form").css("visibility", "visible")
+    }
+
     var totalPage = '';
     //var totalPage = 50;
     var totalRecords = '';
@@ -65,9 +73,7 @@ $(function () {
     })
 
 
-    if (getCookie("token")) {
-        $("form").css("visibility", "hidden")
-    }
+
 
 });
 
@@ -88,61 +94,44 @@ function kp(pageNo, totalPage, totalRecords) {
         //链接尾部
         hrefLatter: '.html',
         click: function (n) {
-            //这里可以做自已的处理
-            //...
-            //处理完后可以手动条用selectPage进行页码选中切换
-            // $("#page").val(n);
-            // $("#pageSize").val(5);
-            // $("#aspnetForm").submit();
+
+            $("#gridview-1024-body").empty();
             $.ajax({
-                url: "/newsInfoList",
+                url: "http://localhost:8080/information/list",
                 data: {
-                    page: n,
+                    pageNo: n,
                     pageSize: 10
                 },
                 type: 'get',
                 dataType: 'json',
                 success: function (data, status) {
-                    if (data.code == 200) {
-                        var newsInfoPage = data.newsInfoPage;
-                        totalPage = data.newsInfoPage.totalPages;
-                        totalRecords = data.newsInfoPage.totalElements;
-                        var htmlStr = '<table role="presentation" id="gridview-1024-table"\n' +
-                            '                                                       class="x-gridview-1024-table x-grid-table x-grid-with-row-lines"\n' +
-                            '                                                       border="0" cellspacing="0" cellpadding="0" style="width: 635px;"\n' +
-                            '                                                       tabindex="-1">\n' +
-                            '                                                    <colgroup>\n' +
-                            '                                                        <col class="x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl00"\n' +
-                            '                                                             style="width:70px">\n' +
-                            '                                                    </colgroup>\n' +
-                            '                                                    <colgroup>\n' +
-                            '                                                        <col class="x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl01"\n' +
-                            '                                                             style="width: 565px;">\n' +
-                            '                                                    </colgroup>\n' +
-                            '                                                    <tbody id="gridview-1024-body">';
-                        var htmlStr1 = "";
-                        for (var i = 0; i < newsInfoPage.content.length; i++) {
-                            var newsInfojs = newsInfoPage.content[i];
-                            console.log('i:' + i);
-                            htmlStr1 += '<tr  role="row" data-boundview="gridview-1024" data-recordid="ext-record-1" data-recordindex="0" class="x-grid-row f-grid-row x-grid-data-row" tabindex="-1">';
-                            htmlStr1 += '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl00 x-grid-cell-row-numberer x-grid-cell-special x-grid-cell-first x-unselectable x-grid-cell-row-numberer x-grid-cell-special" >';
-                            htmlStr1 += '<div unselectable="on" class="x-grid-cell-inner x-grid-cell-inner-row-numberer" style="text-align:right;">' + (i + 1);
-                            htmlStr1 += '</div>';
-                            htmlStr1 += '</td>';
-                            htmlStr1 += '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl01 x-grid-cell-last x-unselectable "id="ext-gen1065">';
-                            htmlStr1 += '<div unselectable="on" class="x-grid-cell-inner "style="text-align:left;"><a title="' + newsInfojs.newsTitle + '"';
-                            htmlStr1 += 'href="/newsInfo?id=' + newsInfojs.id + '" target="_blank" >' + newsInfojs.newsTitle + '</a></div></td></tr>';
-                            htmlStr1 += htmlStr;
-                        }
-                        htmlStr += htmlStr1;
-                        htmlStr += '  </tbody>\n' +
-                            '</table>';
-                        $("#typeId").html(htmlStr);
+                    if (data.code == 0) {
+                        totalRecords = data.data.total;
+                        totalPage = data.data.pages
 
-                    } else {
-                        totalPage = 0;
-                        totalRecords = 0;
+                        for (var i = 0; i < data.data.list.length; i++) {
+                            var html = "<tr role='role' class='x-grid-row f-grid-row x-grid-data-row' tabindex='-1'>"
+                                + "<td role='gridcell' class='x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl00 x-grid-cell-row-numberer x-grid-cell-special x-grid-cell-first x-unselectable x-grid-cell-row-numberer x-grid-cell-special'>"
+                                + "<div unselectable='on'  class='x-grid-cell-inner x-grid-cell-inner-row-numberer' style='text-align:right;'>"
+                                + (i + 1)
+                                + "</div>"
+                                + "</td>"
+                                + "<td role='gridcell' class='x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl01 x-grid-cell-last x-unselectable '>"
+                                + "<div unselectable='on' class='x-grid-cell-inner' style='text-align:left;'>"
+                                + "<a title='#{title}' target='_blank' href='show.html?id=#{id}'>#{title}</a>"
+                                + "</div>"
+                                + "</td>"
+                                + "</tr>"
+
+                            html = html.replace(/#{title}/g,data.data.list[i].informationName)
+                            html = html.replace(/#{id}/g,data.data.list[i].id)
+
+                            $("#gridview-1024-body").append(html)
+
+                        }
+
                     }
+                    kp(n, totalPage, totalRecords)
                 },
                 fail: function (err, status) {
                     console.log(err)
@@ -188,7 +177,7 @@ function toLogin() {
                 alert(data.msg)
             } else if (data.code == 0) {
                 setCookie("token", data.data.token)
-                sessionStorage.setItem("userName",data.data.user.userName)
+                sessionStorage.setItem("user",JSON.stringify(data.data.user))
                 alert("登录成功，请继续使用网站！")
                 window.location.reload();
             }
