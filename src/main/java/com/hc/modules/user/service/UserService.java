@@ -21,6 +21,6 @@ public interface UserService extends IService<UserEntity> {
 
     public void regUser(UserEntity userEntity);
 
-    public String getPassword(String username);
+    public UserEntity getUser(String username);
 }
 

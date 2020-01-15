@@ -36,8 +36,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public String getPassword(String username) {
-        String password = userMapper.getPassword(username);
-        return password;
+    public UserEntity getUser(String username) {
+        UserEntity userEntity = userMapper.getUser(username);
+        return userEntity;
     }
 }

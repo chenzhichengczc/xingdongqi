@@ -89,8 +89,8 @@
         DELETE FROM user WHERE id=#{userId}
     </delete>-->
 
-    <select id="getPassword" parameterType="String" resultType="String">
-        SELECT user_acount_password
+    <select id="getUser" parameterType="com.hc.modules.user.entity.UserEntity" resultType="String">
+        SELECT *
         FROM user
         WHERE user_acount_name = #{username}
     </select>

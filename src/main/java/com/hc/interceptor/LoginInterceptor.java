@@ -18,7 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         if (session.getAttribute("uid") == null) {
             System.out.println("session = " + session);
-            response.sendError(403, "请登录");
+            response.sendRedirect("/page/home");
             return false;
         }
         return true;

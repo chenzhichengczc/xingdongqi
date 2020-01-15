@@ -1,5 +1,6 @@
 package com.hc.modules.user.controller;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.List;
 import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
@@ -41,16 +42,18 @@ public class UserController {
     public ResponseUtil login(@RequestParam(value = "username") String username,
                            @RequestParam(value = "password") String password,
                            HttpServletRequest request) {
-
-        String realPassword = userService.getPassword(username);
-        if (realPassword == null) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        UserEntity userEntity = userService.getUser(username);
+        map.put("user", userEntity);
+        if (userEntity.getUserAcountPassword() == null) {
             return ResponseUtil.success(401, "用户名不存在或者密码错误");
-        } else if (!realPassword.equals(password)) {
+        } else if (!userEntity.getUserAcountPassword().equals(password)) {
             return ResponseUtil.success(401, "用户名不存在或者密码错误");
         } else {
             String token = jwtConfig.createToken(username);
             request.getSession().setAttribute("uid", 1);
-            return ResponseUtil.success(token);
+            map.put("token", token);
+            return ResponseUtil.success(map);
         }
     }
 

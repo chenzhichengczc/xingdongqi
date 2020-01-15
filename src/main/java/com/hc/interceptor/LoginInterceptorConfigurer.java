@@ -27,7 +27,7 @@ public class LoginInterceptorConfigurer
         excludePatterns.add("/fonts/**");
         excludePatterns.add("/img/**");
         excludePatterns.add("/login");
-        excludePatterns.add("/page/login");
+        excludePatterns.add("/page/home");
         excludePatterns.add("/usr/local/ngnix/html/pic/img/shopImg/**");
         //加不需要登录的路径
         registry

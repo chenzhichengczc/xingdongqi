@@ -18,7 +18,7 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      * 获得密码
      * @param username 用户名
      */
-    public String getPassword(@Param(value = "username") String username);
+    public UserEntity getUser(@Param(value = "username") String username);
 
     public Integer findByUname(@Param(value = "uname") String uname);
 
