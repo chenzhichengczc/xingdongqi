@@ -28,6 +28,7 @@ public class JcExceptionHandler {
      */
     @ExceptionHandler(JcException.class)
     public ResponseUtil handleJcException(JcException e){
+        System.out.println("ee = " + e);
         logger.error(e.getMsg(),e);
         return ResponseUtil.error(e.getCode(), e.getMsg());
     }

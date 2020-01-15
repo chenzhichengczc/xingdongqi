@@ -3,7 +3,8 @@ package com.hc.modules.information.controller;
 
 import java.util.List;
 
-import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
+
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hc.common.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,3 +1,4 @@
+/*
 package com.hc.common.exception;
 
 
@@ -15,16 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+
+*/
 /**
  * @author ：fenghuang
  * @date ：Created in 2020/1/13 15:55
  * @description：
  * @modified By：
  * @version:
- */
+ *//*
+
+
 @RestController
 @Api(value = "filter错误处理", description = "filter错误处理")
 public class ErrorController extends BasicErrorController {
+
 
     public ErrorController() {
         super(new DefaultErrorAttributes(), new ErrorProperties());
@@ -53,7 +59,9 @@ public class ErrorController extends BasicErrorController {
     @Override
     public String getErrorPath() {
         return "error/error";
-    }
+    }a
+
 
 }
 
+*/

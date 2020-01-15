@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.List;
 import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.hc.common.utils.IpConfig;
 import com.hc.common.utils.ResponseUtil;
 import com.hc.conifig.JwtConfig;
 import com.hc.modules.user.mapper.UserMapper;
@@ -50,7 +51,8 @@ public class UserController {
         } else if (!userEntity.getUserAcountPassword().equals(password)) {
             return ResponseUtil.success(401, "用户名不存在或者密码错误");
         } else {
-            String token = jwtConfig.createToken(username);
+            String remoteAddrIp = IpConfig.getRemoteAddr(request);
+            String token = jwtConfig.createToken(remoteAddrIp);
             request.getSession().setAttribute("uid", 1);
             map.put("token", token);
             return ResponseUtil.success(map);

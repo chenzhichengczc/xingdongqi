@@ -1,7 +1,8 @@
 package com.hc.interceptor;
 
 import com.hc.common.exception.JcException;
-import com.hc.conifig.AuthenFilter;
+import com.hc.common.utils.IpConfig;
+
 import com.hc.conifig.JwtConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -22,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Resource
     private JwtConfig jwtConfig;
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthenFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -32,19 +33,18 @@ public class LoginInterceptor implements HandlerInterceptor {
         //请求头token为空返回
         if (StringUtils.isEmpty(token)) {
             logger.info("无token");
-            response.sendRedirect("/page/home");
-            return false;
+            throw new JcException(403, "访问错误");
         }
         //token验证
-
-        boolean result = jwtConfig.verifyToken(token);
+        String remoteAddr = IpConfig.getRemoteAddr(request);
+        System.out.println("remoteAddr = " + remoteAddr);
+        System.out.println("jwtConfig = " + jwtConfig);
+        boolean result = jwtConfig.verifyToken(token, remoteAddr);
         if (!result) {
             logger.info("token已过期,请重新登陆");
             System.out.println("result = " + result);
-            response.sendRedirect("/page/home");
-            return false;
+            throw new JcException(403, "登录过期,请重新登陆");
         }
-
         /*HttpSession session = request.getSession();
         if (session.getAttribute("uid") == null) {
             System.out.println("session = " + session);
