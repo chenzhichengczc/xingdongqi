@@ -38,6 +38,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Override
     public UserEntity getUser(String username) {
         UserEntity userEntity = userMapper.getUser(username);
+        if(userEntity == null){
+            userEntity = new UserEntity();
+        }
         return userEntity;
     }
 }

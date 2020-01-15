@@ -1,6 +1,7 @@
 package com.hc.interceptor;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,6 +13,9 @@ import java.util.List;
 @Configuration
 public class LoginInterceptorConfigurer
         implements WebMvcConfigurer {
+
+    @Autowired
+    private LoginInterceptor loginInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -38,7 +42,7 @@ public class LoginInterceptorConfigurer
         excludePatterns.add("/usr/local/ngnix/html/pic/img/shopImg/**");
         //加不需要登录的路径
         registry
-                .addInterceptor(new LoginInterceptor())
+                .addInterceptor(loginInterceptor)
                 .addPathPatterns(patterns)
                 .excludePathPatterns(excludePatterns);
     }
