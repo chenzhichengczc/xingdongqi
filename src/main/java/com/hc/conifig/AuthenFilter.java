@@ -39,15 +39,15 @@ public class AuthenFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
 
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        /*HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 
         //过滤不是post的请求
-        /*if(!request.getMethod().equalsIgnoreCase("post")){
+        *//*if(!request.getMethod().equalsIgnoreCase("post")){
             filterChain.doFilter(servletRequest, servletResponse);
             return;
-        }*/
+        }*//*
 
         String token = request.getHeader("token");
         //请求头token为空返回
@@ -62,7 +62,7 @@ public class AuthenFilter implements Filter {
             logger.info("token已过期,请重新登陆");
             System.out.println("result = " + result);
             throw new JcException("token已过期,请重新登陆");
-        }
+        }*/
         filterChain.doFilter(servletRequest, servletResponse);
 
 
