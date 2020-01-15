@@ -23,11 +23,18 @@ public class LoginInterceptorConfigurer
         List<String> excludePatterns = new ArrayList<>();
         excludePatterns.add("/static/bootstrap3/**");
         excludePatterns.add("/css/**");
+        excludePatterns.add("/layer/**");
+        excludePatterns.add("/pager/**");
+        excludePatterns.add("/res/**");
+        excludePatterns.add("/jquery-validation/**");
         excludePatterns.add("/js/**");
         excludePatterns.add("/fonts/**");
         excludePatterns.add("/img/**");
         excludePatterns.add("/login");
-        excludePatterns.add("/page/home");
+        excludePatterns.add("/home");
+        excludePatterns.add("/reg/user");
+        excludePatterns.add("/information/list");
+        excludePatterns.add("/favicon.ico");
         excludePatterns.add("/usr/local/ngnix/html/pic/img/shopImg/**");
         //加不需要登录的路径
         registry
