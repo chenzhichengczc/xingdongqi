@@ -46,7 +46,7 @@ spring:
   # 缓存
   redis:
     open: true # 是否开启redis缓存  true开启   false关闭
-    database: 2
+    database: 3
     host: 123.207.230.97
     port: 6379
     password: jcredis   # 密码（默认为空）

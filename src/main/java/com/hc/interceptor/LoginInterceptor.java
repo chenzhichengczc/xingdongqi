@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //请求头token为空返回
         if (StringUtils.isEmpty(token)) {
             logger.info("无token");
-            throw new JcException(403, "访问错误");
+            throw new JcException(403, "请先登录");
         }
         //token验证
         String remoteAddr = IpConfig.getRemoteAddr(request);

@@ -36,10 +36,14 @@ public class LoginInterceptorConfigurer
         excludePatterns.add("/img/**");
         excludePatterns.add("/login");
         excludePatterns.add("/home");
+        excludePatterns.add("/findSignUpInfo");
+        excludePatterns.add("/show");
+        excludePatterns.add("/toRegister");
         excludePatterns.add("/reg/user");
         excludePatterns.add("/information/list");
         excludePatterns.add("/layDate-v5.0.9/**");
         excludePatterns.add("/favicon.ico");
+        excludePatterns.add("/getUserInfo");
         excludePatterns.add("/usr/local/ngnix/html/pic/img/shopImg/**");
         //加不需要登录的路径
         registry
