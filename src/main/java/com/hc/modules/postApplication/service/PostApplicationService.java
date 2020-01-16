@@ -1,10 +1,10 @@
-package com.hc.modules.postapplication.service;
+package com.hc.modules.postApplication.service;
 
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
-import com.hc.modules.postapplication.entity.PostApplicationEntity;
+import com.hc.modules.postApplication.entity.PostApplicationEntity;
 
 import java.util.List;
 

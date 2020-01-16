@@ -66,6 +66,18 @@ public class UserController {
         return ResponseUtil.success();
     }
 
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    public ResponseUtil updateUser(UserEntity userEntity) {
+        userService.updateUser(userEntity);
+        return ResponseUtil.success();
+    }
+
+    @RequestMapping(value = "/user/getUserById", method = RequestMethod.POST)
+    public ResponseUtil getUserById(Integer id) {
+        UserEntity userEntity1 = userService.getUserById(id);
+        return ResponseUtil.success(userEntity1);
+    }
+
 
 
 /*    *//**

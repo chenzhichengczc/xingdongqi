@@ -37,6 +37,7 @@ public class LoginInterceptorConfigurer
         excludePatterns.add("/login");
         excludePatterns.add("/home");
         excludePatterns.add("/findSignUpInfo");
+        excludePatterns.add("/postInfoPage");
         excludePatterns.add("/show");
         excludePatterns.add("/toRegister");
         excludePatterns.add("/reg/user");

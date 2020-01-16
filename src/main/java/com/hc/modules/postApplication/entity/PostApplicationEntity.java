@@ -1,4 +1,4 @@
-package com.hc.modules.postapplication.entity;
+package com.hc.modules.postApplication.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
