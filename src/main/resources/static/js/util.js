@@ -31,3 +31,33 @@ function getCookie(name)
         return null;
     }
 }
+
+function getQuantum() {
+    var hours = new Date().getHours();
+    var quantum = "";
+    if (hours < 6) {
+        quantum = "凌晨好！"
+    }
+    else if (hours < 9) {
+        quantum = "早上好！"
+    }
+    else if (hours < 12) {
+        quantum = "上午好！"
+    }
+    else if (hours < 14) {
+        quantum = "中午好！"
+    }
+    else if (hours < 17) {
+        quantum = "下午好！"
+    }
+    else if (hours < 19) {
+        quantum = "傍晚好！"
+    }
+    else if (hours < 22) {
+        quantum = "晚上好！"
+    }
+    else {
+        quantum = "深夜好！"
+    }
+    return quantum;
+}

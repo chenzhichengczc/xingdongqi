@@ -1,3 +1,5 @@
+var popup = new Popup();
+
 function getParameter(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
@@ -12,7 +14,6 @@ $(function () {
     if (getCookie("token")) {
         $("form").css("visibility", "hidden")
     }else if(performance.timing.redirectStart > 0){
-        alert("信息存储超时，请重新登录！")
         $("form").css("visibility", "visible")
     }
 
@@ -68,7 +69,7 @@ $(function () {
             kp(pageNo, totalPage, totalRecords)
         },
         error: function () {
-            alert("服务器异常，请稍后再试！")
+            popup.alert("异常提醒","服务器异常，请稍后再试！")
         }
     })
 
@@ -137,7 +138,7 @@ function kp(pageNo, totalPage, totalRecords) {
                     console.log(err)
                 }
             })
-            this.selectPage(n);
+            this.selectPage(n,totalPage,totalRecords);
             console.log('nnnn', n)
         },
         //getHref是在click模式下链接算法，一般不需要配置，默认代码如下
@@ -151,12 +152,12 @@ function kp(pageNo, totalPage, totalRecords) {
 function toLogin() {
 
     if (isEmpty123($("#userName").val())) {
-        alert("登录账号为空，请确认！")
+        popup.alert("温馨提示","登录账号为空，请确认！")
         return
     }
 
     if (isEmpty123($("#password").val())) {
-        alert("登录密码为空，请确认！")
+        popup.alert("温馨提示","登录密码为空，请确认！")
         return
     }
 
@@ -174,16 +175,18 @@ function toLogin() {
         dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
         success: function (data) {
             if (data.code == 401) {
-                alert(data.msg)
+                popup.alert(data.msg)
             } else if (data.code == 0) {
                 setCookie("token", data.data.token)
                 sessionStorage.setItem("user",JSON.stringify(data.data.user))
-                alert("登录成功，请继续使用网站！")
-                window.location.reload();
+                popup.alert("登录告示","登录成功，请继续使用网站！")
+                setTimeout(function () {
+                    window.location.reload();
+                },1500)
             }
         },
         error: function () {
-            alert("服务器异常，请稍后再试！")
+            popup.alert("异常提醒","服务器异常，请稍后再试！")
         }
     })
 

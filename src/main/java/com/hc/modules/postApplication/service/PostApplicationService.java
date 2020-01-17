@@ -1,11 +1,13 @@
 package com.hc.modules.postApplication.service;
 
 
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.hc.modules.postApplication.entity.PostApplicationEntity;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -18,7 +20,11 @@ import java.util.List;
  */
 public interface PostApplicationService extends IService<PostApplicationEntity> {
 
-    public List<PostApplicationEntity> getPostApplicationList();
+    public List<PostApplicationEntity> getPostApplicationList(String postName,
+                                                              String hireDepartment,
+                                                              String recruitment,
+                                                              String educationRequirement,
+                                                              String major);
 
     public void insertPostApplication(PostApplicationEntity postApplicationEntity);
 
@@ -28,5 +34,6 @@ public interface PostApplicationService extends IService<PostApplicationEntity> 
 
     public void updatePostApplication(PostApplicationEntity postApplicationEntity);
 
+    public HashMap getSelect();
 }
 

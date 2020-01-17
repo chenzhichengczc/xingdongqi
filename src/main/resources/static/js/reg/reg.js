@@ -1,3 +1,5 @@
+var popup = new Popup();
+
 function submitFun() {
     if ($("#userInfoForm").valid()) {
         var userAcountName = $("#userName").val();
@@ -23,12 +25,15 @@ function submitFun() {
             dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             success: function (data) {
                 if (data.code == 0) {
-                    alert("注册成功!")
+                    popup.alert("注册告示","用户注册成功!")
+                    setTimeout(function () {
+                        window.location.href = "/home"
+                    },1500)
                     window.location.href = "/home"
                 }
             },
             error: function () {
-                alert("服务器异常，请稍后再试！")
+                popup.alert("异常提醒","服务器异常，请稍后再试！")
             }
         })
 

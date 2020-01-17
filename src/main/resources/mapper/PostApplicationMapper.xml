@@ -5,42 +5,50 @@
 
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.hc.modules.postApplication.entity.PostApplicationEntity" id="postApplicationResultMap">
-                    <result property="id" column="id"/>
-                    <result property="postCode" column="post_code"/>
-                    <result property="postName" column="post_name"/>
-                    <result property="hireDepartment" column="hire_department"/>
-                    <result property="applicationDeadline" column="application_deadline"/>
-                    <result property="postDuty" column="post_duty"/>
-                    <result property="applicationQualifications" column="application_qualifications"/>
-                    <result property="hireAmount" column="hire_amount"/>
-                    <result property="major" column="major"/>
-                    <result property="educationRequirement" column="education_requirement"/>
-                    <result property="age" column="age"/>
-                    <result property="otherRequirement" column="other_requirement"/>
-                    <result property="createTime" column="create_time"/>
-                    <result property="updateTime" column="update_time"/>
-                    <result property="recruitment" column="recruitment"/>
-            </resultMap>
+        <result property="id" column="id"/>
+        <result property="postCode" column="post_code"/>
+        <result property="postName" column="post_name"/>
+        <result property="hireDepartment" column="hire_department"/>
+        <result property="applicationDeadline" column="application_deadline"/>
+        <result property="postDuty" column="post_duty"/>
+        <result property="applicationQualifications" column="application_qualifications"/>
+        <result property="hireAmount" column="hire_amount"/>
+        <result property="major" column="major"/>
+        <result property="educationRequirement" column="education_requirement"/>
+        <result property="age" column="age"/>
+        <result property="otherRequirement" column="other_requirement"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="recruitment" column="recruitment"/>
+    </resultMap>
 
 
     <select id="getPostApplicationList" resultMap="postApplicationResultMap">
         SELECT
-                    a.id,
-                    a.post_code,
-                    a.post_name,
-                    a.hire_department,
-                    a.application_deadline,
-                    a.post_duty,
-                    a.application_qualifications,
-                    a.hire_amount,
-                    a.major,
-                    a.education_requirement,
-                    a.age,
-                    a.other_requirement,
-                    a.create_time,
-                    a.update_time,
-                    a.recruitment
-                FROM post_application a
+        a.id,
+        a.post_code,
+        a.post_name,
+        a.hire_department,
+        a.application_deadline,
+        a.post_duty,
+        a.application_qualifications,
+        a.hire_amount,
+        a.major,
+        a.education_requirement,
+        a.age,
+        a.other_requirement,
+        a.create_time,
+        a.update_time,
+        a.recruitment
+        FROM post_application a
+        <where>
+            <if test="postName != null and postName != ''">and post_name=#{postName}</if>
+            <if test="hireDepartment != null and hireDepartment != ''">and hire_department=#{hireDepartment}</if>
+            <if test="recruitment != null and recruitment != ''">and recruitment=#{recruitment}</if>
+            <if test="educationRequirement != null and educationRequirement != ''">and education_requirement=#{educationRequirement}</if>
+            <if test="major != null and major != ''">and major=#{major}</if>
+        </where>
+        order by update_time desc
     </select>
 
     <insert id="insertPostApplication">
@@ -81,8 +89,6 @@
     </insert>
 
 
-
-
     <select id="getPostApplicationById" resultType="com.hc.modules.postApplication.entity.PostApplicationEntity">
         SELECT
                     id,
@@ -108,5 +114,25 @@
     <delete id="removePostApplicationById">
         DELETE FROM post_application WHERE id=#{postApplicationId}
     </delete>
+
+    <select id="selectPostName" resultType="java.lang.String">
+        select DISTINCT(post_name) from post_application
+    </select>
+
+    <select id="selectHireDepartment" resultType="java.lang.String">
+        select DISTINCT(hire_department) from post_application
+    </select>
+
+    <select id="selectRecruitment" resultType="java.lang.String">
+        select DISTINCT(recruitment) from post_application
+    </select>
+
+    <select id="selectEducationRequirement" resultType="java.lang.String">
+        select DISTINCT(education_requirement) from post_application
+    </select>
+
+    <select id="selectMajor" resultType="java.lang.String">
+        select DISTINCT(major) from post_application
+    </select>
 
 </mapper>

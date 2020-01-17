@@ -1,17 +1,18 @@
 package com.hc.modules.postApplication.controller;
 
+import java.util.HashMap;
 import java.util.List;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hc.common.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.hc.modules.postApplication.entity.PostApplicationEntity;
 import com.hc.modules.postApplication.service.PostApplicationService;
-
-
 
 
 /**
@@ -32,50 +33,62 @@ public class PostApplicationController {
      * 列表
      */
     @RequestMapping(value = "/postApplication/list", method = RequestMethod.GET)
-    public ResponseUtil getPostApplicationList(Integer pageNo, Integer pageSize){
+    public ResponseUtil getPostApplicationList(Integer pageNo, Integer pageSize,
+                                               @RequestParam(required = false) String postName,
+                                               @RequestParam(required = false) String hireDepartment,
+                                               @RequestParam(required = false) String recruitment,
+                                               @RequestParam(required = false) String educationRequirement,
+                                               @RequestParam(required = false) String major) {
         PageHelper.startPage(pageNo, pageSize);
-        List<PostApplicationEntity> postApplicationEntities = postApplicationService.getPostApplicationList();
+        List<PostApplicationEntity> postApplicationEntities = postApplicationService.getPostApplicationList(postName,hireDepartment,recruitment,educationRequirement,major);
         PageInfo<PostApplicationEntity> pageInfo = new PageInfo<>(postApplicationEntities);
         return ResponseUtil.success(pageInfo);
     }
 
 
-
-
     /**
-    * 新增
-    */
+     * 新增
+     */
     @RequestMapping(value = "/postApplication/insert", method = RequestMethod.POST)
-    public ResponseUtil insertPostApplication(PostApplicationEntity postApplicationEntity){
+    public ResponseUtil insertPostApplication(PostApplicationEntity postApplicationEntity) {
         postApplicationService.insertPostApplication(postApplicationEntity);
         return ResponseUtil.success();
     }
 
     /**
-    *  获取
-    */
+     * 获取
+     */
     @RequestMapping(value = "/postApplication/getById", method = RequestMethod.GET)
-    public ResponseUtil getPostApplicationById(Integer postApplicationId){
+    public ResponseUtil getPostApplicationById(Integer postApplicationId) {
         PostApplicationEntity postApplicationEntity = postApplicationService.getPostApplicationById(postApplicationId);
         return ResponseUtil.success(postApplicationEntity);
     }
 
     /**
-    * 删除
-    */
+     * 删除
+     */
     @RequestMapping(value = "/postApplication/delete", method = RequestMethod.POST)
-    public ResponseUtil removePostApplicationById(Integer postApplicationId){
+    public ResponseUtil removePostApplicationById(Integer postApplicationId) {
         postApplicationService.removePostApplicationById(postApplicationId);
         return ResponseUtil.success();
     }
 
     /**
-    * 更新
-    */
+     * 更新
+     */
     @RequestMapping(value = "/postApplication/update", method = RequestMethod.POST)
-    public ResponseUtil updatePostApplication(PostApplicationEntity postApplicationEntity){
+    public ResponseUtil updatePostApplication(PostApplicationEntity postApplicationEntity) {
         postApplicationService.updatePostApplication(postApplicationEntity);
         return ResponseUtil.success();
+    }
+
+    //获取多列下拉列表数据
+    @RequestMapping(value = "/postApplication/getSelect",method = RequestMethod.GET)
+    public ResponseUtil getSelect(){
+
+        HashMap map = postApplicationService.getSelect();
+
+        return ResponseUtil.success(map);
     }
 
 }

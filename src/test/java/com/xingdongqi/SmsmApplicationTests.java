@@ -36,11 +36,6 @@ class SmsmApplicationTests {
         System.out.println("informationList = " + informationList);
     }
 
-    @Test
-    void t2(){
-        List<PostApplicationEntity> postApplicationList = postApplicationService.getPostApplicationList();
 
-        System.out.println("postApplicationList = " + postApplicationList);
-    }
 
 }

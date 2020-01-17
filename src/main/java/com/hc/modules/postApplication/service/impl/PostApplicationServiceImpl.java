@@ -10,6 +10,7 @@ import com.hc.modules.postApplication.entity.PostApplicationEntity;
 import com.hc.modules.postApplication.service.PostApplicationService;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -22,8 +23,12 @@ public class PostApplicationServiceImpl extends ServiceImpl<PostApplicationMappe
 
 
     @Override
-    public List<PostApplicationEntity> getPostApplicationList(){
-        List<PostApplicationEntity> postApplicationEntityList = postApplicationMapper.getPostApplicationList();
+    public List<PostApplicationEntity> getPostApplicationList(String postName,
+                                                              String hireDepartment,
+                                                              String recruitment,
+                                                              String educationRequirement,
+                                                              String major){
+        List<PostApplicationEntity> postApplicationEntityList = postApplicationMapper.getPostApplicationList(postName,hireDepartment,recruitment,educationRequirement,major);
         return postApplicationEntityList;
     }
 
@@ -55,5 +60,26 @@ public class PostApplicationServiceImpl extends ServiceImpl<PostApplicationMappe
         if(result == null || result == 0){
             throw new JcException("");
         }
+    }
+
+    @Override
+    public HashMap getSelect() {
+
+        HashMap hashMap = new HashMap();
+
+        List<String> postNameList = postApplicationMapper.selectPostName();
+        List<String> hireDepartmentList = postApplicationMapper.selectHireDepartment();
+        List<String> recruitmentList = postApplicationMapper.selectRecruitment();
+        List<String> educationRequirementList = postApplicationMapper.selectEducationRequirement();
+        List<String> majorList = postApplicationMapper.selectMajor();
+
+        hashMap.put("postNameList",postNameList);
+        hashMap.put("hireDepartmentList",hireDepartmentList);
+        hashMap.put("recruitmentList",recruitmentList);
+        hashMap.put("educationRequirementList",educationRequirementList);
+        hashMap.put("majorList",majorList);
+
+
+        return hashMap;
     }
 }

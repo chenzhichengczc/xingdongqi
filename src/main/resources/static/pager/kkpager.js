@@ -128,8 +128,10 @@ var kkpager = {
 			}
 		},
 		//不刷新页面直接手动调用选中某一页码
-		selectPage : function(n){
+		selectPage : function(n,b,c){
 			this._config['pno'] = n;
+            this._config['total'] = b;
+            this._config['totalRecords'] = c;
 			this.generPageHtml(this._config,true);
 		},
 		//生成控件代码

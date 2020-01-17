@@ -25,6 +25,7 @@
             a.create_time,
             a.update_time
         FROM information a
+        ORDER BY update_time desc
     </select>
 
     <insert id="insertInformation">

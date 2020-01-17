@@ -10,21 +10,19 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<link href="../css/all.css" rel="stylesheet" type="text/css">
 		<link href="../css/index.css" type="text/css" rel="stylesheet">
+		<link href="../css/popup.css" type="text/css" rel="stylesheet">
 		<script src="../js/jquery-1.7.2-vsdoc.js" type="text/javascript"></script>
 		<script src="../js/jquery-1.7.2.js" type="text/javascript"></script>
+		<script src="../js/popup/popup.js" type="text/javascript"></script>
+		<script src="../js/global.js" type="text/javascript"></script>
+		<script src="../js/global.js" type="text/javascript"></script>
+		<script src="../js/signUpInfo/signUpInfo.js" type="text/javascript"></script>
 		<script type="text/javascript" src="../layer/layer.js"></script>
 		<script type="text/javascript" src="../js/JScalendar.js"></script>
 	</head>
 
 	<body class="x-body x-webkit x-chrome x-mac f-body f-theme-neptune" id="ext-gen1018">
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var message = '';
-				if(message != null && message != '') {
-					layer.alert(message);
-				}
-			})
-		</script>
+
 		<div id="ContainerPanel" style="display:none;">
 			<div id="calendarPanel" style="position: absolute;display: none;z-index: 9999;background-color: #FFFFFF;border: 1px solid #CCCCCC;width:175px;font-size:12px;margin-left:25px;"></div>
 		</div>
@@ -44,7 +42,7 @@
 											<tr role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-inputRow" class="x-form-item-input-row">
 												<td role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-labelCell" style="display:none;" valign="top" halign="left" width="105" class="x-field-label-cell"><label id="ctl00_ContentPlaceHolder1_lblInfo-labelEl" for="ctl00_ContentPlaceHolder1_lblInfo-inputEl" class="x-form-item-label x-unselectable x-form-item-label-left" style="width:100px;margin-right:5px;" unselectable="on"></label></td>
 												<td role="presentation" class="x-form-item-body x-form-display-field-body " id="ctl00_ContentPlaceHolder1_lblInfo-bodyEl" colspan="3">
-													<div id="ctl00_ContentPlaceHolder1_lblInfo-inputEl" role="input" class="x-form-display-field" aria-invalid="false"><span>陈志成, 您好！</span></div>
+													<div id="ctl00_ContentPlaceHolder1_lblInfo-inputEl" role="input" class="x-form-display-field" aria-invalid="false"><span id="callSpan"></span></div>
 												</td>
 												<td role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-sideErrorCell" valign="middle" style="display: none;" width="21">
 													<div role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-errorEl" class="x-form-error-msg x-form-invalid-icon" style="display:none" data-errorqtip=""></div>
@@ -72,7 +70,7 @@
 								</div>
 							</td>
 							<td align="center" style="width: 18%">&nbsp;
-								<a href="home.html">返回首页</a>
+								<a href="/home">返回首页</a>
 							</td>
 
 							<td align="center" style="width: 18%">
@@ -83,7 +81,7 @@
 												<td role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-labelCell" style="display:none;" valign="top" halign="left" width="105" class="x-field-label-cell"><label id="ctl00_ContentPlaceHolder1_lbtjobquery-labelEl" for="ctl00_ContentPlaceHolder1_lbtjobquery-inputEl" class="x-form-item-label x-unselectable x-form-item-label-left" style="width:100px;margin-right:5px;" unselectable="on"></label></td>
 												<td role="presentation" class="x-form-item-body x-form-display-field-body " id="ctl00_ContentPlaceHolder1_lbtjobquery-bodyEl" colspan="3">
 													<div id="ctl00_ContentPlaceHolder1_lbtjobquery-inputEl" role="input" class="x-form-display-field" aria-invalid="false">
-														<a href="postInfoPage.html">网上报名</a>
+														<a href="/postInfoPage">网上报名</a>
 													</div>
 												</td>
 												<td role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-sideErrorCell" valign="middle" style="display: none;" width="21">
@@ -102,7 +100,7 @@
 												<td role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-labelCell" style="display:none;" valign="top" halign="left" width="105" class="x-field-label-cell"><label id="ctl00_ContentPlaceHolder1_lblPersonInfo-labelEl" for="ctl00_ContentPlaceHolder1_lblPersonInfo-inputEl" class="x-form-item-label x-unselectable x-form-item-label-left" style="width:100px;margin-right:5px;" unselectable="on"></label></td>
 												<td role="presentation" class="x-form-item-body x-form-display-field-body " id="ctl00_ContentPlaceHolder1_lblPersonInfo-bodyEl" colspan="3">
 													<div id="ctl00_ContentPlaceHolder1_lblPersonInfo-inputEl" role="input" class="x-form-display-field" aria-invalid="false">
-														<a href="getUserInfo.html">个人信息</a>
+														<a href="/getUserInfo">个人信息</a>
 													</div>
 												</td>
 												<td role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-sideErrorCell" valign="middle" style="display: none;" width="21">
@@ -144,56 +142,51 @@
 										</div>
 									</div>
 									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 139px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl02">
-										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl02-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl02-textEl" class="x-column-header-text">招聘部门</span>
+										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl02-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl02-textEl" class="x-column-header-text">招聘单位</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl02-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 70px; right: auto; left: 229px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl03">
-										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl03-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl03-textEl" class="x-column-header-text">岗位类别</span>
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 229px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl03">
+										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl03-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl03-textEl" class="x-column-header-text">岗位职责</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl03-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 150px; right: auto; left: 299px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl04">
-										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl04-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl04-textEl" class="x-column-header-text">岗位简介</span>
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 329px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl04">
+										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl04-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl04-textEl" class="x-column-header-text">招聘条件</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl04-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 70px; right: auto; left: 449px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl05">
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 429px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl05">
 										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl05-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl05-textEl" class="x-column-header-text">招聘人数</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl05-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 70px; right: auto; left: 519px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl06">
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 529px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl06">
 										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl06-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl06-textEl" class="x-column-header-text">提交状态</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl06-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 70px; right: auto; left: 589px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl07">
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 629px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl07">
 										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl07-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl07-textEl" class="x-column-header-text">审核状态</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl07-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 659px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl08">
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 90px; right: auto; left: 729px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl08">
 										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl08-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl08-textEl" class="x-column-header-text">审核意见</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl08-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 60px; right: auto; left: 749px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl09">
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 60px; right: auto; left: 819px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl09">
 										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl09-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl09-textEl" class="x-column-header-text">详情</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl09-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 60px; right: auto; left: 809px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl10">
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 60px; right: auto; left: 879px; top: 0px; margin: 0px;" id="ctl00_ContentPlaceHolder1_Grid1_ctl10">
 										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl10-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl10-textEl" class="x-column-header-text">编辑</span>
 											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl10-triggerEl" class="x-column-header-trigger"></div>
 										</div>
 									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable" style="width: 60px; right: auto; left: 869px; top: 0px; margin: 0px; cursor: col-resize;" id="ctl00_ContentPlaceHolder1_Grid1_ctl11">
-										<div id="ctl00_ContentPlaceHolder1_Grid1_ctl11-titleEl" class="x-column-header-inner"><span id="ctl00_ContentPlaceHolder1_Grid1_ctl11-textEl" class="x-column-header-text">删除</span>
-											<div id="ctl00_ContentPlaceHolder1_Grid1_ctl11-triggerEl" class="x-column-header-trigger" style="cursor: col-resize;"></div>
-										</div>
-									</div>
-									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable x-column-header-last" style="width: 60px; right: auto; left: 929px; top: 0px; margin: 0px; cursor: col-resize;" id="Print">
+									<div class="x-column-header x-column-header-align-left x-box-item x-column-header-default x-unselectable x-column-header-last" style="width: 60px; right: auto; left: 939px; top: 0px; margin: 0px; cursor: col-resize;" id="Print">
 										<div id="Print-titleEl" class="x-column-header-inner"><span id="Print-textEl" class="x-column-header-text">打印</span>
 										</div>
 									</div>
@@ -260,3 +253,22 @@
 											</td>
 											<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl01 x-unselectable " id="ext-gen1091">
 												<div unselectable="on" class="x-grid-cell-inner " style="text-align:left;">
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="f_ajax_loading" class="f-ajax-loading" style="visibility: hidden; display: block;">正在加载...</div>
+
+		<div class="botton">版权所有 © 和臣 - 行动企<br> 备案号 ： 粤ICP备19159726号-1</div>
+
+	</body>
+</html>
