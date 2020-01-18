@@ -1,19 +1,23 @@
 package com.hc.modules.userapplication.controller;
 
-import java.util.Map;
 import java.util.List;
-import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import java.util.Map;
+
+import com.github.pagehelper.PageHelper;
+import com.hc.common.utils.FileUploadUtils;
 import com.hc.common.utils.ResponseUtil;
+import com.hc.modules.userapplication.entity.UserApplicationEntity;
+import com.hc.modules.userapplication.entity.UserApplicationPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.hc.modules.userapplication.entity.UserApplicationEntity;
 import com.hc.modules.userapplication.service.UserApplicationService;
 import com.github.pagehelper.PageInfo;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -77,6 +81,27 @@ public class UserApplicationController {
     public ResponseUtil updateUserApplication(UserApplicationEntity userApplicationEntity){
         userApplicationService.updateUserApplication(userApplicationEntity);
         return ResponseUtil.success();
+    }
+
+    /**
+     * 根据个人id查询对应的工作投递情况
+     */
+
+    @RequestMapping(value = "/userApplication/getUserApplication", method = RequestMethod.GET)
+    public ResponseUtil getUserApplication(Integer pageNo,Integer pageSize,Integer id){
+        PageHelper.startPage(pageNo, pageSize);
+        List<UserApplicationPO> userApplication = userApplicationService.getUserApplication(id);
+        PageInfo<UserApplicationPO> pageInfo = new PageInfo<>(userApplication);
+        return ResponseUtil.success(pageInfo);
+    }
+
+    /**
+     * 图片上传
+     */
+    @RequestMapping(value = "/userApplication/uploadFile",method = RequestMethod.POST)
+    public ResponseUtil uploadFile(MultipartFile uploadFile, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Map<String, Object> map = (Map<String, Object>) FileUploadUtils.uploadApk(uploadFile, request, response);
+        return ResponseUtil.success(map);
     }
 
 }

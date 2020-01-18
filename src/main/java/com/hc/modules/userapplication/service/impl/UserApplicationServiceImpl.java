@@ -1,12 +1,14 @@
 package com.hc.modules.userapplication.service.impl;
 
 import com.hc.common.exception.JcException;
+import com.hc.modules.postApplication.mapper.PostApplicationMapper;
+import com.hc.modules.userapplication.entity.UserApplicationEntity;
+import com.hc.modules.userapplication.entity.UserApplicationPO;
 import com.hc.modules.userapplication.mapper.UserApplicationMapper;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
-import com.hc.modules.userapplication.entity.UserApplicationEntity;
 import com.hc.modules.userapplication.service.UserApplicationService;
 
 import javax.annotation.Resource;
@@ -18,7 +20,8 @@ public class UserApplicationServiceImpl extends ServiceImpl<UserApplicationMappe
     @Resource
     private UserApplicationMapper userApplicationMapper;
 
-    
+    @Resource
+    private PostApplicationMapper postApplicationMapper;
 
 
     @Override
@@ -55,5 +58,12 @@ public class UserApplicationServiceImpl extends ServiceImpl<UserApplicationMappe
         if(result == null || result == 0){
             throw new JcException("");
         }
+    }
+
+    @Override
+    public List<UserApplicationPO> getUserApplication(Integer id) {
+
+        List<UserApplicationPO> list = userApplicationMapper.getUserApplication(id);
+        return list;
     }
 }

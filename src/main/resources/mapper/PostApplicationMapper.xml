@@ -106,7 +106,6 @@
                     create_time,
                     update_time,
                     recruitment
-        )
         FROM post_application WHERE id=#{postApplicationId}
     </select>
 

@@ -5,15 +5,63 @@
 
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.hc.modules.userapplication.entity.UserApplicationEntity" id="userApplicationResultMap">
-                    <result property="id" column="id"/>
-                    <result property="userId" column="user_id"/>
-                    <result property="postApplicationId" column="post_application_id"/>
-                    <result property="applicationTime" column="application_time"/>
-                    <result property="createTime" column="create_time"/>
-                    <result property="paymentStatus" column="payment_status"/>
-                    <result property="payId" column="pay_id"/>
-                    <result property="checkResult" column="check_result"/>
-            </resultMap>
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="postApplicationId" column="post_application_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="paymentStatus" column="payment_status"/>
+        <result property="payId" column="pay_id"/>
+        <result property="checkResult" column="check_result"/>
+        <result property="checkReport" column="check_report"/>
+        <result property="applicantName" column="applicant_name"/>
+        <result property="applicantGender" column="applicant_gender"/>
+        <result property="applicantBirth" column="applicant_birth"/>
+        <result property="applicantPoliticalStatus" column="applicant_political_status"/>
+        <result property="applicantHouseholdRegister" column="applicant_household_register"/>
+        <result property="applicantMarriageStatus" column="applicant_marriage_status"/>
+        <result property="applicantIdentityCard" column="applicant_identity_card"/>
+        <result property="applicantGraduatedTime" column="applicant_graduated_time"/>
+        <result property="applicantGraduatedCollege" column="applicant_graduated_college"/>
+        <result property="applicantEducationalBackground" column="applicant_educational_background"/>
+        <result property="applicantOccupationalQualification" column="applicant_occupational_qualification"/>
+        <result property="applicantMajor" column="applicant_major"/>
+        <result property="applicantEnglishLevel" column="applicant_english_level"/>
+        <result property="applicantComputerLevel" column="applicant_computer_level"/>
+        <result property="applicantContactAddress" column="applicant_contact_address"/>
+        <result property="applicantContactPhone" column="applicant_contact_phone"/>
+        <result property="applicantApplicationPost" column="applicant_application_post"/>
+        <result property="applicantWorkExprience" column="applicant_work_exprience"/>
+        <result property="applicantErgentContact" column="applicant_ergent_contact"/>
+        <result property="applicantErgentPhone" column="applicant_ergent_phone"/>
+        <result property="applicantFamilyRelationship" column="applicant_family_relationship"/>
+        <result property="applicantSignName" column="applicant_sign_name"/>
+        <result property="applicantSignTime" column="applicant_sign_time"/>
+        <result property="applicantPhotoSrc" column="applicant_photo_src"/>
+        <result property="applicantIdentityCardPhoneSrc" column="applicant_identity_card_phone_src"/>
+        <result property="applicantDiplomaSrc" column="applicant_diploma_src"/>
+    </resultMap>
+
+    <resultMap type="com.hc.modules.userapplication.entity.UserApplicationPO" id="rm">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="postApplicationId" column="post_application_id"/>
+        <result property="paymentStatus" column="payment_status"/>
+        <result property="payId" column="pay_id"/>
+        <result property="checkResult" column="check_result"/>
+        <result property="checkReport" column="check_report"/>
+        <result property="postCode" column="post_code"/>
+        <result property="postName" column="post_name"/>
+        <result property="hireDepartment" column="hire_department"/>
+        <result property="applicationDeadline" column="application_deadline"/>
+        <result property="postDuty" column="post_duty"/>
+        <result property="applicationQualifications" column="application_qualifications"/>
+        <result property="hireAmount" column="hire_amount"/>
+        <result property="major" column="major"/>
+        <result property="educationRequirement" column="education_requirement"/>
+        <result property="age" column="age"/>
+        <result property="otherRequirement" column="other_requirement"/>
+        <result property="recruitment" column="recruitment"/>
+    </resultMap>
 
 
     <select id="getUserApplicationList" resultMap="userApplicationResultMap">
@@ -53,8 +101,6 @@
     </insert>
 
 
-
-
     <select id="getUserApplicationById" resultType="com.hc.modules.userapplication.entity.UserApplicationEntity">
         SELECT
                     id,
@@ -73,5 +119,14 @@
     <delete id="removeUserApplicationById">
         DELETE FROM user_application WHERE id=#{userApplicationId}
     </delete>
+
+    <select id="getUserApplication" resultMap="rm">
+        select ua.user_id,ua.post_application_id,ua.check_result,ua.payment_status,ua.pay_id,ua.check_report,
+        pa.post_code,pa.post_name,pa.hire_department,pa.application_deadline,pa.post_duty,pa.application_qualifications,pa.hire_amount,pa.major,pa.education_requirement,pa.age,pa.other_requirement,pa.recruitment
+         from user_application ua
+          LEFT JOIN post_application pa
+          on ua.post_application_id = pa.id
+          where ua.user_id = #{id}
+    </select>
 
 </mapper>
