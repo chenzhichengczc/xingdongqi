@@ -29,28 +29,15 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        String token = request.getHeader("token");
-        //请求头token为空返回
-        if (StringUtils.isEmpty(token)) {
-            logger.info("无token");
-            throw new JcException(403, "请先登录");
-        }
-        //token验证
-        String remoteAddr = IpConfig.getRemoteAddr(request);
-        System.out.println("remoteAddr = " + remoteAddr);
-        System.out.println("jwtConfig = " + jwtConfig);
-        boolean result = jwtConfig.verifyToken(token, remoteAddr);
-        if (!result) {
-            logger.info("token已过期,请重新登陆");
-            System.out.println("result = " + result);
-            throw new JcException(403, "登录过期,请重新登陆");
-        }
-        /*HttpSession session = request.getSession();
-        if (session.getAttribute("uid") == null) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("username") == null) {
             System.out.println("session = " + session);
             response.sendRedirect("/home");
             return false;
-        }*/
+        }
+
+
+
         return true;
     }
 

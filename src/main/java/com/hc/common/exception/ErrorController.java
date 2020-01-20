@@ -1,4 +1,4 @@
-/*
+
 package com.hc.common.exception;
 
 
@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
-*/
+
 /**
  * @author ：fenghuang
  * @date ：Created in 2020/1/13 15:55
  * @description：
  * @modified By：
  * @version:
- *//*
+ */
 
 
 @RestController
@@ -42,6 +42,7 @@ public class ErrorController extends BasicErrorController {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.ALL));
         HttpStatus status = getStatus(request);
         String jsonCommonResult = body.get("message").toString();
+        System.out.println("jsonCommonResult = " + jsonCommonResult);
         //自定义的错误信息类
         ResponseUtil ret = ResponseUtil.error(status.value(), jsonCommonResult);;
         if((Integer)body.get(status) == 500 && ((String)body.get("message")).contains("token")){
@@ -59,9 +60,9 @@ public class ErrorController extends BasicErrorController {
     @Override
     public String getErrorPath() {
         return "error/error";
-    }a
+    }
 
 
 }
 
-*/
+

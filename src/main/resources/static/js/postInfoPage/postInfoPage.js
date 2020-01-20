@@ -368,7 +368,8 @@ function queryCriteria() {
 }
 
 function initSelect() {
-
+    debugger
+    console.log("token:"+ getCookie("token"))
     $.ajax({
         url: 'http://localhost:8080/postApplication/getSelect',
         type: 'get', //GET

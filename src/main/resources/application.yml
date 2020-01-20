@@ -7,7 +7,8 @@ server:
   connection-timeout: 5000ms
   servlet:
     session:
-      timeout: 7200s
+      timeout: 100s
+
 #  ssl:
 #    key-store: classpath:www.xingdongqi.com.jks
 #    key-store-password: jc08e3ot28
@@ -27,6 +28,9 @@ spring:
       enabled: true
   freemarker:
     cache: false
+
+
+
 
 #    spring.thymeleaf.prefix=classpath:/templates/
 #    spring.thymeleaf.suffix=.vm

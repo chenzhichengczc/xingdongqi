@@ -53,7 +53,7 @@ public class UserController {
         } else {
             String remoteAddrIp = IpConfig.getRemoteAddr(request);
             String token = jwtConfig.createToken(remoteAddrIp);
-            request.getSession().setAttribute("uid", 1);
+            request.getSession().setAttribute("username", username);
             map.put("token", token);
             return ResponseUtil.success(map);
         }

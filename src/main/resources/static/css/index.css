@@ -8,6 +8,8 @@ textarea{
 	width: 595px;
 	height: 150px;
 }
+
+
 .header
 {
 	background: url('../img/index-baner.jpg') ;
@@ -35,7 +37,7 @@ textarea{
 }
  #contentL, #contentR
 {
-	float:left; 
+	float:left;
 }
 #content
 {
@@ -46,9 +48,9 @@ textarea{
 #contentL
 {
 	width:650px;
-	
+
 	padding-left:30px;
-	
+
 }
 /*#contentM
 {
@@ -60,8 +62,8 @@ textarea{
 #contentR
 {
 	margin-left:20px;
-	width:300px;	
-	
+	width:300px;
+
 	padding-top:15px;
 }
 .clearfloat
@@ -92,7 +94,7 @@ textarea{
 	font:600 14px Microsoft Yahei,冬青黑体简体中文;
 	line-height:55px;
 	text-align:center;
-	
+
 }
 .contact .image
 {
@@ -115,7 +117,7 @@ A:hover {
  text-decoration: underline;
 }
 A:active {
- COLOR: #0b4894;  
+ COLOR: #0b4894;
  text-decoration: underline;
 }
 .jobsearch,.showdata,.register,.registertable
