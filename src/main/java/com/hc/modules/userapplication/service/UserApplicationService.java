@@ -2,8 +2,8 @@ package com.hc.modules.userapplication.service;
 
 
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.hc.modules.userapplication.entity.UserApplicationPO;
 import com.hc.modules.userapplication.entity.UserApplicationEntity;
 
 import java.util.List;
@@ -28,5 +28,6 @@ public interface UserApplicationService extends IService<UserApplicationEntity> 
 
     public void updateUserApplication(UserApplicationEntity userApplicationEntity);
 
+    public List<UserApplicationPO> getUserApplication(Integer id);
 }
 

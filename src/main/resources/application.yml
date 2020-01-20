@@ -7,7 +7,7 @@ server:
   connection-timeout: 5000ms
   servlet:
     session:
-      timeout: 100s
+      timeout: 7200s
 
 #  ssl:
 #    key-store: classpath:www.xingdongqi.com.jks

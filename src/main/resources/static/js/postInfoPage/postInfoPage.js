@@ -92,7 +92,7 @@ $(function () {
                             + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{recruitment}</span></div>'
                             + '</td>'
                             + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                            + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="applicationPost(#{id})">申请</a>'
+                            + '<div unselectable="on" class="x-grid-cell-inner" ><a href="/writeForm?id=#{id}&postName=#{postName}" target="_blank">申请</a>'
                             + '</div>'
                             + '</td>'
                             + '</tr>'
@@ -182,6 +182,8 @@ function kp(pageNo, totalPage, totalRecords) {
 
                         var data = data.data.list;
 
+                        var html = "";
+
                         for (var i = 0; i < data.length; i++) {
                             html = '<tr role="row" class="x-grid-row f-grid-row x-grid-data-row" tabindex="-1">'
                                 + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl00 x-grid-cell-row-numberer x-grid-cell-special x-unselectable x-grid-cell-row-numberer x-grid-cell-special">'
@@ -221,7 +223,7 @@ function kp(pageNo, totalPage, totalRecords) {
                                 + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{recruitment}</span></div>'
                                 + '</td>'
                                 + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                                + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="applicationPost(#{id})">申请</a>'
+                                + '<div unselectable="on" class="x-grid-cell-inner" ><a href="/writeForm?id=#{id}&postName=#{postName}" target="_blank">申请</a>'
                                 + '</div>'
                                 + '</td>'
                                 + '</tr>'
@@ -299,6 +301,8 @@ function queryCriteria() {
 
                 var data = data.data.list;
 
+                var html = "";
+
                 for (var i = 0; i < data.length; i++) {
                     html = '<tr role="row" class="x-grid-row f-grid-row x-grid-data-row" tabindex="-1">'
                         + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl00 x-grid-cell-row-numberer x-grid-cell-special x-unselectable x-grid-cell-row-numberer x-grid-cell-special">'
@@ -338,7 +342,7 @@ function queryCriteria() {
                         + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{recruitment}</span></div>'
                         + '</td>'
                         + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                        + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="applicationPost(#{id})">申请</a>'
+                        + '<div unselectable="on" class="x-grid-cell-inner" ><a href="/writeForm?id=#{id}&postName=#{postName}" target="_blank">申请</a>'
                         + '</div>'
                         + '</td>'
                         + '</tr>'

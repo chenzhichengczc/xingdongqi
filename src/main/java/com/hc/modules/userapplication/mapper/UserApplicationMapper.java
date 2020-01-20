@@ -2,6 +2,7 @@ package com.hc.modules.userapplication.mapper;
 
 import com.hc.modules.userapplication.entity.UserApplicationEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.hc.modules.userapplication.entity.UserApplicationPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -24,4 +25,5 @@ public interface UserApplicationMapper extends BaseMapper<UserApplicationEntity>
 
     public Integer removeUserApplicationById(@Param(value = "userApplicationId") Integer userApplicationId);
 
+    public List<UserApplicationPO> getUserApplication(Integer id);
 }
