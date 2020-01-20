@@ -38,6 +38,7 @@
         <result property="applicantSignTime" column="applicant_sign_time"/>
         <result property="applicantPhotoSrc" column="applicant_photo_src"/>
         <result property="applicantIdentityCardPhoneSrc" column="applicant_identity_card_phone_src"/>
+        <result property="applicantIdentityCardPhoneReverseSrc" column="applicantIdentity_card_phone_reverse_src"/>
         <result property="applicantDiplomaSrc" column="applicant_diploma_src"/>
     </resultMap>
 
