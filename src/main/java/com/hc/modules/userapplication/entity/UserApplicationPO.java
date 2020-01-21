@@ -67,7 +67,7 @@ public class UserApplicationPO {
     /**
      * 年龄
      */
-    private Integer age;
+    private String ageRange;
     /**
      * 其他要求
      */

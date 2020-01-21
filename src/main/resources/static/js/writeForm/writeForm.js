@@ -265,39 +265,76 @@ function initField() {
 
 function saveForm() {
 
-    var applicantName = $("#applicantName").val()
-    var applicantGender = $("#applicantGender").val()
-    var applicantPhotoSrc = $("#peronImageArea img").data() == null ? "" : $("#peronImageArea img").data().url
-    var applicantBirth = $("#applicantBirth").val()
-    var applicantPoliticalStatus = $("#applicantPoliticalStatus").val()
-    var applicantHouseholdRegister = $("#applicantHouseholdRegister").val()
-    var applicantMarriageStatus = $("#applicantMarriageStatus").val()
-    var applicantIdentityCard = $("#applicantIdentityCard").val()
-    var applicantGraduatedTime = $("#applicantGraduatedTime").val()
-    var applicantGraduatedCollege = $("#applicantGraduatedCollege").val()
-    var applicantEducationalBackground = $("#applicantEducationalBackground").val()
-    var applicantOccupationalQualification = $("#applicantOccupationalQualification").val()
-    var applicantMajor = $("#applicantMajor").val()
-    var applicantEnglishLevel = $("#applicantEnglishLevel").val()
-    var applicantComputerLevel = $("#applicantComputerLevel").val()
-    var applicantContactAddress = $("#applicantContactAddress").val()
-    var applicantContactPhone = $("#applicantContactPhone").val()
-    var applicantApplicationPost = $("#applicantApplicationPost").val()
-    var applicantWorkExprience = $("#applicantWorkExprience").val()
-    var applicantErgentContact = $("#applicantErgentContact").val()
-    var applicantErgentPhone = $("#applicantErgentPhone").val()
-    var applicantFamilyRelationship = ""
-    var applicantIdentityCardPhoneSrc = $("#identityCardArea img").data() == null ? "" : $("#identityCardArea img").data().url
-    var applicantIdentityCardPhoneReverseSrc = $("#identityCardReverseArea img").data() == null ? "" : $("#identityCardReverseArea img").data().url
-    var applicantDiplomaSrc = $("#diplomaImageArea img").data() == null ? "" : $("#diplomaImageArea img").data().url
-    var applicantSignName = $("#userName").html()
-    var applicantSignTime = $("#year").html() + "年" + $("#mouth").html() + "月" + $("#day").html() + "日"
-    var userId = JSON.parse(sessionStorage.getItem("user")) == null ? "" : JSON.parse(sessionStorage.getItem("user")).id
-    var postApplicationId = getParameter("id")
+    // var applicantName = $("#applicantName").val()
+    // var applicantGender = $("#applicantGender").val()
+    // var applicantPhotoSrc = $("#peronImageArea img").data() == null ? "" : $("#peronImageArea img").data().url
+    // var applicantBirth = $("#applicantBirth").val()
+    // var applicantPoliticalStatus = $("#applicantPoliticalStatus").val()
+    // var applicantHouseholdRegister = $("#applicantHouseholdRegister").val()
+    // var applicantMarriageStatus = $("#applicantMarriageStatus").val()
+    // var applicantIdentityCard = $("#applicantIdentityCard").val()
+    // var applicantGraduatedTime = $("#applicantGraduatedTime").val()
+    // var applicantGraduatedCollege = $("#applicantGraduatedCollege").val()
+    // var applicantEducationalBackground = $("#applicantEducationalBackground").val()
+    // var applicantOccupationalQualification = $("#applicantOccupationalQualification").val()
+    // var applicantMajor = $("#applicantMajor").val()
+    // var applicantEnglishLevel = $("#applicantEnglishLevel").val()
+    // var applicantComputerLevel = $("#applicantComputerLevel").val()
+    // var applicantContactAddress = $("#applicantContactAddress").val()
+    // var applicantContactPhone = $("#applicantContactPhone").val()
+    // var applicantApplicationPost = $("#applicantApplicationPost").val()
+    // var applicantWorkExprience = $("#applicantWorkExprience").val()
+    // var applicantErgentContact = $("#applicantErgentContact").val()
+    // var applicantErgentPhone = $("#applicantErgentPhone").val()
+    // var applicantFamilyRelationship = ""
+    // var applicantIdentityCardPhoneSrc = $("#identityCardArea img").data() == null ? "" : $("#identityCardArea img").data().url
+    // var applicantIdentityCardPhoneReverseSrc = $("#identityCardReverseArea img").data() == null ? "" : $("#identityCardReverseArea img").data().url
+    // var applicantDiplomaSrc = $("#diplomaImageArea img").data() == null ? "" : $("#diplomaImageArea img").data().url
+    // var applicantSignName = $("#userName").html()
+    // var applicantSignTime = $("#year").html() + "年" + $("#mouth").html() + "月" + $("#day").html() + "日"
+    // var userId = JSON.parse(sessionStorage.getItem("user")) == null ? "" : JSON.parse(sessionStorage.getItem("user")).id
+    // var postApplicationId = getParameter("id")
+    //
+    //
+    // applicantFamilyRelationship = applicantFamilyRelationshipMethod().join(",");
+    // debugger;
 
+    // var h = $("#table").height();
+    // var w = $("#table").width();
+    //
+    // var canvas = document.createElement("canvas");
+    // canvas.width = h * 3;
+    // canvas.height = w * 3;
+    //
+    // canvas.style.width = h * 3 + "px"
+    // canvas.style.height = w * 3 + "px"
+    // canvas.style.backgroundColor = "#fff"
+    //
+    // html2canvas($("#table"),{
+    //     allowTaint: true,
+    //     taintTest: false,
+    //     canvas: canvas,
+    //     onrendered: function(canvas) {
+    //         var imgUrl =  canvas.toDataURL('image/jpg');
+    //     }
+    // })
 
-    applicantFamilyRelationship = applicantFamilyRelationshipMethod().join(",");
-    debugger;
+    var target = $("#table")
+    var copy = target.clone();
+    copy.width(target.width() + "px");
+    copy.height(target.height() + "px");
+    $('body').append(copy);
+    html2canvas(copy, {
+        allowTaint: true,
+        taintTest: false,
+        onrendered : function(canvas) {
+            var img = canvas.toDataURL("image/png");
+            copy.remove();
+
+        },
+        background:"#fff"
+    });
+
 }
 
 

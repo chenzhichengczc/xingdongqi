@@ -15,7 +15,7 @@
         <result property="hireAmount" column="hire_amount"/>
         <result property="major" column="major"/>
         <result property="educationRequirement" column="education_requirement"/>
-        <result property="age" column="age"/>
+        <result property="ageRange" column="age_range"/>
         <result property="otherRequirement" column="other_requirement"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
@@ -35,7 +35,7 @@
         a.hire_amount,
         a.major,
         a.education_requirement,
-        a.age,
+        a.age_range,
         a.other_requirement,
         a.create_time,
         a.update_time,
@@ -63,7 +63,7 @@
                     hire_amount,
                     major,
                     education_requirement,
-                    age,
+                    age_range,
                     other_requirement,
                     create_time,
                     update_time,
@@ -80,7 +80,7 @@
                     #{hireAmount},
                     #{major},
                     #{educationRequirement},
-                    #{age},
+                    #{age_range},
                     #{otherRequirement},
                     #{createTime},
                     #{updateTime},
@@ -101,7 +101,7 @@
                     hire_amount,
                     major,
                     education_requirement,
-                    age,
+                    age_range,
                     other_requirement,
                     create_time,
                     update_time,

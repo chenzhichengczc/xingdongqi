@@ -175,7 +175,7 @@ function toLogin() {
         dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
         success: function (data) {
             if (data.code == 401) {
-                popup.alert(data.msg)
+                popup.alert("账号错误",data.msg)
             } else if (data.code == 0) {
                 setCookie("token", data.data.token)
                 sessionStorage.setItem("user",JSON.stringify(data.data.user))

@@ -59,7 +59,7 @@
         <result property="hireAmount" column="hire_amount"/>
         <result property="major" column="major"/>
         <result property="educationRequirement" column="education_requirement"/>
-        <result property="age" column="age"/>
+        <result property="ageRange" column="age_range"/>
         <result property="otherRequirement" column="other_requirement"/>
         <result property="recruitment" column="recruitment"/>
     </resultMap>
