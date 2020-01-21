@@ -19,9 +19,6 @@ public class PostApplicationServiceImpl extends ServiceImpl<PostApplicationMappe
     @Resource
     private PostApplicationMapper postApplicationMapper;
 
-
-
-
     @Override
     public List<PostApplicationEntity> getPostApplicationList(String postName,
                                                               String hireDepartment,

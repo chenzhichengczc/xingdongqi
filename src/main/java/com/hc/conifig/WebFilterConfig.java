@@ -26,7 +26,7 @@ public class WebFilterConfig {
     public FilterRegistrationBean setFilter() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(authenFilter);
-        registrationBean.addUrlPatterns("/postApplication/*");
+        registrationBean.addUrlPatterns("/api/*");
         registrationBean.setOrder(FilterRegistrationBean.LOWEST_PRECEDENCE);
         return registrationBean;
     }

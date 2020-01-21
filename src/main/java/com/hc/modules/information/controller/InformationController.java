@@ -41,43 +41,43 @@ public class InformationController {
         return ResponseUtil.success(pageInfo);
     }
 
+/*
 
 
-
-    /**
+    *//**
     * 新增
-    */
+    *//*
     @RequestMapping(value = "/information/insert", method = RequestMethod.POST)
     public ResponseUtil insertInformation(InformationEntity informationEntity){
         informationService.insertInformation(informationEntity);
         return ResponseUtil.success();
     }
 
-    /**
+    *//**
     *  获取
-    */
+    *//*
     @RequestMapping(value = "/information/getById", method = RequestMethod.GET)
     public ResponseUtil getInformationById(Integer informationId){
         InformationEntity informationEntity = informationService.getInformationById(informationId);
         return ResponseUtil.success(informationEntity);
     }
 
-    /**
+    *//**
     * 删除
-    */
+    *//*
     @RequestMapping(value = "/information/delete", method = RequestMethod.POST)
     public ResponseUtil removeInformationById(Integer informationId){
         informationService.removeInformationById(informationId);
         return ResponseUtil.success();
     }
 
-    /**
+    *//**
     * 更新
-    */
+    *//*
     @RequestMapping(value = "/information/update", method = RequestMethod.POST)
     public ResponseUtil updateInformation(InformationEntity informationEntity){
         informationService.updateInformation(informationEntity);
         return ResponseUtil.success();
-    }
+    }*/
 
 }

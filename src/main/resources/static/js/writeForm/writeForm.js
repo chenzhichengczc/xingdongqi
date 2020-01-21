@@ -24,11 +24,14 @@ function fileSelected() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/userApplication/uploadFile",
+        url: "http://localhost:8080/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "identityCardImage",//文件选择框的id属性
         dataType: 'json',//服务器返回的格式
+        headers: {
+            "token": getCookie("token")
+        },
         async: false,
         success: function (data) {
             if (data.code == 0) {
@@ -73,9 +76,12 @@ function fileSelected1() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/userApplication/uploadFile",
+        url: "http://localhost:8080/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
+        headers: {
+            "token": getCookie("token")
+        },
         fileElementId: "diplomaImage",//文件选择框的id属性
         dataType: 'json',//服务器返回的格式
         async: false,
@@ -115,10 +121,13 @@ function fileSelected2() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/userApplication/uploadFile",
+        url: "http://localhost:8080/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "peronImage",//文件选择框的id属性
+        headers: {
+            "token": getCookie("token")
+        },
         dataType: 'json',//服务器返回的格式
         async: false,
         success: function (data) {
@@ -220,7 +229,7 @@ function initField() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/postApplication/getById',
+        url: 'http://localhost:8080/api/postApplication/getById',
         type: 'get', //GET
         async: true,    //或false,是否异步
         headers: {

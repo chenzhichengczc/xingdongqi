@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * 用户岗位申请表
  *
  * @author fenghuang
- * @email 
+ * @email
  * @date 2020-01-11 19:46:44
  */
 @RestController
@@ -36,7 +36,7 @@ public class UserApplicationController {
     /**
      * 列表
      */
-    @RequestMapping(value = "/userApplication/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/userApplication/list", method = RequestMethod.GET)
     public ResponseUtil getUserApplicationList(Integer pageNo, Integer pageSize){
         PageHelper.startPage(pageNo, pageSize);
         List<UserApplicationEntity> userApplicationEntities = userApplicationService.getUserApplicationList();
@@ -49,45 +49,45 @@ public class UserApplicationController {
 
     /**
     * 新增
-    */
-    @RequestMapping(value = "/userApplication/insert", method = RequestMethod.POST)
+    *//*
+    @RequestMapping(value = "/api/userApplication/insert", method = RequestMethod.POST)
     public ResponseUtil insertUserApplication(UserApplicationEntity userApplicationEntity){
         userApplicationService.insertUserApplication(userApplicationEntity);
         return ResponseUtil.success();
-    }
+    }*/
 
     /**
     *  获取
     */
-    @RequestMapping(value = "/userApplication/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/userApplication/getById", method = RequestMethod.GET)
     public ResponseUtil getUserApplicationById(Integer userApplicationId){
         UserApplicationEntity userApplicationEntity = userApplicationService.getUserApplicationById(userApplicationId);
         return ResponseUtil.success(userApplicationEntity);
     }
 
-    /**
+/*    *//**
     * 删除
-    */
-    @RequestMapping(value = "/userApplication/delete", method = RequestMethod.POST)
+    *//*
+    @RequestMapping(value = "/api/userApplication/delete", method = RequestMethod.POST)
     public ResponseUtil removeUserApplicationById(Integer userApplicationId){
         userApplicationService.removeUserApplicationById(userApplicationId);
         return ResponseUtil.success();
-    }
+    }*/
 
     /**
     * 更新
-    */
-    @RequestMapping(value = "/userApplication/update", method = RequestMethod.POST)
+    *//*
+    @RequestMapping(value = "/api/userApplication/update", method = RequestMethod.POST)
     public ResponseUtil updateUserApplication(UserApplicationEntity userApplicationEntity){
         userApplicationService.updateUserApplication(userApplicationEntity);
         return ResponseUtil.success();
-    }
+    }*/
 
     /**
      * 根据个人id查询对应的工作投递情况
      */
 
-    @RequestMapping(value = "/userApplication/getUserApplication", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/userApplication/getUserApplication", method = RequestMethod.GET)
     public ResponseUtil getUserApplication(Integer pageNo,Integer pageSize,Integer id){
         PageHelper.startPage(pageNo, pageSize);
         List<UserApplicationPO> userApplication = userApplicationService.getUserApplication(id);
@@ -98,7 +98,7 @@ public class UserApplicationController {
     /**
      * 图片上传
      */
-    @RequestMapping(value = "/userApplication/uploadFile",method = RequestMethod.POST)
+    @RequestMapping(value = "/file/userApplication/uploadFile",method = RequestMethod.POST)
     public ResponseUtil uploadFile(MultipartFile uploadFile, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> map = (Map<String, Object>) FileUploadUtils.uploadApk(uploadFile, request, response);
         return ResponseUtil.success(map);

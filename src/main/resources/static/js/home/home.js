@@ -9,9 +9,31 @@ function getParameter(name) {
 
 //init
 $(function () {
-
-
-    if (getCookie("token")) {
+    var tokenStatus = getCookie("token");
+    debugger
+    if (tokenStatus) {
+        //检查是否登录状态
+        $.ajax({
+            url: 'http://localhost:8080/check/status',
+            type: 'get', //GET
+            async: true,    //或false,是否异步
+            data: {
+                token: tokenStatus
+            },
+            timeout: 50000,    //超时时间
+            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success: function (data) {
+                debugger
+                if(data.code == 400){
+                    //设置token过期
+                    expireCookie("token");
+                    $("form").css("visibility", "visible")
+                }
+            },
+            error: function () {
+                popup.alert("异常提醒","服务器异常，请稍后再试！")
+            }
+        })
         $("form").css("visibility", "hidden")
     }else if(performance.timing.redirectStart > 0){
         $("form").css("visibility", "visible")
@@ -174,6 +196,7 @@ function toLogin() {
         timeout: 50000,    //超时时间
         dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
         success: function (data) {
+            debugger
             if (data.code == 401) {
                 popup.alert("账号错误",data.msg)
             } else if (data.code == 0) {

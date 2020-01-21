@@ -24,7 +24,7 @@ $(function () {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/userApplication/getUserApplication',
+        url: 'http://localhost:8080/api/userApplication/getUserApplication',
         type: 'get', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -143,7 +143,7 @@ function kp(pageNo, totalPage, totalRecords) {
             $("#gridview-1024-body").empty();
 
             $.ajax({
-                url: 'http://localhost:8080/userApplication/getUserApplication',
+                url: 'http://localhost:8080/api/userApplication/getUserApplication',
                 type: 'get', //GET
                 async: true,    //或false,是否异步
                 headers: {
