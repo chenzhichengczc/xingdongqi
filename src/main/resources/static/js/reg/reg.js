@@ -10,7 +10,7 @@ function submitFun() {
 
 
         $.ajax({
-            url: 'https://www.xingdongqi.com/reg/user',
+            url: 'http://localhost:8080/reg/user',
             type: 'POST', //GET
             async: true,    //或false,是否异步
             headers: {},
@@ -27,9 +27,9 @@ function submitFun() {
                 if (data.code == 0) {
                     popup.alert("注册告示","用户注册成功!")
                     setTimeout(function () {
-                        window.location.href = "/https://www.xingdongqi.com/home.html"
+                        window.location.href = "/http://localhost:8080/home.html"
                     },1500)
-                    window.location.href = "/https://www.xingdongqi.com/home.html"
+                    window.location.href = "/http://localhost:8080/home.html"
                 }
             },
             error: function () {

@@ -10,11 +10,11 @@ function getParameter(name) {
 //init
 $(function () {
     var tokenStatus = getCookie("token");
-
+    debugger
     if (tokenStatus) {
         //检查是否登录状态
         $.ajax({
-            url: 'https://www.xingdongqi.com/check/status',
+            url: 'http://localhost:8080/check/status',
             type: 'get', //GET
             async: true,    //或false,是否异步
             data: {
@@ -23,7 +23,15 @@ $(function () {
             timeout: 50000,    //超时时间
             dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             success: function (data) {
-
+                debugger
+                if(data.code == 400){
+                    //设置token过期
+                    expireCookie("token");
+                    $("form").css("visibility", "visible")
+                }
+            },
+            error: function () {
+                popup.alert("异常提醒","服务器异常，请稍后再试！")
             }
         })
         $("form").css("visibility", "hidden")
@@ -40,7 +48,7 @@ $(function () {
     }
 
     $.ajax({
-        url: 'https://www.xingdongqi.com/information/list',
+        url: 'http://localhost:8080/information/list',
         type: 'get', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -112,7 +120,7 @@ function kp(pageNo, totalPage, totalRecords) {
 
             $("#gridview-1024-body").empty();
             $.ajax({
-                url: "https://www.xingdongqi.com/information/list",
+                url: "http://localhost:8080/information/list",
                 data: {
                     pageNo: n,
                     pageSize: 10
@@ -177,7 +185,7 @@ function toLogin() {
 
 
     $.ajax({
-        url: 'https://www.xingdongqi.com/login',
+        url: 'http://localhost:8080/login',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {},
@@ -188,6 +196,7 @@ function toLogin() {
         timeout: 50000,    //超时时间
         dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
         success: function (data) {
+            debugger
             if (data.code == 401) {
                 popup.alert(data.msg)
             } else if (data.code == 0) {

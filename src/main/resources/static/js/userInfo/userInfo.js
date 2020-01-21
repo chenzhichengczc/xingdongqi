@@ -12,7 +12,7 @@ $(function () {
 
 
     $.ajax({
-        url: 'https://www.xingdongqi.com/api/user/getUserById',
+        url: 'http://localhost:8080/api/user/getUserById',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -76,7 +76,7 @@ function saveUserInfo() {
     }
 
     $.ajax({
-        url: 'https://www.xingdongqi.com/api/user/update',
+        url: 'http://localhost:8080/api/user/update',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {

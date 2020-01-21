@@ -134,15 +134,18 @@ public class UserController {
 
     @RequestMapping(value = "/check/status", method = RequestMethod.GET)
     public ResponseUtil checkStatus(String token, HttpServletRequest request){
-
+        System.out.println("token =123123");
         HttpSession httpSession = request.getSession();
 
         if(httpSession.getAttribute("username") == null){
 
-            ResponseUtil.success();
+            return ResponseUtil.success(400, "登陆已过期");
 
         }
-
+        boolean result = jwtConfig.verifyToken(token, IpConfig.getRemoteAddr(request));
+        if(!result){
+            return ResponseUtil.success(400, "登陆已过期");
+        }
 
         return ResponseUtil.success();
     }

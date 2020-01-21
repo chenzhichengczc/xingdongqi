@@ -87,7 +87,6 @@ public class JwtConfig {
     public boolean verifyToken(String token, String remoteAddrIp) {
         try {
             String jwtIdByToken = getJwtIdByToken(token);
-            System.out.println("jwtIdByToken = " + jwtIdByToken);
             //1 . 根据token解密，解密出jwt-id , 先从redis中查找出redisToken，匹配是否相同
             String redisToken =  (String) redisUtil.get("JWT-SESSION-" + getJwtIdByToken(token));
             if (!redisToken.equals(token)) {
@@ -95,12 +94,9 @@ public class JwtConfig {
             }
             //2 . 得到算法相同的JWTVerifier
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
-            System.out.println("algorithm = " + algorithm);
             JWTVerifier verifier = JWT.require(algorithm).build();
-            System.out.println("verifier = " + verifier);
             //3 . 验证token
             DecodedJWT verify = verifier.verify(redisToken);
-            System.out.println("verify = " + verify);
             Map<String, Claim> claims = verify.getClaims();
             String remoteAddrIpJWT = claims.get("remoteAddrIp").asString();
             System.out.println("remoteAddrIpJWT = " + remoteAddrIpJWT);
@@ -133,7 +129,7 @@ public class JwtConfig {
      * 根据Token 获取jwt-id
      */
     private String getJwtIdByToken(String token) throws JWTDecodeException {
-        System.out.println("token = " + token);
+        System.out.println("token1 = " + token);
         return JWT.decode(token).getClaim("jwt-id").asString();
     }
 }
