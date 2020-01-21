@@ -80,7 +80,7 @@
                     #{hireAmount},
                     #{major},
                     #{educationRequirement},
-                    #{age_range},
+                    #{ageRange},
                     #{otherRequirement},
                     #{createTime},
                     #{updateTime},

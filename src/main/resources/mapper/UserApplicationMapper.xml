@@ -226,7 +226,7 @@
 
     <select id="getUserApplication" resultMap="rm">
         select ua.user_id,ua.post_application_id,ua.check_result,ua.payment_status,ua.pay_id,ua.check_report,
-        pa.post_code,pa.post_name,pa.hire_department,pa.application_deadline,pa.post_duty,pa.application_qualifications,pa.hire_amount,pa.major,pa.education_requirement,pa.age,pa.other_requirement,pa.recruitment
+        pa.post_code,pa.post_name,pa.hire_department,pa.application_deadline,pa.post_duty,pa.application_qualifications,pa.hire_amount,pa.major,pa.education_requirement,pa.age_range,pa.other_requirement,pa.recruitment
          from user_application ua
           LEFT JOIN post_application pa
           on ua.post_application_id = pa.id
