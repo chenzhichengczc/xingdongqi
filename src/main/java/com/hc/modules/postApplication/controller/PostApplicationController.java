@@ -32,7 +32,7 @@ public class PostApplicationController {
     /**
      * 列表
      */
-    @RequestMapping(value = "/postApplication/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/postApplication/list", method = RequestMethod.GET)
     public ResponseUtil getPostApplicationList(Integer pageNo, Integer pageSize,
                                                @RequestParam(required = false) String postName,
                                                @RequestParam(required = false) String hireDepartment,
@@ -46,19 +46,19 @@ public class PostApplicationController {
     }
 
 
-    /**
+   /* *//**
      * 新增
-     */
-    @RequestMapping(value = "/postApplication/insert", method = RequestMethod.POST)
+     *//*
+    @RequestMapping(value = "/api/postApplication/insert", method = RequestMethod.POST)
     public ResponseUtil insertPostApplication(PostApplicationEntity postApplicationEntity) {
         postApplicationService.insertPostApplication(postApplicationEntity);
         return ResponseUtil.success();
     }
-
+*/
     /**
      * 获取
      */
-    @RequestMapping(value = "/postApplication/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/postApplication/getById", method = RequestMethod.GET)
     public ResponseUtil getPostApplicationById(Integer postApplicationId) {
         PostApplicationEntity postApplicationEntity = postApplicationService.getPostApplicationById(postApplicationId);
         return ResponseUtil.success(postApplicationEntity);
@@ -66,24 +66,24 @@ public class PostApplicationController {
 
     /**
      * 删除
-     */
-    @RequestMapping(value = "/postApplication/delete", method = RequestMethod.POST)
+     *//*
+    @RequestMapping(value = "/api/postApplication/delete", method = RequestMethod.POST)
     public ResponseUtil removePostApplicationById(Integer postApplicationId) {
         postApplicationService.removePostApplicationById(postApplicationId);
         return ResponseUtil.success();
     }
 
-    /**
+    *//**
      * 更新
-     */
-    @RequestMapping(value = "/postApplication/update", method = RequestMethod.POST)
+     *//*
+    @RequestMapping(value = "/api/postApplication/update", method = RequestMethod.POST)
     public ResponseUtil updatePostApplication(PostApplicationEntity postApplicationEntity) {
         postApplicationService.updatePostApplication(postApplicationEntity);
         return ResponseUtil.success();
-    }
+    }*/
 
     //获取多列下拉列表数据
-    @RequestMapping(value = "/postApplication/getSelect",method = RequestMethod.GET)
+    @RequestMapping(value = "/api/postApplication/getSelect",method = RequestMethod.GET)
     public ResponseUtil getSelect(){
 
         HashMap map = postApplicationService.getSelect();

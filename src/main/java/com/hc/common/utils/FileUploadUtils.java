@@ -25,11 +25,11 @@ public class FileUploadUtils {
             return resMap;
         }
         String path = request.getContextPath();
-        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+        String basePath = request.getScheme() + "://" + request.getServerName() + ":80"  + path;
         Date dt = new Date();
         Long time = dt.getTime();
         if (myfiles != null) {
-            String realPath ="D:/uploadFiles/"; // 获取保存的路径，本地磁盘中的一个文件夹
+            String realPath ="/usr/local/application/file/img/upload"; // 获取保存的路径，本地磁盘中的一个文件夹
             if (myfiles.isEmpty()) {
                 // 未选择文件
                 resMap.put("code", 400);

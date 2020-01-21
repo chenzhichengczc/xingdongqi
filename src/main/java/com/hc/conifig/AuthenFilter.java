@@ -49,7 +49,7 @@ public class AuthenFilter implements Filter {
         //请求头token为空返回
         if (StringUtils.isEmpty(token)) {
             logger.info("无token");
-            response.sendError(401, "非法请求");
+            response.sendError(402, "非法请求");
             return;
             //throw new JcException(403, "非法请求");
         }
@@ -62,7 +62,7 @@ public class AuthenFilter implements Filter {
             logger.info("token已过期,请重新登陆");
             System.out.println("result = " + result);
             HttpSession session = request.getSession();
-            response.sendError(403, "登录会哈已过期");
+            response.sendError(403, "登录会话已过期");
             return;
         }
 /*HttpServletRequest request = (HttpServletRequest) servletRequest;

@@ -9,10 +9,6 @@ server:
     session:
       timeout: 7200s
 
-#  ssl:
-#    key-store: classpath:www.xingdongqi.com.jks
-#    key-store-password: jc08e3ot28
-#    key-store-type: JKS
 
 
 spring:
@@ -51,9 +47,9 @@ spring:
   redis:
     open: true # 是否开启redis缓存  true开启   false关闭
     database: 3
-    host: 123.207.230.97
+    host: 49.234.179.185
     port: 6379
-    password: jcredis   # 密码（默认为空）
+    password: ys444redis   # 密码（默认为空）
     timeout: 6000ms  # 连接超时时长（毫秒）
     jedis:
       pool:

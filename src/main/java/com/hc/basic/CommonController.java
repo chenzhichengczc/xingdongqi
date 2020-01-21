@@ -25,4 +25,6 @@ public class CommonController {
     void returnNoFavicon() {
         System.out.println("true = " + true);
     }
+
+
 }

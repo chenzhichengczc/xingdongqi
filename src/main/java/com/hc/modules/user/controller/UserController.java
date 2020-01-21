@@ -20,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -66,13 +67,13 @@ public class UserController {
         return ResponseUtil.success();
     }
 
-    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/user/update", method = RequestMethod.POST)
     public ResponseUtil updateUser(UserEntity userEntity) {
         userService.updateUser(userEntity);
         return ResponseUtil.success();
     }
 
-    @RequestMapping(value = "/user/getUserById", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/user/getUserById", method = RequestMethod.POST)
     public ResponseUtil getUserById(Integer id) {
         UserEntity userEntity1 = userService.getUserById(id);
         return ResponseUtil.success(userEntity1);
@@ -130,4 +131,19 @@ public class UserController {
         return ResponseUtil.success();
     }*/
 
+
+    @RequestMapping(value = "/check/status", method = RequestMethod.GET)
+    public ResponseUtil checkStatus(String token, HttpServletRequest request){
+
+        HttpSession httpSession = request.getSession();
+
+        if(httpSession.getAttribute("username") == null){
+
+            ResponseUtil.success();
+
+        }
+
+
+        return ResponseUtil.success();
+    }
 }

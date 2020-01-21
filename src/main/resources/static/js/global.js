@@ -12,7 +12,7 @@ $.ajaxSetup({
             var popup = new Popup();
             popup.alert("信息过期","登录信息过期，请重新登录！")
             setTimeout(function () {
-                window.location.href = "/home"
+                window.location.href = "https://www.xingdongqi.com/home.html"
             },1500)
         }
     },

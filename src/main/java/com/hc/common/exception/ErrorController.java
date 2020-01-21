@@ -1,3 +1,4 @@
+/*
 
 package com.hc.common.exception;
 
@@ -18,13 +19,15 @@ import java.util.Map;
 
 
 
+*/
 /**
  * @author ：fenghuang
  * @date ：Created in 2020/1/13 15:55
  * @description：
  * @modified By：
  * @version:
- */
+ *//*
+
 
 
 @RestController
@@ -66,3 +69,4 @@ public class ErrorController extends BasicErrorController {
 }
 
 
+*/
