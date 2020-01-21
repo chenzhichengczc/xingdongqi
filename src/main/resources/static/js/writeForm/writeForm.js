@@ -37,7 +37,7 @@ function fileSelected() {
             if (data.code == 0) {
                 var htmlUrl = "";
 
-                htmlUrl = "<img src='" + data.data.path + "' data-url='" + data.data.path + "' style='width: 214px; height: 178px ; margin-top: 3px;margin-left:2px'/>"
+                htmlUrl = "<img src='" + data.data.path + "' data-url='" + data.data.path + "' style='width: 100px; height: 100px ; margin-top: 3px;margin-left:2px'/>"
 
                 $("#identityCardArea").empty();
 
@@ -89,7 +89,7 @@ function fileSelected1() {
             if (data.code == 0) {
                 var htmlUrl = "";
 
-                htmlUrl = "<img src='" + data.data.path + "' data-url='" + data.data.path + "' style='width: 214px; height: 178px ; margin-top: 3px;margin-left:2px'/>"
+                htmlUrl = "<img src='" + data.data.path + "' data-url='" + data.data.path + "' style='width: 100px; height: 100px ; margin-top: 3px;margin-left:2px'/>"
 
                 $("#diplomaImageArea").empty();
 
@@ -141,6 +141,50 @@ function fileSelected2() {
                 $("#peronImageArea").empty();
 
                 $("#peronImageArea").append(htmlUrl);
+            } else {
+                //coding
+            }
+        },
+        error: function (data, status, e) {
+            //coding
+        }
+    });
+
+}
+
+function openFileDialog3(e) {
+
+    $("#identityCardImageReverse").click()
+}
+
+function fileSelected3() {
+
+    var fbutton = $("#identityCardImageReverse")[0];
+
+    var reader = new FileReader();
+
+    var file = fbutton.files[0];
+    reader.readAsDataURL(file);
+
+    $.ajaxFileUpload({
+        type: "POST",
+        url: "http://localhost:8080/userApplication/uploadFile",
+        data: {"fileName": file.name},//要传到后台的参数，没有可以不写
+        secureuri: false,//是否启用安全提交，默认为false
+        fileElementId: "identityCardImageReverse",//文件选择框的id属性
+        dataType: 'json',//服务器返回的格式
+        async: false,
+        success: function (data) {
+            if (data.code == 0) {
+                var htmlUrl = "";
+                //coding
+                //data.data.path
+                //”javascript:return false
+                htmlUrl = "<img src='" + data.data.path + "' data-url='" + data.data.path + "' style='width: 100px; height: 100px ; margin-top: 3px;margin-left:2px'/>"
+
+                $("#identityCardReverseArea").empty();
+
+                $("#identityCardReverseArea").append(htmlUrl);
             } else {
                 //coding
             }
@@ -253,6 +297,7 @@ function saveForm() {
     var applicantErgentPhone = $("#applicantErgentPhone").val()
     var applicantFamilyRelationship = ""
     var applicantIdentityCardPhoneSrc = $("#identityCardArea img").data() == null ? "" : $("#identityCardArea img").data().url
+    var applicantIdentityCardPhoneReverseSrc = $("#identityCardReverseArea img").data() == null ? "" : $("#identityCardReverseArea img").data().url
     var applicantDiplomaSrc = $("#diplomaImageArea img").data() == null ? "" : $("#diplomaImageArea img").data().url
     var applicantSignName = $("#userName").html()
     var applicantSignTime = $("#year").html() + "年" + $("#mouth").html() + "月" + $("#day").html() + "日"

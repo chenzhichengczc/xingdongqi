@@ -106,6 +106,8 @@ public class UserApplicationEntity implements Serializable {
 
     private String applicantIdentityCardPhoneSrc;
 
+    private String applicantIdentityCardPhoneReverseSrc;
+
     private String applicantDiplomaSrc;
 
 }
