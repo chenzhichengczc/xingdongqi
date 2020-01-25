@@ -29,5 +29,9 @@ public interface UserApplicationService extends IService<UserApplicationEntity> 
     public void updateUserApplication(UserApplicationEntity userApplicationEntity);
 
     public List<UserApplicationPO> getUserApplication(Integer id);
+
+    public UserApplicationPO getApplication(Integer id);
+
+    public void updateApplication(UserApplicationEntity userApplicationEntity);
 }
 

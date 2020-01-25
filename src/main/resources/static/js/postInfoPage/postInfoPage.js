@@ -13,7 +13,7 @@ $(function () {
         var user = JSON.parse(sessionStorage.getItem("user"));
 
 
-        $("#callSpan").html(user == null ? "" : user.userName + ',' +  getQuantum())
+        $("#callSpan").html(user == null ? "" : user.userName + ',' + getQuantum())
 
         //初始化下拉列表
         initSelect();
@@ -91,9 +91,15 @@ $(function () {
                             + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
                             + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{recruitment}</span></div>'
                             + '</td>'
-                            + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                            + '<div unselectable="on" class="x-grid-cell-inner" ><a href="/writeForm?id=#{id}&postName=#{postName}" target="_blank">申请</a>'
-                            + '</div>'
+                            if(new Date(data[i].applicationDeadline) - new Date() > 0){
+                                html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                                + '<div unselectable="on" class="x-grid-cell-inner" ><a href="javascript:void(0)" style="color: green;font-weight: bold" onclick="goWriteForm(#{id},\'#{postName}\')">申请</a>'
+                            }else{
+                                html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" ><a href="javascript:void(0)" style="color: darkred;font-weight: bold">已过期</a>'
+                            }
+
+                            html = html + '</div>'
                             + '</td>'
                             + '</tr>'
 
@@ -107,7 +113,7 @@ $(function () {
                         html = html.replace(/#{hireAmount}/g, data[i].hireAmount)
                         html = html.replace(/#{major}/g, data[i].major)
                         html = html.replace(/#{educationRequiremen}/g, data[i].educationRequirement)
-                        html = html.replace(/#{age}/g, data[i].age)
+                        html = html.replace(/#{age}/g, data[i].ageRange)
                         html = html.replace(/#{otherRequirement}/g, data[i].otherRequirement)
                         html = html.replace(/#{recruitment}/g, data[i].recruitment)
 
@@ -128,6 +134,10 @@ $(function () {
 
     }
 );
+
+function goWriteForm(id, postName) {
+    window.open("/writeForm?id=" + id + "&postName=" + postName)
+}
 
 function kp(pageNo, totalPage, totalRecords) {
     var totalPage = totalPage;
@@ -223,7 +233,7 @@ function kp(pageNo, totalPage, totalRecords) {
                                 + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{recruitment}</span></div>'
                                 + '</td>'
                                 + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                                + '<div unselectable="on" class="x-grid-cell-inner" ><a href="/writeForm?id=#{id}&postName=#{postName}" target="_blank">申请</a>'
+                                + '<div unselectable="on" class="x-grid-cell-inner" ><a href="javascript:void(0)" onclick="goWriteForm(#{id},\'#{postName}\')">申请</a>'
                                 + '</div>'
                                 + '</td>'
                                 + '</tr>'
@@ -238,7 +248,7 @@ function kp(pageNo, totalPage, totalRecords) {
                             html = html.replace(/#{hireAmount}/g, data[i].hireAmount)
                             html = html.replace(/#{major}/g, data[i].major)
                             html = html.replace(/#{educationRequiremen}/g, data[i].educationRequirement)
-                            html = html.replace(/#{age}/g, data[i].age)
+                            html = html.replace(/#{age}/g, data[i].ageRange)
                             html = html.replace(/#{otherRequirement}/g, data[i].otherRequirement)
                             html = html.replace(/#{recruitment}/g, data[i].recruitment)
 
@@ -342,7 +352,7 @@ function queryCriteria() {
                         + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{recruitment}</span></div>'
                         + '</td>'
                         + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                        + '<div unselectable="on" class="x-grid-cell-inner" ><a href="/writeForm?id=#{id}&postName=#{postName}" target="_blank">申请</a>'
+                        + '<div unselectable="on" class="x-grid-cell-inner" ><a href="javascript:void(0)" onclick="goWriteForm(#{id},\'#{postName}\')">申请</a>'
                         + '</div>'
                         + '</td>'
                         + '</tr>'
@@ -357,7 +367,7 @@ function queryCriteria() {
                     html = html.replace(/#{hireAmount}/g, data[i].hireAmount)
                     html = html.replace(/#{major}/g, data[i].major)
                     html = html.replace(/#{educationRequiremen}/g, data[i].educationRequirement)
-                    html = html.replace(/#{age}/g, data[i].age)
+                    html = html.replace(/#{age}/g, data[i].ageRange)
                     html = html.replace(/#{otherRequirement}/g, data[i].otherRequirement)
                     html = html.replace(/#{recruitment}/g, data[i].recruitment)
 
@@ -372,8 +382,8 @@ function queryCriteria() {
 }
 
 function initSelect() {
-    debugger
-    console.log("token:"+ getCookie("token"))
+    
+    console.log("token:" + getCookie("token"))
     $.ajax({
         url: 'http://localhost:8080/api/postApplication/getSelect',
         type: 'get', //GET

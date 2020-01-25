@@ -2,13 +2,8 @@ function isEmpty123(value){
     if(value == null || value == "" || value == "undefined" || value == undefined || value == "null"){
         return true;
     }
-    else{
-        value = value.replace(/\s/g,"");
-        if(value == ""){
-            return true;
-        }
+
         return false;
-    }
 }
 
 
@@ -78,4 +73,12 @@ function listenUrlChange(method) {
             }
         }, 150);
     }
+}
+
+//从路径获取参数
+function getParameter(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
 }

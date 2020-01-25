@@ -2,67 +2,117 @@ var popup = new Popup();
 
 $(function () {
 
-    var width = ((window.innerWidth)/2) - 100
+    var width = ((window.innerWidth) / 2) - 100
 
-    $("#btn1").css("margin-left",width+"px")
+    $("#btn1").css("margin-left", width + "px")
 
-    //初始化一些必要字段的必须值
-    initField()
+    var id = getParameter("id");
 
-})
+    if (isEmpty123(id)) {
+        popup.alert("异常告示", "获取ID失败");
+        return;
+    }
+
+    laydate.render({
+        elem: '#applicantBirth',
+        type: 'month'
+    });
+    laydate.render({
+        elem: '#applicantGraduatedTime',
+        type: 'month'
+    });
 
 
-function openFileDialog() {
-
-    $("#identityCardImage").click()
-}
-
-function fileSelected() {
-
-    var fbutton = $("#identityCardImage")[0];
-
-    var reader = new FileReader();
-
-    var file = fbutton.files[0];
-    reader.readAsDataURL(file);
-
-    $.ajaxFileUpload({
-        type: "POST",
-        url: "http://localhost:8080/file/userApplication/uploadFile",
-        data: {"fileName": file.name},//要传到后台的参数，没有可以不写
-        secureuri: false,//是否启用安全提交，默认为false
-        fileElementId: "identityCardImage",//文件选择框的id属性
-        dataType: 'json',//服务器返回的格式
+    $.ajax({
+        url: 'http://localhost:8080/api/userApplication/getApplication',
+        type: 'POST', //GET
+        async: true,    //或false,是否异步
         headers: {
             "token": getCookie("token")
         },
-        async: false,
+        data: {
+            id: id
+        },
+        timeout: 50000,    //超时时间
+        dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
         success: function (data) {
-            if (data.code == 0) {
-                var htmlUrl = "";
+            //console.log(data)；
+            if (data.code === 0) {
+                var data = data.data;
+                $("#applicantName").val(data.applicantName);
+                $("#applicantGender").val(data.applicantGender);
+                $("#peronImageArea img").attr("src", data.applicantPhotoSrc).attr("data-url", data.applicantPhotoSrc);
+                $("#applicantPoliticalStatus").val(data.applicantPoliticalStatus)
+                $("#applicantBirth").val(data.applicantBirth);
+                $("#applicantHouseholdRegister").val(data.applicantHouseholdRegister);
+                $("#applicantMarriageStatus").val(data.applicantMarriageStatus);
+                $("#applicantIdentityCard").val(data.applicantIdentityCard);
+                $("#applicantGraduatedTime").val(data.applicantGraduatedTime);
+                $("#applicantGraduatedCollege").val(data.applicantGraduatedCollege);
+                $("#applicantEducationalBackground").val(data.applicantEducationalBackground);
+                $("#applicantOccupationalQualification").val(data.applicantOccupationalQualification);
+                $("#applicantMajor").val(data.applicantMajor);
+                $("#applicantEnglishLevel").val(data.applicantEnglishLevel);
+                $("#applicantComputerLevel").val(data.applicantComputerLevel);
+                $("#applicantErgentContact").val(data.applicantErgentContact);
+                $("#applicantErgentPhone").val(data.applicantErgentPhone);
+                $("#applicantApplicationPost").val(data.applicantApplicationPost);
+                $("#applicantWorkExprience").val(data.applicantWorkExprience);
+                $("#applicantContactAddress").val(data.applicantContactAddress);
+                $("#applicantContactPhone").val(data.applicantContactPhone);
+                $("#userName").html(data.userName);
 
-                htmlUrl = "<img src='" + data.data.path + "' data-url='" + data.data.path + "' style='width: 180px; height: 180px ; margin-top: 3px;margin-left:2px'/>"
+                var year = data.applicantSignTime.split("年")[0];
+                var mouth = data.applicantSignTime.split("年")[1].split("月")[0]
+                var day = data.applicantSignTime.split("年")[1].split("月")[1].split("日")[0]
 
-                $("#identityCardArea").empty();
+                $("#year").html(year)
+                $("#mouth").html(mouth)
+                $("#day").html(day)
+                $("#identityCardArea img").attr("src", data.applicantIdentityCardPhoneSrc).attr("data-url", data.applicantIdentityCardPhoneSrc);
+                $("#identityCardReverseArea img").attr("src", data.applicantIdentityCardPhoneReverseSrc).attr("data-url", data.applicantIdentityCardPhoneReverseSrc);
+                $("#diplomaImageArea img").attr("src", data.applicantDiplomaSrc).attr("data-url", data.applicantDiplomaSrc);
 
-                $("#identityCardArea").append(htmlUrl);
+                var relation = data.applicantFamilyRelationship.replace(/\[/g, '').replace(/\]/g, '').split(",")
+
+                var j = 0;
+                var k = 0;
+
+                for (var i = 0; i < relation.length; i++) {
+                    k = k + 1;
+                    if (i % 4 == 0) {
+                        j = j + 1
+                        k = 0;
+                    }
+
+                    switch (k) {
+                        case 0 :
+                            $("#t" + j + " td").eq(k).html('<input value="' + relation[i] + '" style="width: 70px;margin-top: 11px" id="n' + (k + 1) + '"/>');
+                            break;
+                        case 1 :
+                            $("#t" + j + " td").eq(k).html('<input value="' + relation[i] + '" style="width: 70px;margin-top: 11px" id="r' + (k + 1) + '"/>');
+                            break;
+                        case 2 :
+                            $("#t" + j + " td").eq(k).html('<input value="' + relation[i] + '" style="width: 70px;margin-top: 11px" id="w' + (k + 1) + '"/>');
+                            break;
+                        case 3 :
+                            $("#t" + j + " td").eq(k).html('<input value="' + relation[i] + '" style="width: 70px;margin-top: 11px" id="a' + (k + 1) + '"/>');
+                            break;
+                    }
+
+
+                }
 
             } else {
-                //coding
+                popup.alert("错误提醒", data.msg)
             }
         },
-        error: function (data, status, e) {
-            //coding
+        error: function () {
+            alert("服务器异常，请稍后再试！")
         }
-    });
+    })
 
-}
-
-function delPhone(obj, event) {
-    event.preventDefault();
-    $(obj).parent().remove();
-    popup.alert("删除告示", "删除成功")
-}
+})
 
 function openFileDialog1() {
 
@@ -200,84 +250,7 @@ function fileSelected3() {
 
 }
 
-function getParameter(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-}
-
-function getParameterChinese(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return decodeURIComponent(r[2]);
-    return null;
-}
-
-function initField() {
-
-    laydate.render({
-        elem: '#applicantBirth',
-        type: 'month'
-    });
-    laydate.render({
-        elem: '#applicantGraduatedTime',
-        type: 'month'
-    });
-
-    //获取路径当中的id
-    var id = getParameter("id");
-    if (isEmpty123(id)) {
-        popup.alert("错误提醒", "无法获取工作ID")
-        return;
-    }
-
-    $.ajax({
-        url: 'http://localhost:8080/api/postApplication/getById',
-        type: 'get', //GET
-        async: true,    //或false,是否异步
-        headers: {
-            "token": getCookie("token")
-        },
-        data: {
-            postApplicationId: id
-        },
-        timeout: 50000,    //超时时间
-        dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-        success: function (data) {
-            //console.log(data)；
-            if (data.code == 0) {
-                $("#applicantApplicationPost").val(data.data.postName)
-            } else {
-                popup.alert("异常提醒", "服务器异常，请稍后再试！")
-            }
-        },
-        error: function () {
-            popup.alert("异常提醒", "服务器异常，请稍后再试！")
-        }
-    })
-
-
-    var user = JSON.parse(sessionStorage.getItem("user"))
-
-    if (user == null || user == undefined || user == "") {
-        popup.alert("错误提醒", "无法获取用户信息")
-        return;
-    }
-
-    $("#userName").html(user.userName)
-
-    var date = new Date()
-
-    $("#year").html(date.getFullYear());
-    $("#mouth").html(date.getMonth() + 1)
-    $("#day").html(date.getDate())
-
-
-}
-
 function saveForm() {
-
     var applicantName = $("#applicantName").val()
     var applicantGender = $("#applicantGender").val()
     var applicantPhotoSrc = $("#peronImageArea img").data() == null ? "" : $("#peronImageArea img").data().url
@@ -311,19 +284,18 @@ function saveForm() {
 
     applicantFamilyRelationship = applicantFamilyRelationshipMethod().join(",");
 
-    if(isEmpty123(applicantName) || isEmpty123(applicantGender) || isEmpty123(applicantPhotoSrc) || isEmpty123(applicantBirth) || isEmpty123(applicantPoliticalStatus) || isEmpty123(applicantHouseholdRegister) ||
+    if (isEmpty123(applicantName) || isEmpty123(applicantGender) || isEmpty123(applicantPhotoSrc) || isEmpty123(applicantBirth) || isEmpty123(applicantPoliticalStatus) || isEmpty123(applicantHouseholdRegister) ||
         isEmpty123(applicantMarriageStatus) || isEmpty123(applicantIdentityCard) || isEmpty123(applicantGraduatedTime) || isEmpty123(applicantGraduatedCollege) || isEmpty123(applicantEducationalBackground) || isEmpty123(applicantOccupationalQualification) ||
         isEmpty123(applicantMajor) || isEmpty123(applicantContactAddress) || isEmpty123(applicantContactPhone) || isEmpty123(applicantApplicationPost) || isEmpty123(applicantErgentContact) || isEmpty123(applicantErgentPhone) ||
         isEmpty123(applicantFamilyRelationship) || isEmpty123(applicantIdentityCardPhoneSrc) || isEmpty123(applicantIdentityCardPhoneReverseSrc) || isEmpty123(applicantDiplomaSrc) ||
-        isEmpty123(applicantFamilyRelationship) || isEmpty123(applicantFamilyRelationship)){
+        isEmpty123(applicantFamilyRelationship) || isEmpty123(applicantFamilyRelationship)) {
         popup.alert("温馨提示", "存在信息未填写，请确认！")
         return;
     }
 
 
-
     $.ajax({
-        url: 'http://localhost:8080/api/userApplication/insertUserApplication',
+        url: 'http://localhost:8080/api/userApplication/updateApplication',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -358,7 +330,7 @@ function saveForm() {
             applicantSignName: applicantSignName,
             applicantSignTime: applicantSignTime,
             userId: userId,
-            postApplicationId: postApplicationId
+            id: postApplicationId
 
         },
         timeout: 50000,    //超时时间
@@ -368,7 +340,8 @@ function saveForm() {
             if (data.code == 0) {
                 popup.alert("提交告示", "已提交，请耐心等待！")
                 setTimeout(function () {
-                    window.close();
+
+                    window.location.href = "/findSignUpInfo"
                 }, 1000)
             } else {
                 popup.alert("异常提醒", "服务器异常，请稍后再试！")
@@ -379,7 +352,6 @@ function saveForm() {
         }
     })
 }
-
 
 function applicantFamilyRelationshipMethod() {
 

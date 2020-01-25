@@ -29,7 +29,6 @@ function submitFun() {
                     setTimeout(function () {
                         window.location.href = "/http://localhost:8080/home.html"
                     },1500)
-                    window.location.href = "/http://localhost:8080/home.html"
                 }
             },
             error: function () {

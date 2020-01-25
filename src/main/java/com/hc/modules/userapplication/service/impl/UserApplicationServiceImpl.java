@@ -32,9 +32,9 @@ public class UserApplicationServiceImpl extends ServiceImpl<UserApplicationMappe
 
     @Override
     public void insertUserApplication(UserApplicationEntity userApplicationEntity){
-        Integer result = userApplicationMapper.insertUserApplication(userApplicationEntity);
-        if(result == null || result == 0){
-            throw new JcException("");
+        Integer insert = userApplicationMapper.insert(userApplicationEntity);
+        if(insert == null || insert == 0){
+            throw new JcException("新增失败");
         }
     }
 
@@ -65,5 +65,24 @@ public class UserApplicationServiceImpl extends ServiceImpl<UserApplicationMappe
 
         List<UserApplicationPO> list = userApplicationMapper.getUserApplication(id);
         return list;
+    }
+
+    @Override
+    public UserApplicationPO getApplication(Integer id) {
+        UserApplicationPO userApplicationPO = userApplicationMapper.getApplication(id);
+        return userApplicationPO;
+    }
+
+    @Override
+    public void updateApplication(UserApplicationEntity userApplicationEntity) {
+
+        userApplicationEntity.setCheckResult(0);
+        userApplicationEntity.setCheckReport("");
+
+        Integer row = userApplicationMapper.update(userApplicationEntity,new EntityWrapper<UserApplicationEntity>().eq("id",userApplicationEntity.getId()));
+
+        if( row != 1){
+            throw  new JcException("提交失败");
+        }
     }
 }

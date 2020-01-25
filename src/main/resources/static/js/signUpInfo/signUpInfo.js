@@ -12,7 +12,6 @@ function getParameter(name) {
 $(function () {
 
 
-
     $("#callSpan").html(user == null ? "" : user.userName + ',' + getQuantum())
 
     var totalPage = '';
@@ -72,20 +71,48 @@ $(function () {
                         + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
                         + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{status}</span></div>'
                         + '</td>'
-                        + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
-                        + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{checkResult}</span></div>'
-                        + '</td>'
+                    if (data[i].paymentStatus == 0) {
+                        html = html
+                            + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
+                            + '<div unselectable="on" class="x-grid-cell-inner" ><span></span></div></td>'
+                    } else {
+                        html = html
+                            + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
+                            + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{checkResult}</span></div></td>'
+                    }
+
+                    html = html + '</td>'
                         + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
                         + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{checkReport}</span></div>'
                         + '</td>'
-                        + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                        + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="updateAndPay(#{id})">编辑</a>'
-                        + '</div>'
-                        + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                        + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="downloadCard(#{id})">下载</a>'
-                        + '</div>'
-                        + '</td>'
-                        + '</tr>'
+                    if (data[i].paymentStatus == 0) {
+                        html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                            + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="pay(#{id})">支付</a>'
+                            + '</div>'
+                    } else if (data[i].checkResult == 2) {
+                        html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                            + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="updateUserApplication(#{id})">修改</a>'
+                            + '</div>'
+                    } else {
+                        html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                            + '<div unselectable="on" class="x-grid-cell-inner" >'
+                            + '</div>'
+                    }
+
+                    if (data[i].checkResult == 1) {
+                        html = html
+                            + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                            + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="downloadCard(#{id})">下载</a>'
+                            + '</div>'
+                            + '</td>'
+                    } else {
+                        html = html
+                            + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                            + '<div unselectable="on" class="x-grid-cell-inner" >'
+                            + '</div>'
+                            + '</td>'
+                    }
+                    html = html + '</tr>'
 
                     html = html.replace(/#{id}/g, data[i].id)
                     html = html.replace(/#{postName}/g, data[i].postName)
@@ -93,8 +120,8 @@ $(function () {
                     html = html.replace(/#{postDuty}/g, data[i].postDuty)
                     html = html.replace(/#{applicationQualifications}/g, data[i].applicationQualifications)
                     html = html.replace(/#{hireAmount}/g, data[i].hireAmount)
-                    html = html.replace(/#{status}/g, data[i].paymentStatus == 0 ? "未支付" : data[i].paymentStatus == 1 ? "已提交" : "异常")
-                    html = html.replace(/#{checkResult}/g, data[i].checkResult == 0 ? "审核中" : data[i].checkResult == 1 ? "审核通过" : "审核不通过")
+                    html = html.replace(/#{status}/g, data[i].paymentStatus == 0 ? "<span style='color: darkred;font-weight: bold'>未支付</span>" : data[i].paymentStatus == 1 ? "<span style='color: green;font-weight: bold'>已支付</span>" : "<span style='color: darkred;font-weight: bold'>异常</span>")
+                    html = html.replace(/#{checkResult}/g, data[i].checkResult == 0 ? "<span style='color: orangered;font-weight: bold'>审核中</span>" : data[i].checkResult == 1 ? "<span style='color: green;font-weight: bold'>通过</span>" : "<span style='color: darkred;font-weight: bold'>不通过</span>")
                     html = html.replace(/#{checkReport}/g, data[i].checkReport == null ? "" : data[i].checkReport)
 
 
@@ -191,20 +218,48 @@ function kp(pageNo, totalPage, totalRecords) {
                                 + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
                                 + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{status}</span></div>'
                                 + '</td>'
-                                + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
-                                + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{checkResult}</span></div>'
-                                + '</td>'
+                            if (data[i].paymentStatus == 0) {
+                                html = html
+                                    + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" ><span></span></div></td>'
+                            } else {
+                                html = html
+                                    + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{checkResult}</span></div></td>'
+                            }
+
+                            html = html + '</td>'
                                 + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl02 x-unselectable">'
                                 + '<div unselectable="on" class="x-grid-cell-inner" ><span>#{checkReport}</span></div>'
                                 + '</td>'
-                                + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                                + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="updateAndPay(#{id})">编辑</a>'
-                                + '</div>'
-                                + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
-                                + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="downloadCard(#{id})">下载</a>'
-                                + '</div>'
-                                + '</td>'
-                                + '</tr>'
+                            if (data[i].paymentStatus == 0) {
+                                html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="pay(#{id})">支付</a>'
+                                    + '</div>'
+                            } else if (data[i].checkResult == 2) {
+                                html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="updateUserApplication(#{id})">修改</a>'
+                                    + '</div>'
+                            } else {
+                                html = html + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" >'
+                                    + '</div>'
+                            }
+
+                            if (data[i].checkResult == 1) {
+                                html = html
+                                    + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" ><a onclick="downloadCard(#{id})">下载</a>'
+                                    + '</div>'
+                                    + '</td>'
+                            } else {
+                                html = html
+                                    + '<td role="gridcell" class="x-grid-cell x-grid-td x-grid-cell-ctl00_ContentPlaceHolder1_Grid1_ctl08 x-grid-cell-last x-unselectable ">'
+                                    + '<div unselectable="on" class="x-grid-cell-inner" >'
+                                    + '</div>'
+                                    + '</td>'
+                            }
+                            html = html + '</tr>'
 
                             html = html.replace(/#{id}/g, data[i].id)
                             html = html.replace(/#{postName}/g, data[i].postName)
@@ -212,16 +267,13 @@ function kp(pageNo, totalPage, totalRecords) {
                             html = html.replace(/#{postDuty}/g, data[i].postDuty)
                             html = html.replace(/#{applicationQualifications}/g, data[i].applicationQualifications)
                             html = html.replace(/#{hireAmount}/g, data[i].hireAmount)
-                            html = html.replace(/#{status}/g, data[i].paymentStatus == 0 ? "未支付" : data[i].paymentStatus == 1 ? "已提交" : "异常")
-                            html = html.replace(/#{checkResult}/g, data[i].checkResult == 0 ? "审核中" : data[i].checkResult == 1 ? "审核通过" : "审核不通过")
+                            html = html.replace(/#{status}/g, data[i].paymentStatus == 0 ? "<span style='color: darkred;font-weight: bold'>未支付</span>" : data[i].paymentStatus == 1 ? "<span style='color: green;font-weight: bold'>已支付</span>" : "<span style='color: darkred;font-weight: bold'>异常</span>")
+                            html = html.replace(/#{checkResult}/g, data[i].checkResult == 0 ? "<span style='color: orangered;font-weight: bold'>审核中</span>" : data[i].checkResult == 1 ? "<span style='color: green;font-weight: bold'>通过</span>" : "<span style='color: darkred;font-weight: bold'>不通过</span>")
                             html = html.replace(/#{checkReport}/g, data[i].checkReport == null ? "" : data[i].checkReport)
 
 
                             $("#gridview-1024-body").append(html)
-
                         }
-
-
                         kp(n, totalPage, totalRecords)
 
                     }
@@ -239,4 +291,13 @@ function kp(pageNo, totalPage, totalRecords) {
             return '#';
         }
     }, true);
+}
+
+
+function updateUserApplication(id) {
+    window.location.href = "/updateUserApplication?id=" + id
+}
+
+function downloadCard(id) {
+    window.open("/ticket.html?id=" + id)
 }

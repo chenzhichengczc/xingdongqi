@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.pagehelper.PageHelper;
+import com.hc.common.exception.JcException;
 import com.hc.common.utils.FileUploadUtils;
 import com.hc.common.utils.ResponseUtil;
 import com.hc.modules.userapplication.entity.UserApplicationEntity;
@@ -37,7 +38,7 @@ public class UserApplicationController {
      * 列表
      */
     @RequestMapping(value = "/api/userApplication/list", method = RequestMethod.GET)
-    public ResponseUtil getUserApplicationList(Integer pageNo, Integer pageSize){
+    public ResponseUtil getUserApplicationList(Integer pageNo, Integer pageSize) {
         PageHelper.startPage(pageNo, pageSize);
         List<UserApplicationEntity> userApplicationEntities = userApplicationService.getUserApplicationList();
         PageInfo<UserApplicationEntity> pageInfo = new PageInfo<>(userApplicationEntities);
@@ -45,11 +46,9 @@ public class UserApplicationController {
     }
 
 
-
-
     /**
-    * 新增
-    *//*
+     * 新增
+     *//*
     @RequestMapping(value = "/api/userApplication/insert", method = RequestMethod.POST)
     public ResponseUtil insertUserApplication(UserApplicationEntity userApplicationEntity){
         userApplicationService.insertUserApplication(userApplicationEntity);
@@ -57,17 +56,17 @@ public class UserApplicationController {
     }*/
 
     /**
-    *  获取
-    */
+     * 获取
+     */
     @RequestMapping(value = "/api/userApplication/getById", method = RequestMethod.GET)
-    public ResponseUtil getUserApplicationById(Integer userApplicationId){
+    public ResponseUtil getUserApplicationById(Integer userApplicationId) {
         UserApplicationEntity userApplicationEntity = userApplicationService.getUserApplicationById(userApplicationId);
         return ResponseUtil.success(userApplicationEntity);
     }
 
-/*    *//**
-    * 删除
-    *//*
+    /*    *//**
+     * 删除
+     *//*
     @RequestMapping(value = "/api/userApplication/delete", method = RequestMethod.POST)
     public ResponseUtil removeUserApplicationById(Integer userApplicationId){
         userApplicationService.removeUserApplicationById(userApplicationId);
@@ -75,8 +74,8 @@ public class UserApplicationController {
     }*/
 
     /**
-    * 更新
-    *//*
+     * 更新
+     *//*
     @RequestMapping(value = "/api/userApplication/update", method = RequestMethod.POST)
     public ResponseUtil updateUserApplication(UserApplicationEntity userApplicationEntity){
         userApplicationService.updateUserApplication(userApplicationEntity);
@@ -88,7 +87,7 @@ public class UserApplicationController {
      */
 
     @RequestMapping(value = "/api/userApplication/getUserApplication", method = RequestMethod.GET)
-    public ResponseUtil getUserApplication(Integer pageNo,Integer pageSize,Integer id){
+    public ResponseUtil getUserApplication(Integer pageNo, Integer pageSize, Integer id) {
         PageHelper.startPage(pageNo, pageSize);
         List<UserApplicationPO> userApplication = userApplicationService.getUserApplication(id);
         PageInfo<UserApplicationPO> pageInfo = new PageInfo<>(userApplication);
@@ -98,10 +97,44 @@ public class UserApplicationController {
     /**
      * 图片上传
      */
-    @RequestMapping(value = "/file/userApplication/uploadFile",method = RequestMethod.POST)
+    @RequestMapping(value = "/file/userApplication/uploadFile", method = RequestMethod.POST)
     public ResponseUtil uploadFile(MultipartFile uploadFile, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> map = (Map<String, Object>) FileUploadUtils.uploadApk(uploadFile, request, response);
         return ResponseUtil.success(map);
+    }
+
+    /**
+     * 保存信息
+     */
+    @RequestMapping(value = "/api/userApplication/insertUserApplication", method = RequestMethod.POST)
+    public ResponseUtil insertUserApplication(UserApplicationEntity userApplicationEntity) {
+
+        userApplicationService.insertUserApplication(userApplicationEntity);
+
+        return ResponseUtil.success();
+    }
+
+    /**
+     * 保存信息
+     */
+    @RequestMapping(value = "/api/userApplication/updateApplication", method = RequestMethod.POST)
+    public ResponseUtil updateApplication(UserApplicationEntity userApplicationEntity) {
+
+        userApplicationService.updateApplication(userApplicationEntity);
+
+        return ResponseUtil.success();
+    }
+
+
+    /**
+     * 保存信息
+     */
+    @RequestMapping(value = "/api/userApplication/getApplication", method = RequestMethod.POST)
+    public ResponseUtil getApplication(Integer id) {
+
+        UserApplicationPO userApplicationPO = userApplicationService.getApplication(id);
+
+        return ResponseUtil.success(userApplicationPO);
     }
 
 }

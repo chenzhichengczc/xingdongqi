@@ -10,12 +10,18 @@ public class UserApplicationPO {
 
     //指userApplication表的id
     private  Integer id;
-
+    /**
+     * 申请者id
+     */
     private Integer userId;
     /**
      * 申请岗位id
      */
     private Integer postApplicationId;
+    /**
+     *
+     */
+    private Date createTime;
     /**
      * 支付状态 0.未支付 1.已支付
      */
@@ -31,6 +37,73 @@ public class UserApplicationPO {
 
     private String checkReport;
 
+    private String applicantName;
+
+    private Integer applicantGender;
+
+    private String applicantBirth;
+
+    private Integer applicantPoliticalStatus;
+
+    private String applicantHouseholdRegister;
+
+    private Integer applicantMarriageStatus;
+
+    private String applicantIdentityCard;
+
+    private String applicantGraduatedTime;
+
+    private String applicantGraduatedCollege;
+
+    private Integer applicantEducationalBackground;
+
+    private String applicantOccupationalQualification;
+
+    private String applicantMajor;
+
+    private String applicantEnglishLevel;
+
+    private String applicantComputerLevel;
+
+    private String applicantContactAddress;
+
+    private String applicantContactPhone;
+
+    private String applicantApplicationPost;
+
+    private String applicantWorkExprience;
+
+    private String applicantErgentContact;
+
+    private String applicantErgentPhone;
+
+    private String applicantFamilyRelationship;
+
+    private String applicantSignName;
+
+    private String applicantSignTime;
+
+    private String applicantPhotoSrc;
+
+    private String applicantIdentityCardPhoneSrc;
+
+    private String applicantIdentityCardPhoneReverseSrc;
+
+    private String applicantDiplomaSrc;
+
+    private String ticketNumber;
+
+    private Date ticketExamTime;
+
+    private String ticketExamAddressOne;
+
+    private String ticketExamAddressTwo;
+
+    private String ticketRemark;
+
+    /**
+     * 岗位编码
+     */
     private String postCode;
     /**
      * 岗位名字
@@ -40,41 +113,39 @@ public class UserApplicationPO {
      * 招聘单位
      */
     private String hireDepartment;
-    /**
-     * 截止时间
-     */
-    private Date applicationDeadline;
-    /**
-     * 岗位职责
-     */
+
     private String postDuty;
-    /**
-     * 招聘条件
-     */
     private String applicationQualifications;
+    private String hireAmount;
+
+    private Integer uid;
     /**
-     * 招聘人数
+     * 用户姓名
      */
-    private Integer hireAmount;
+    private String userName;
     /**
-     * 专业
+     * 用户电子邮箱
      */
-    private String major;
+    private String userEmail;
     /**
-     * 学历要求
+     * 性别 0.男 1.女
      */
-    private String educationRequirement;
+    private Integer gender;
     /**
-     * 年龄
+     * 出生日期
      */
-    private String ageRange;
+    private Date birthTime;
     /**
-     * 其他要求
+     * 身份证
      */
-    private String otherRequirement;
+    private String identityCard;
     /**
-     * 招聘对象
+     * 毕业院校
      */
-    private String recruitment;
+    private String graduatedSchool;
+    /**
+     * 用户手机
+     */
+    private String userPhone;
 
 }

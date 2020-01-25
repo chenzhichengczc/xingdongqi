@@ -38,7 +38,7 @@
         <result property="applicantSignTime" column="applicant_sign_time"/>
         <result property="applicantPhotoSrc" column="applicant_photo_src"/>
         <result property="applicantIdentityCardPhoneSrc" column="applicant_identity_card_phone_src"/>
-        <result property="applicantIdentityCardPhoneReverseSrc" column="applicantIdentity_card_phone_reverse_src"/>
+        <result property="applicantIdentityCardPhoneReverseSrc" column="applicant_identity_card_phone_reverse_src"/>
         <result property="applicantDiplomaSrc" column="applicant_diploma_src"/>
     </resultMap>
 
@@ -46,22 +46,52 @@
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="postApplicationId" column="post_application_id"/>
+        <result property="createTime" column="create_time"/>
         <result property="paymentStatus" column="payment_status"/>
         <result property="payId" column="pay_id"/>
         <result property="checkResult" column="check_result"/>
         <result property="checkReport" column="check_report"/>
+        <result property="applicantName" column="applicant_name"/>
+        <result property="applicantGender" column="applicant_gender"/>
+        <result property="applicantBirth" column="applicant_birth"/>
+        <result property="applicantPoliticalStatus" column="applicant_political_status"/>
+        <result property="applicantHouseholdRegister" column="applicant_household_register"/>
+        <result property="applicantMarriageStatus" column="applicant_marriage_status"/>
+        <result property="applicantIdentityCard" column="applicant_identity_card"/>
+        <result property="applicantGraduatedTime" column="applicant_graduated_time"/>
+        <result property="applicantGraduatedCollege" column="applicant_graduated_college"/>
+        <result property="applicantEducationalBackground" column="applicant_educational_background"/>
+        <result property="applicantOccupationalQualification" column="applicant_occupational_qualification"/>
+        <result property="applicantMajor" column="applicant_major"/>
+        <result property="applicantEnglishLevel" column="applicant_english_level"/>
+        <result property="applicantComputerLevel" column="applicant_computer_level"/>
+        <result property="applicantContactAddress" column="applicant_contact_address"/>
+        <result property="applicantContactPhone" column="applicant_contact_phone"/>
+        <result property="applicantApplicationPost" column="applicant_application_post"/>
+        <result property="applicantWorkExprience" column="applicant_work_exprience"/>
+        <result property="applicantErgentContact" column="applicant_ergent_contact"/>
+        <result property="applicantErgentPhone" column="applicant_ergent_phone"/>
+        <result property="applicantFamilyRelationship" column="applicant_family_relationship"/>
+        <result property="applicantSignName" column="applicant_sign_name"/>
+        <result property="applicantSignTime" column="applicant_sign_time"/>
+        <result property="applicantPhotoSrc" column="applicant_photo_src"/>
+        <result property="applicantIdentityCardPhoneSrc" column="applicant_identity_card_phone_src"/>
+        <result property="applicantDiplomaSrc" column="applicant_diploma_src"/>
         <result property="postCode" column="post_code"/>
         <result property="postName" column="post_name"/>
         <result property="hireDepartment" column="hire_department"/>
-        <result property="applicationDeadline" column="application_deadline"/>
+        <result property="uid" column="uid"/>
+        <result property="userPhone" column="user_phone"/>
+        <result property="userName" column="user_name"/>
+        <result property="ticketNumber" column="ticket_number"/>
+        <result property="ticketExamTime" column="ticket_exam_time"/>
+        <result property="ticketExamAddressOne" column="ticket_exam_address_one"/>
+        <result property="ticketExamAddressTwo" column="ticket_exam_address_two"/>
+        <result property="ticketRemark" column="ticket_remark"/>
+        <result property="recruitment" column="recruitment"/>
         <result property="postDuty" column="post_duty"/>
         <result property="applicationQualifications" column="application_qualifications"/>
         <result property="hireAmount" column="hire_amount"/>
-        <result property="major" column="major"/>
-        <result property="educationRequirement" column="education_requirement"/>
-        <result property="ageRange" column="age_range"/>
-        <result property="otherRequirement" column="other_requirement"/>
-        <result property="recruitment" column="recruitment"/>
     </resultMap>
 
 
@@ -70,7 +100,6 @@
                     a.id,
                     a.user_id,
                     a.post_application_id,
-                    a.application_time,
                     a.create_time,
                     a.payment_status,
                     a.pay_id,
@@ -225,12 +254,122 @@
     </delete>
 
     <select id="getUserApplication" resultMap="rm">
-        select ua.user_id,ua.post_application_id,ua.check_result,ua.payment_status,ua.pay_id,ua.check_report,
-        pa.post_code,pa.post_name,pa.hire_department,pa.application_deadline,pa.post_duty,pa.application_qualifications,pa.hire_amount,pa.major,pa.education_requirement,pa.age_range,pa.other_requirement,pa.recruitment
-         from user_application ua
-          LEFT JOIN post_application pa
-          on ua.post_application_id = pa.id
-          where ua.user_id = #{id}
+        select
+        a.id,
+        a.user_id,
+        a.post_application_id,
+        a.create_time,
+        a.payment_status,
+        a.pay_id,
+        a.check_result,
+        a.check_report,
+        a.applicant_name,
+        a.applicant_gender,
+        a.applicant_birth,
+        a.applicant_political_status,
+        a.applicant_household_register,
+        a.applicant_marriage_status,
+        a.applicant_identity_card,
+        a.applicant_graduated_time,
+        a.applicant_graduated_college,
+        a.applicant_educational_background,
+        a.applicant_occupational_qualification,
+        a.applicant_major,
+        a.applicant_english_level,
+        a.applicant_computer_level,
+        a.applicant_ergent_contact,
+        a.applicant_ergent_phone,
+        a.applicant_application_post,
+        a.applicant_work_exprience,
+        a.applicant_contact_address,
+        a.applicant_contact_phone,
+        a.applicant_family_relationship,
+        a.applicant_sign_name,
+        a.applicant_sign_time,
+        a.applicant_photo_src,
+        a.applicant_identity_card_phone_src,
+        a.applicant_identity_card_phone_reverse_src,
+        a. applicant_diploma_src,
+        a.ticket_number,
+        a.ticket_exam_time,
+        a.ticket_exam_address_one,
+        a.ticket_exam_address_two,
+        a.ticket_remark,
+        b.post_code,
+        b.post_name,
+        b.hire_department,
+        b.post_duty,
+        b.application_qualifications,
+        b.hire_amount,
+        c.id as uid,
+        c.user_phone,
+        c.user_name
+
+        from user_application a
+        LEFT JOIN post_application b
+        on a.post_application_id = b.id
+        LEFT JOIN user c ON a.user_id=c.id
+        WHERE c.id = #{id}
+        order by applicant_sign_time desc
+    </select>
+
+    <select id="getApplication" resultMap="rm">
+           select
+        a.id,
+        a.user_id,
+        a.post_application_id,
+        a.create_time,
+        a.payment_status,
+        a.pay_id,
+        a.check_result,
+        a.check_report,
+        a.applicant_name,
+        a.applicant_gender,
+        a.applicant_birth,
+        a.applicant_political_status,
+        a.applicant_household_register,
+        a.applicant_marriage_status,
+        a.applicant_identity_card,
+        a.applicant_graduated_time,
+        a.applicant_graduated_college,
+        a.applicant_educational_background,
+        a.applicant_occupational_qualification,
+        a.applicant_major,
+        a.applicant_english_level,
+        a.applicant_computer_level,
+        a.applicant_ergent_contact,
+        a.applicant_ergent_phone,
+        a.applicant_application_post,
+        a.applicant_work_exprience,
+        a.applicant_contact_address,
+        a.applicant_contact_phone,
+        a.applicant_family_relationship,
+        a.applicant_sign_name,
+        a.applicant_sign_time,
+        a.applicant_photo_src,
+        a.applicant_identity_card_phone_src,
+        a.applicant_identity_card_phone_reverse_src,
+        a. applicant_diploma_src,
+        a.ticket_number,
+        a.ticket_exam_time,
+        a.ticket_exam_address_one,
+        a.ticket_exam_address_two,
+        a.ticket_remark,
+        b.post_code,
+        b.post_name,
+        b.hire_department,
+        b.post_duty,
+        b.application_qualifications,
+        b.hire_amount,
+        c.id as uid,
+        c.user_phone,
+        c.user_name
+
+        from user_application a
+        LEFT JOIN post_application b
+        on a.post_application_id = b.id
+        LEFT JOIN user c ON a.user_id=c.id
+        WHERE a.id = #{id}
     </select>
 
 </mapper>

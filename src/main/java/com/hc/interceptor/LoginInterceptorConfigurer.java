@@ -34,6 +34,7 @@ public class LoginInterceptorConfigurer
             excludePatterns.add("/img/**");
             excludePatterns.add("/images/**");
             excludePatterns.add("/login");
+            excludePatterns.add("/toRegister");
             excludePatterns.add("/home");
             excludePatterns.add("/home.html");
             excludePatterns.add("/show");
