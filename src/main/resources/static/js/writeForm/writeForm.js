@@ -5,7 +5,20 @@ $(function () {
     var width = ((window.innerWidth)/2) - 100
 
     $("#btn1").css("margin-left",width+"px")
-
+    $("#fontP").css("margin-left",(width - 150)+"px")
+    $("#fontP").css("margin-bottom",20 +"px")
+    $("#ttt").css("margin-left",(width - 280) + "px")
+    $("#ttt").css("margin-bottom",20 + "px")
+    $("#footer1").css("margin-left",(width - 30)+"px")
+    $("#footer2").css("margin-left",(width - 60)+"px")
+    $("table td").css("background-color","#F7EED6")
+    $("table input").css("background-color","#F7EED6")
+    $("table input").not("#applicantApplicationPost").css("font-size","15px")
+    $("table textarea").css("font-size","18px")
+    $("table textarea").attr("cols","60")
+    $("table input").not("#n2").not("#r2").not("#w2").not("#a2").not("#n3").not("#r3").not("#w3").not("#a3").attr("placeholder","必填项目")
+    $("table select").css("background-color","#F7EED6")
+    $("table textarea").css("background-color","#F7EED6")
     //初始化一些必要字段的必须值
     initField()
 
