@@ -44,6 +44,7 @@ public class LoginInterceptorConfigurer
             excludePatterns.add("/layDate-v5.0.9/**");
             excludePatterns.add("/favicon.ico");
             excludePatterns.add("/check/status");
+            excludePatterns.add("/information/getById");
             excludePatterns.add("/usr/local/ngnix/html/pic/img/shopImg/**");
             //加不需要登录的路径
             registry

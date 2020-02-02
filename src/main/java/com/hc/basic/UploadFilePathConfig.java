@@ -14,7 +14,7 @@ public class UploadFilePathConfig  implements WebMvcConfigurer {
     //记住记住记住：：：：：  记得添加后面的斜杠
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:/D:/uploadFiles/")
+        registry.addResourceHandler("/upload/**").addResourceLocations("/usr/local/application/file/img/upload")
         ;
     }
 

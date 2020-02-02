@@ -48,4 +48,6 @@ public class InformationEntity implements Serializable {
 		 */
 	private Date updateTime;
 
+	private Integer status;
+
 }

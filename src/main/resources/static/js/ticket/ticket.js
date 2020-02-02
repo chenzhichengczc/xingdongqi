@@ -8,7 +8,7 @@ $(function () {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/api/userApplication/getApplication',
+        url: 'https://www.xingdongqi.com/api/userApplication/getApplication',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {

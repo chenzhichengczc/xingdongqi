@@ -41,6 +41,8 @@ public class InformationController {
         return ResponseUtil.success(pageInfo);
     }
 
+
+
 /*
 
 
@@ -53,16 +55,16 @@ public class InformationController {
         return ResponseUtil.success();
     }
 
-    *//**
+    /**
     *  获取
-    *//*
+    */
     @RequestMapping(value = "/information/getById", method = RequestMethod.GET)
     public ResponseUtil getInformationById(Integer informationId){
         InformationEntity informationEntity = informationService.getInformationById(informationId);
         return ResponseUtil.success(informationEntity);
     }
 
-    *//**
+    /*//**
     * 删除
     *//*
     @RequestMapping(value = "/information/delete", method = RequestMethod.POST)

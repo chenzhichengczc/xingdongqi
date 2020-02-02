@@ -23,7 +23,7 @@ $(function () {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/api/userApplication/getUserApplication',
+        url: 'https://www.xingdongqi.com/api/userApplication/getUserApplication',
         type: 'get', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -170,7 +170,7 @@ function kp(pageNo, totalPage, totalRecords) {
             $("#gridview-1024-body").empty();
 
             $.ajax({
-                url: 'http://localhost:8080/api/userApplication/getUserApplication',
+                url: 'https://www.xingdongqi.com/api/userApplication/getUserApplication',
                 type: 'get', //GET
                 async: true,    //或false,是否异步
                 headers: {

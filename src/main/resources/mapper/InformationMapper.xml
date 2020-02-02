@@ -24,7 +24,7 @@
             a.text,
             a.create_time,
             a.update_time
-        FROM information a
+        FROM information a WHERE a.status=1
         ORDER BY update_time desc
     </select>
 
@@ -61,8 +61,9 @@
             click,
             text,
             create_time,
-            update_time
-        )
+            update_time,
+            status
+
         FROM information WHERE id=#{informationId}
     </select>
 
