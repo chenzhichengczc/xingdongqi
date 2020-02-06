@@ -61,7 +61,6 @@ public class AuthenFilter implements Filter {
         if (!result) {
             logger.info("token已过期,请重新登陆");
             System.out.println("result = " + result);
-            HttpSession session = request.getSession();
             response.sendError(403, "登录会话已过期");
             return;
         }
