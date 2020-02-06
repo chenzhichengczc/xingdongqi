@@ -2,6 +2,7 @@
 
 package com.hc.modules.userapplication.entity;
 
+import com.baomidou.mybatisplus.annotations.KeySequence;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -45,10 +46,12 @@ public class UserApplicationEntity implements Serializable {
      * 支付状态 0.未支付 1.已支付
      */
     private Integer paymentStatus;
+
+    private Integer alipayId;
     /**
      * 支付id
      */
-    private Integer payId;
+    private Integer wechatPayId;
     /**
      * 审批结果 0.审批中 1.审批通过 2.审批不通过
      */
@@ -109,6 +112,16 @@ public class UserApplicationEntity implements Serializable {
     private String applicantIdentityCardPhoneReverseSrc;
 
     private String applicantDiplomaSrc;
+
+    private String ticketNumber;
+
+    private Date ticketExamTime;
+
+    private String ticketExamAddressOne;
+
+    private String ticketExamAddressTwo;
+
+    private String ticketRemark;
 
 }
 

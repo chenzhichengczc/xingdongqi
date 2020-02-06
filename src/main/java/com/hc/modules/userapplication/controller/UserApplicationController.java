@@ -109,9 +109,9 @@ public class UserApplicationController {
     @RequestMapping(value = "/api/userApplication/insertUserApplication", method = RequestMethod.POST)
     public ResponseUtil insertUserApplication(UserApplicationEntity userApplicationEntity) {
 
-        userApplicationService.insertUserApplication(userApplicationEntity);
+        Integer id = userApplicationService.insertUserApplication(userApplicationEntity);
 
-        return ResponseUtil.success();
+        return ResponseUtil.success(userApplicationEntity.getId());
     }
 
     /**

@@ -1,7 +1,7 @@
 var popup = new Popup();
 
 $(function () {
-
+    
     var width = ((window.innerWidth) / 2) - 100
 
     $("#btn1").css("margin-left", width + "px")

@@ -26,10 +26,13 @@ public class UserApplicationPO {
      * 支付状态 0.未支付 1.已支付
      */
     private Integer paymentStatus;
+
+
+    private Integer alipayId;
     /**
      * 支付id
      */
-    private Integer payId;
+    private Integer wechatPayId;
     /**
      * 审批结果 0.审批中 1.审批通过 2.审批不通过
      */

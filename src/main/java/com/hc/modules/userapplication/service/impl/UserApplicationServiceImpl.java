@@ -31,11 +31,21 @@ public class UserApplicationServiceImpl extends ServiceImpl<UserApplicationMappe
     }
 
     @Override
-    public void insertUserApplication(UserApplicationEntity userApplicationEntity){
-        Integer insert = userApplicationMapper.insert(userApplicationEntity);
+    public Integer insertUserApplication(UserApplicationEntity userApplicationEntity){
+        if(userApplicationEntity.getPaymentStatus() == null){
+            userApplicationEntity.setPaymentStatus(0);
+        }
+
+        if(userApplicationEntity.getCheckResult() == null){
+            userApplicationEntity.setCheckResult(0);
+        }
+
+        Integer insert = userApplicationMapper.insertUserApplication(userApplicationEntity);
+
         if(insert == null || insert == 0){
             throw new JcException("新增失败");
         }
+        return userApplicationEntity.getId();
     }
 
     @Override

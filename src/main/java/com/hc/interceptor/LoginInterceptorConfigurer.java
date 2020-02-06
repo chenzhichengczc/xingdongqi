@@ -46,6 +46,10 @@ public class LoginInterceptorConfigurer
             excludePatterns.add("/check/status");
             excludePatterns.add("/information/getById");
             excludePatterns.add("/usr/local/ngnix/html/pic/img/shopImg/**");
+            excludePatterns.add("/payInfo.html");
+            excludePatterns.add("/alipay/**");
+            excludePatterns.add("/CRT/**");
+            excludePatterns.add("/pay/alipay/notifyUrl");
             //加不需要登录的路径
             registry
                     .addInterceptor(loginInterceptor)
