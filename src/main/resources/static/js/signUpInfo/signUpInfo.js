@@ -301,3 +301,7 @@ function updateUserApplication(id) {
 function downloadCard(id) {
     window.open("/ticket.html?id=" + id)
 }
+
+function pay(id) {
+    window.open("/payInfo?id=" + id)
+}

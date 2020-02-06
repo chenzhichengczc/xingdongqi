@@ -18,9 +18,9 @@ public class FileUploadUtils {
     public static Object uploadApk(MultipartFile myfiles, HttpServletRequest request, HttpServletResponse response) {
 
         Map<String, Object> resMap = new HashMap<String, Object>();
-        if(myfiles.getSize()>1024*1024*5){
+        if(myfiles.getSize()>1024*1024*2){
             resMap.put("code", 500);
-            resMap.put("msg", "文件过大，请上传5M以内的图片");
+            resMap.put("msg", "文件过大，请上传2M以内的图片");
             System.out.println("文件上传失败");
             return resMap;
         }

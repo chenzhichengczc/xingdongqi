@@ -20,7 +20,7 @@ public interface UserApplicationService extends IService<UserApplicationEntity> 
 
     public List<UserApplicationEntity> getUserApplicationList();
 
-    public void insertUserApplication(UserApplicationEntity userApplicationEntity);
+    public Integer insertUserApplication(UserApplicationEntity userApplicationEntity);
 
     public UserApplicationEntity getUserApplicationById(Integer userApplicationId);
 

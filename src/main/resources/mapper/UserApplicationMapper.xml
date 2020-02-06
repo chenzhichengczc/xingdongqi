@@ -10,7 +10,8 @@
         <result property="postApplicationId" column="post_application_id"/>
         <result property="createTime" column="create_time"/>
         <result property="paymentStatus" column="payment_status"/>
-        <result property="payId" column="pay_id"/>
+        <result property="alipayId" column="alipay_id"/>
+        <result property="wechatPayId" column="wechat_pay_id"/>
         <result property="checkResult" column="check_result"/>
         <result property="checkReport" column="check_report"/>
         <result property="applicantName" column="applicant_name"/>
@@ -48,7 +49,8 @@
         <result property="postApplicationId" column="post_application_id"/>
         <result property="createTime" column="create_time"/>
         <result property="paymentStatus" column="payment_status"/>
-        <result property="payId" column="pay_id"/>
+        <result property="alipayId" column="alipay_id"/>
+        <result property="wechatPayId" column="wechat_pay_id"/>
         <result property="checkResult" column="check_result"/>
         <result property="checkReport" column="check_report"/>
         <result property="applicantName" column="applicant_name"/>
@@ -133,15 +135,15 @@
                 FROM user_application a
     </select>
 
-    <insert id="insertUserApplication">
+    <insert id="insertUserApplication" parameterType="com.hc.modules.userapplication.entity.UserApplicationEntity" useGeneratedKeys="true" keyProperty="id" >
         INSERT INTO user_application(
                     id,
                     user_id,
                     post_application_id,
-                    application_time,
                     create_time,
                     payment_status,
-                    pay_id,
+                    alipay_id,
+                    wechat_pay_id,
                     check_result,
                     check_report,
                     applicant_name,
@@ -168,16 +170,23 @@
                     applicant_sign_name,
                     applicant_sign_time,
                     applicant_photo_src,
-                    applicant_identity_card_phone_src
-        )
+                    applicant_identity_card_phone_src,
+                    applicant_identity_card_phone_reverse_src,
+                    applicant_diploma_src,
+                    ticket_number,
+                    ticket_exam_time,
+                    ticket_exam_address_one,
+                    ticket_exam_address_two,
+                    ticket_remark
+      )
         VALUES (
                     #{id},
                     #{userId},
                     #{postApplicationId},
-                    #{applicationTime},
                     #{createTime},
                     #{paymentStatus},
-                    #{payId},
+                    #{alipayId},
+                    #{wechatPayId},
                     #{checkResult},
                     #{checkReport},
                     #{applicantName},
@@ -198,12 +207,20 @@
                     #{applicantContactPhone},
                     #{applicantApplicationPost},
                     #{applicantWorkExprience},
-                    #{applicantErgentContactPhone},
+                    #{applicantErgentContact},
+                    #{applicantErgentPhone},
                     #{applicantFamilyRelationship},
                     #{applicantSignName},
                     #{applicantSignTime},
                     #{applicantPhotoSrc},
-                    #{applicantIdentityCardPhoneSrc}
+                    #{applicantIdentityCardPhoneSrc},
+                     #{applicantIdentityCardPhoneReverseSrc},
+                    #{applicantDiplomaSrc},
+                    #{ticketNumber},
+                    #{ticketExamTime},
+                    #{ticketExamAddressOne},
+                    #{ticketExamAddressTwo},
+                    #{ticketRemark}
                 )
     </insert>
 
@@ -216,7 +233,8 @@
                     application_time,
                     create_time,
                     payment_status,
-                    pay_id,
+                     alipay_id,
+                    wechat_pay_id,
                     check_result,
                     check_report,
                     applicant_name,
@@ -260,7 +278,8 @@
         a.post_application_id,
         a.create_time,
         a.payment_status,
-        a.pay_id,
+         a.alipay_id,
+        a.wechat_pay_id,
         a.check_result,
         a.check_report,
         a.applicant_name,
@@ -320,7 +339,8 @@
         a.post_application_id,
         a.create_time,
         a.payment_status,
-        a.pay_id,
+         a.alipay_id,
+        a.wechat_pay_id,
         a.check_result,
         a.check_report,
         a.applicant_name,

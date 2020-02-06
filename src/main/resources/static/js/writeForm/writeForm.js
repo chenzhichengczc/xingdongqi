@@ -2,23 +2,23 @@ var popup = new Popup();
 
 $(function () {
 
-    var width = ((window.innerWidth)/2) - 100
+    var width = ((window.innerWidth) / 2) - 100
 
-    $("#btn1").css("margin-left",width+"px")
-    $("#fontP").css("margin-left",(width - 150)+"px")
-    $("#fontP").css("margin-bottom",20 +"px")
-    $("#ttt").css("margin-left",(width - 280) + "px")
-    $("#ttt").css("margin-bottom",20 + "px")
-    $("#footer1").css("margin-left",(width - 30)+"px")
-    $("#footer2").css("margin-left",(width - 60)+"px")
-    $("table td").css("background-color","#F7EED6")
-    $("table input").css("background-color","#F7EED6")
-    $("table input").not("#applicantApplicationPost").css("font-size","15px")
-    $("table textarea").css("font-size","18px")
-    $("table textarea").attr("cols","60")
-    $("table input").not("#n2").not("#r2").not("#w2").not("#a2").not("#n3").not("#r3").not("#w3").not("#a3").attr("placeholder","必填项目")
-    $("table select").css("background-color","#F7EED6")
-    $("table textarea").css("background-color","#F7EED6")
+    $("#btn1").css("margin-left", width + "px")
+    $("#fontP").css("margin-left", (width - 150) + "px")
+    $("#fontP").css("margin-bottom", 20 + "px")
+    $("#ttt").css("margin-left", (width - 280) + "px")
+    $("#ttt").css("margin-bottom", 20 + "px")
+    $("#footer1").css("margin-left", (width - 30) + "px")
+    $("#footer2").css("margin-left", (width - 60) + "px")
+    $("table td").css("background-color", "#F7EED6")
+    $("table input").css("background-color", "#F7EED6")
+    $("table input").not("#applicantApplicationPost").css("font-size", "15px")
+    $("table textarea").css("font-size", "18px")
+    $("table textarea").attr("cols", "60")
+    $("table input").not("#n2").not("#r2").not("#w2").not("#a2").not("#n3").not("#r3").not("#w3").not("#a3").attr("placeholder", "必填项目")
+    $("table select").css("background-color", "#F7EED6")
+    $("table textarea").css("background-color", "#F7EED6")
     //初始化一些必要字段的必须值
     initField()
 
@@ -260,7 +260,7 @@ function initField() {
         success: function (data) {
             //console.log(data)；
             if (data.code == 0) {
-                $("#applicantApplicationPost").val(data.data.postName)
+                $("#applicantApplicationPost").val(data.data.postName + " (" + data.data.postDuty + "," + data.data.applicationQualifications + ")")
             } else {
                 popup.alert("异常提醒", "服务器异常，请稍后再试！")
             }
@@ -290,6 +290,7 @@ function initField() {
 }
 
 function saveForm() {
+
 
     var applicantName = $("#applicantName").val()
     var applicantGender = $("#applicantGender").val()
@@ -324,15 +325,14 @@ function saveForm() {
 
     applicantFamilyRelationship = applicantFamilyRelationshipMethod().join(",");
 
-    if(isEmpty123(applicantName) || isEmpty123(applicantGender) || isEmpty123(applicantPhotoSrc) || isEmpty123(applicantBirth) || isEmpty123(applicantPoliticalStatus) || isEmpty123(applicantHouseholdRegister) ||
+    if (isEmpty123(applicantName) || isEmpty123(applicantGender) || isEmpty123(applicantPhotoSrc) || isEmpty123(applicantBirth) || isEmpty123(applicantPoliticalStatus) || isEmpty123(applicantHouseholdRegister) ||
         isEmpty123(applicantMarriageStatus) || isEmpty123(applicantIdentityCard) || isEmpty123(applicantGraduatedTime) || isEmpty123(applicantGraduatedCollege) || isEmpty123(applicantEducationalBackground) || isEmpty123(applicantOccupationalQualification) ||
         isEmpty123(applicantMajor) || isEmpty123(applicantContactAddress) || isEmpty123(applicantContactPhone) || isEmpty123(applicantApplicationPost) || isEmpty123(applicantErgentContact) || isEmpty123(applicantErgentPhone) ||
         isEmpty123(applicantFamilyRelationship) || isEmpty123(applicantIdentityCardPhoneSrc) || isEmpty123(applicantIdentityCardPhoneReverseSrc) || isEmpty123(applicantDiplomaSrc) ||
-        isEmpty123(applicantFamilyRelationship) || isEmpty123(applicantFamilyRelationship)){
+        isEmpty123(applicantFamilyRelationship) || isEmpty123(applicantFamilyRelationship)) {
         popup.alert("温馨提示", "存在信息未填写，请确认！")
         return;
     }
-
 
 
     $.ajax({
@@ -381,7 +381,7 @@ function saveForm() {
             if (data.code == 0) {
                 popup.alert("提交告示", "已提交，请耐心等待！")
                 setTimeout(function () {
-                    window.close();
+                    window.location.href = "/payInfo.html?id=" + data.data
                 }, 1000)
             } else {
                 popup.alert("异常提醒", "服务器异常，请稍后再试！")
@@ -466,3 +466,4 @@ function applicantFamilyRelationshipMethod() {
     return list;
 
 }
+
