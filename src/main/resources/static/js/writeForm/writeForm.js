@@ -41,7 +41,7 @@ function fileSelected() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/api/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "identityCardImage",//文件选择框的id属性
@@ -61,7 +61,10 @@ function fileSelected() {
                 $("#identityCardArea").append(htmlUrl);
 
             } else {
-                //coding
+                if(data.data.code == 500){
+                    popup.alert("上传告示", "上传文件大于2M，请重新上传")
+                }
+
             }
         },
         error: function (data, status, e) {
@@ -93,7 +96,7 @@ function fileSelected1() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/api/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         headers: {
@@ -112,7 +115,9 @@ function fileSelected1() {
 
                 $("#diplomaImageArea").append(htmlUrl);
             } else {
-                //coding
+                if(data.data.code == 500){
+                    popup.alert("上传告示", "上传文件大于2M，请重新上传")
+                }
             }
         },
         error: function (data, status, e) {
@@ -138,7 +143,7 @@ function fileSelected2() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/api/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "peronImage",//文件选择框的id属性
@@ -159,7 +164,9 @@ function fileSelected2() {
 
                 $("#peronImageArea").append(htmlUrl);
             } else {
-                //coding
+                if(data.data.code == 500){
+                    popup.alert("上传告示", "上传文件大于2M，请重新上传")
+                }
             }
         },
         error: function (data, status, e) {
@@ -185,7 +192,7 @@ function fileSelected3() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/api/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "identityCardImageReverse",//文件选择框的id属性
@@ -203,7 +210,9 @@ function fileSelected3() {
 
                 $("#identityCardReverseArea").append(htmlUrl);
             } else {
-                //coding
+                if(data.data.code == 500){
+                    popup.alert("上传告示", "上传文件大于2M，请重新上传")
+                }
             }
         },
         error: function (data, status, e) {

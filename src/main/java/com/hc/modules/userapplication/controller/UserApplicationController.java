@@ -97,7 +97,7 @@ public class UserApplicationController {
     /**
      * 图片上传
      */
-    @RequestMapping(value = "/file/userApplication/uploadFile", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/api/file/userApplication/uploadFile", method = RequestMethod.POST)
     public ResponseUtil uploadFile(MultipartFile uploadFile, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> map = (Map<String, Object>) FileUploadUtils.uploadApk(uploadFile, request, response);
         return ResponseUtil.success(map);

@@ -46,7 +46,7 @@ public class AlipayServiceImpl extends ServiceImpl<AlipayMapper, ResponseEntity>
 //        app_cert_path = ResourceUtils.getFile("classpath:static/CRT/appCertPublicKey_2021001107684815.crt").getPath();
 //        alipay_root_cert_path = ResourceUtils.getFile("classpath:static/CRT/alipayRootCert.crt").getPath();
 //        alipay_cert_path = ResourceUtils.getFile("classpath:static/CRT/alipayCertPublicKey_RSA2.crt").getPath();
-
+        this.findPayStatus(useApplicationId);
         app_cert_path = "/usr/local/application/crt/appCertPublicKey_2021001107684815.crt";
         alipay_cert_path = "/usr/local/application/crt/alipayCertPublicKey_RSA2.crt";
         alipay_root_cert_path = "/usr/local/application/crt/alipayRootCert.crt";
@@ -105,7 +105,7 @@ public class AlipayServiceImpl extends ServiceImpl<AlipayMapper, ResponseEntity>
         UserApplicationEntity userApplicationEntity = userApplicationMapper.selectById(useApplicationId);
 
         if(userApplicationEntity.getAlipayId()!= null || userApplicationEntity.getWechatPayId() != null){
-            throw new JcException("此订单已经支付，请勿再次支付!");
+            throw new JcException(502, "此订单已经支付，请勿再次支付!");
         }
 
     }
