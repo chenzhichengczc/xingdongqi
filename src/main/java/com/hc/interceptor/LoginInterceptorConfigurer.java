@@ -12,49 +12,45 @@ import java.util.List;
 public class LoginInterceptorConfigurer
         implements WebMvcConfigurer {
 
-    @Autowired
-    private LoginInterceptor loginInterceptor;
+        @Autowired
+        private LoginInterceptor loginInterceptor;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-            // 拦截路径：必须登录才可以访问
-            List<String> patterns = new ArrayList<>();
-            patterns.add("/**");
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+                // 拦截路径：必须登录才可以访问
+                List<String> patterns = new ArrayList<>();
+                patterns.add("/**");
 
-            // 白名单：在黑名单范围内，却不需要登录就可以访问
-            List<String> excludePatterns = new ArrayList<>();
-            excludePatterns.add("/static/bootstrap3/**");
-            excludePatterns.add("/css/**");
-            excludePatterns.add("/layer/**");
-            excludePatterns.add("/pager/**");
-            excludePatterns.add("/res/**");
-            excludePatterns.add("/jquery-validation/**");
-            excludePatterns.add("/js/**");
-            excludePatterns.add("/fonts/**");
-            excludePatterns.add("/img/**");
-            excludePatterns.add("/images/**");
-            excludePatterns.add("/login");
-            excludePatterns.add("/toRegister");
-            excludePatterns.add("/home");
-            excludePatterns.add("/home.html");
-            excludePatterns.add("/show");
-            excludePatterns.add("/show.html");
-            excludePatterns.add("/reg/user");
-            excludePatterns.add("/information/list");
-            excludePatterns.add("/layDate-v5.0.9/**");
-            excludePatterns.add("/favicon.ico");
-            excludePatterns.add("/check/status");
-            excludePatterns.add("/information/getById");
-            excludePatterns.add("/usr/local/ngnix/html/pic/img/shopImg/**");
-            excludePatterns.add("/payInfo.html");
-            excludePatterns.add("/alipay/**");
-            excludePatterns.add("/CRT/**");
-            excludePatterns.add("/pay/alipay/notifyUrl");
-            //加不需要登录的路径
-            registry
-                    .addInterceptor(loginInterceptor)
-                    .addPathPatterns(patterns)
-                    .excludePathPatterns(excludePatterns);
-    }
+                // 白名单：在黑名单范围内，却不需要登录就可以访问
+                List<String> excludePatterns = new ArrayList<>();
+                excludePatterns.add("/static/bootstrap3/**");
+                excludePatterns.add("/css/**");
+                excludePatterns.add("/layer/**");
+                excludePatterns.add("/pager/**");
+                excludePatterns.add("/res/**");
+                excludePatterns.add("/jquery-validation/**");
+                excludePatterns.add("/js/**");
+                excludePatterns.add("/fonts/**");
+                excludePatterns.add("/img/**");
+                excludePatterns.add("/images/**");
+                excludePatterns.add("/login");
+                excludePatterns.add("/home.html");
+                excludePatterns.add("/show.html");
+                excludePatterns.add("/reg/user");
+                excludePatterns.add("/information/list");
+                excludePatterns.add("/layDate-v5.0.9/**");
+                excludePatterns.add("/favicon.ico");
+                excludePatterns.add("/check/status");
+                excludePatterns.add("/information/getById");
+                excludePatterns.add("/pay/alipay/notifyUrl/alipay/notify/back/Hmc");
+                excludePatterns.add("/pay/alipay/notifyUrlPage");
+                excludePatterns.add("/CRT/**");
+
+                registry
+                        .addInterceptor(loginInterceptor)
+                        .addPathPatterns(patterns)
+                        .excludePathPatterns(excludePatterns);
+        }
+
 
 }

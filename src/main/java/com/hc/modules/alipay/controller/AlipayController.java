@@ -41,7 +41,7 @@ public class AlipayController {
      * @Date 2019/6/18 20:40
      * @Created by 张哈哈
      */
-    @PostMapping("/alipay/goAlipay")
+    @PostMapping("/api/alipay/goAlipay")
     @ResponseBody
     public ResponseUtil goAlipay(Integer useApplicationId) throws Exception {
 
@@ -56,10 +56,10 @@ public class AlipayController {
      */
     @GetMapping("/pay/alipay/notifyUrlPage")
     public String notifyMessage(){
-        return "redirect:https://www.xingdongqi.com/home.html";
+        return "redirect:http://localhost:8080/home.html";
     }
 
-    @PostMapping("/pay/alipay/notifyUrl")
+    @PostMapping("/pay/alipay/notifyUrl/alipay/notify/back/Hmc")
     @ResponseBody
     public void notifyUrl(ResponseEntity responseEntity){
         alipayService.notifyUrl(responseEntity);

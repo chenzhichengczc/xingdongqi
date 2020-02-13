@@ -27,10 +27,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnbCjQ4uOrxKl0QIFmEtFp5V6TI0XefJx2EECqCaZ6trGRYp+gM0MS1094R+ych5Pa4hysmK21PjTKEGMccquvqe7OZ81X2q08krBiG7+XnK0hMEYDkF7Br9ehwhWi/4cQPJjud5JVVBpmoN+bE2IP+uH4pXadoe1b4wrrfo50W1YQ5pv9w39lvtfw7kKCFuxyfZQrHYCtdYTXC2/nAC/DQKrpfytrd2BG507DVWGO5AZf/QH8XJz12VZRhwpMpXSUC2r7ahCWwnofHuQ/Xj/SwM2WduX5CT0A+SxoRNnzgXo263/qxckQ7h93vX3v/zmQzrdyuMmgnj+LlC/qYDWZQIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "https://www.xingdongqi.com/pay/alipay/notifyUrl";
+    public static String notify_url = "http://localhost:8080/pay/alipay/notifyUrl/alipay/notify/back/Hmc";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String return_url = "https://www.xingdongqi.com/pay/alipay/notifyUrlPage";
+    public static String return_url = "http://localhost:8080/pay/alipay/notifyUrlPage";
 
     // 签名方式
     public static String sign_type = "RSA2";

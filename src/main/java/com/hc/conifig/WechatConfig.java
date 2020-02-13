@@ -13,13 +13,13 @@ import java.util.*;
  */
 public class WechatConfig {
     //小程序appid
-    public static final String appid = "ww9755ffca3e7076d0";
+    public static final String appid = "wx63d6e115552ff981";
     //微信支付的商户id
     public static final String mch_id = "1574275411";
     //微信支付的商户密钥
     public static final String key = "14789632147896321478963214789632";
     //支付成功后的服务器回调url，这里填PayControlle里的回调函数地址
-    public static final String notify_url = "https://www.xingdongqi.com/wechatPay/nativePay";
+    public static final String notify_url = "http://localhost:8080/wechatPay/nativePay";
     //签名方式，固定值
     public static final String SIGNTYPE = "MD5";
     //交易类型，小程序支付的固定值为JSAPI

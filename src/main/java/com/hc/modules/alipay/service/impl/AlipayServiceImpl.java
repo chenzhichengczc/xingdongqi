@@ -72,7 +72,7 @@ public class AlipayServiceImpl extends ServiceImpl<AlipayMapper, ResponseEntity>
         model.setSubject("岗位申请服务费");
         model.setOutTradeNo(getOrder());
         model.setTimeoutExpress("30m");
-        model.setTotalAmount("0.01");
+        model.setTotalAmount("15.00");
         model.setProductCode("FAST_INSTANT_TRADE_PAY");
         request.setBizModel(model);
         request.setNotifyUrl(AlipayConfig.notify_url);
