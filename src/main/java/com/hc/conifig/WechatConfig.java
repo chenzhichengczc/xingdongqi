@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class WechatConfig {
     //小程序appid
-    public static final String appid = "ww9755ffca3e7076d0";
+    public static final String appid = "wx63d6e115552ff981";
     //微信支付的商户id
     public static final String mch_id = "1574275411";
     //微信支付的商户密钥
