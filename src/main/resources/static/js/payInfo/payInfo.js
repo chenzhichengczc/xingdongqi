@@ -8,6 +8,11 @@ function alipay() {
         return
     }
 
+    if(!$("#radioCheck").is(":checked")){
+        popup.alert("温馨提示","请勾选阅读事项!")
+        return
+    }
+
     $.ajax({
         url: 'https://www.xingdongqi.com/alipay/goAlipay',
         type: 'POST', //GET
