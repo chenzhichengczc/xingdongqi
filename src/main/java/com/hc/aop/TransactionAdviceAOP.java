@@ -72,6 +72,9 @@ public class TransactionAdviceAOP {
         map.put("change*", ruleChange);
         map.put("delete*", ruleChange);
         map.put("remove*", ruleChange);
+        map.put("notify*", ruleChange);
+        map.put("reg*", ruleChange);
+        map.put("go*", ruleSelect);
 
         source.setNameMap(map);
         //配置事务拦截器

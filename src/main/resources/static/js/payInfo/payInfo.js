@@ -29,6 +29,9 @@ function alipay() {
             if(data.code == 0){
                 window.open(data.msg)
             }
+            if(data.code == 502){
+                popup.alert("支付提醒", data.msg)
+            }
         },
         error: function () {
             alert("服务器异常，请稍后再试！")
