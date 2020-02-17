@@ -104,7 +104,7 @@ public class AlipayServiceImpl extends ServiceImpl<AlipayMapper, ResponseEntity>
     public void findPayStatus(Integer useApplicationId) {
         UserApplicationEntity userApplicationEntity = userApplicationMapper.selectById(useApplicationId);
 
-        if(userApplicationEntity.getPaymentStatus() == 0 || userApplicationEntity.getAlipayId()!= null || userApplicationEntity.getWechatPayId() != null || userApplicationEntity.getOrderOn() != null){
+        if(userApplicationEntity.getPaymentStatus() == 1 || userApplicationEntity.getAlipayId()!= null || userApplicationEntity.getWechatPayId() != null){
             throw new JcException(502, "此订单已经支付，请勿再次支付!");
         }
 

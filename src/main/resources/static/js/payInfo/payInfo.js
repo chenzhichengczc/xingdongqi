@@ -10,6 +10,11 @@ function alipay() {
         return
     }
 
+    if(!$("#radioCheck").is(":checked")){
+        popup.alert("温馨提示", "请勾选阅读事项！")
+        return
+    }
+
     $.ajax({
         url: 'http://localhost:8080/api/alipay/goAlipay',
         type: 'POST', //GET
@@ -76,6 +81,18 @@ var payInterval;
 
 
 function weixinpay() {
+    var popup = new Popup();
+
+    if (isEmpty123(getParameter("id"))) {
+        popup.alert("异常提醒", "订单异常！")
+        return
+    }
+
+    if(!$("#radioCheck").is(":checked")){
+        popup.alert("温馨提示", "请勾选阅读事项！")
+        return
+    }
+
     $.ajax({
         url: 'http://localhost:8080/api/wx/pay',
         type: 'POST', //GET
@@ -94,7 +111,7 @@ function weixinpay() {
                 $(".weixin_pay").css("display", "block");
                 const qr = new QRious({
                     element: document.getElementById('qr'),
-                    size:250,
+                    size:150,
                     value: data.data.codeUrl
                 })
 
