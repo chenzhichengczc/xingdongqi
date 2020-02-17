@@ -123,5 +123,7 @@ public class UserApplicationEntity implements Serializable {
 
     private String ticketRemark;
 
+    private String orderOn;
+
 }
 

@@ -66,6 +66,9 @@ public class WeixinPayServiceImpl implements WeixinPayService {
     @Override
     public Map<String, Object> getImageUrl(HttpServletRequest httpServletRequest, Integer userApplicationId) {
 
+
+
+
         //获取订单号
         String orderOn = getOrder();
 

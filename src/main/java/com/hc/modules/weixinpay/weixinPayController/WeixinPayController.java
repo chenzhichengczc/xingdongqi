@@ -4,6 +4,7 @@ import com.alipay.api.internal.util.XmlUtils;
 import com.hc.common.exception.JcExceptionHandler;
 import com.hc.common.utils.*;
 import com.hc.conifig.WechatConfig;
+import com.hc.modules.alipay.service.AlipayService;
 import com.hc.modules.weixinpay.entity.PayReultEntity;
 import com.hc.modules.weixinpay.service.WeixinPayService;
 import org.apache.http.HttpEntity;
@@ -48,8 +49,14 @@ public class WeixinPayController {
     @Resource
     private WeixinPayService weixinPayService;
 
+    @Resource
+    private AlipayService alipayService;
+
     @RequestMapping(value = "/api/wx/pay", method = RequestMethod.POST)
     public ResponseUtil getImageUrl(HttpServletRequest httpServletRequest,Integer userApplicationId) throws Exception{
+
+        //判断是否已支付
+        alipayService.findPayStatus(userApplicationId);
 
         Map<String, Object> map = weixinPayService.getImageUrl(httpServletRequest, userApplicationId);
 

@@ -10,9 +10,10 @@ $(function() {
       timeout: 50000,    //超时时间
       dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
       success: function (data) {
-          console.log(data.data.text)
           if (data.code == 0) {
               $("#tbody_information").append(data.data.text)
+              $("#tbody_information").css("width",((window.screen.width / 2) + 50) + "px")
+              $("#ctl00_ContentPlaceHolder1_NewsTitle").html(data.data.informationName)
           }
       },
       error: function () {
