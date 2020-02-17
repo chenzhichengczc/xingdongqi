@@ -1,0 +1,161 @@
+body,div,p,ul,table
+{
+	margin:0;
+	padding:0;
+}
+textarea{
+	resize: none;
+	width: 595px;
+	height: 150px;
+}
+
+
+.header
+{
+	background: url('../img/index-baner.jpg') ;
+	height:220px;
+	width:1000px;
+	margin: 1px auto;
+}
+.botton
+{
+	background: url('../img/foot.gif') ;
+	width:1000px;
+	margin: 1px auto;
+	font-size:12px;
+	text-align:center;
+	padding:5px 0px;
+	line-height:22px;
+
+}
+.daohang
+{
+	background: url('../img/foot.gif') ;
+	width:1000px;
+	margin: 0px auto;
+	height:30px;
+}
+ #contentL, #contentR
+{
+	float:left;
+}
+#content
+{
+	width:1000px;
+	margin: 0 auto;
+	min-height:440px;
+}
+#contentL
+{
+	width:650px;
+
+	padding-left:30px;
+
+}
+/*#contentM
+{
+	width:1px;
+	margin-top:50px;
+	margin-bottom:40px;
+	background-color:black;
+}*/
+#contentR
+{
+	margin-left:20px;
+	width:300px;
+
+	padding-top:15px;
+}
+.clearfloat
+{
+	clear:both;
+}
+.leftLogo
+{
+	background: url('../img/kaoshengloginlogo.gif') no-repeat ;
+	height:45px;
+	margin-left:25px;
+}
+.leftnews ul li
+{
+	list-style:none;
+	line-height:30px;
+}
+.login_loginfont2
+{
+	padding-left:20px;
+}
+.contact
+{
+	margin-top:35px;
+}
+.contact .number
+{
+	font:600 14px Microsoft Yahei,冬青黑体简体中文;
+	line-height:55px;
+	text-align:center;
+
+}
+.contact .image
+{
+	line-height:35px;
+	text-align:center;
+}
+
+
+A{
+	font: 14px/24px "Microsoft Yahei","冬青黑体简体中文 w3";
+ color: #0b4894;
+ TEXT-DECORATION: none
+}
+a:focus{
+ COLOR: #0b4894;
+ TEXT-DECORATION: underline
+}
+A:hover {
+ COLOR: #0b4894;
+ text-decoration: underline;
+}
+A:active {
+ COLOR: #0b4894;
+ text-decoration: underline;
+}
+.jobsearch,.showdata,.register,.registertable
+{
+	width:1000px;
+	margin: 0 auto;
+}
+.showdata
+{
+	min-height:400px;
+
+}
+.register
+{
+	height:420px;
+	padding-top:15px;
+}
+.pic_label
+{
+	padding-left:5px;
+	padding-right:5px;
+	text-align:left;
+	color:red;
+}
+td.textbold
+{
+	width:140px;
+	font-weight:bold;
+	background: #F3F7F9;
+
+}
+td.textnormal
+{
+	width:220px;
+}
+/*label red*/
+.f-inline-block .error{
+	color: red;
+}
+
+

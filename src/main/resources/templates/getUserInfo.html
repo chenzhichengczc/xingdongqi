@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://zhaopin.tjau.edu.cn/UserInformation.aspx -->
+<html class="x-strict">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        行动企 - 应聘工作首选
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="../css/all.css" rel="stylesheet" type="text/css">
+    <link href="../css/index.css" type="text/css" rel="stylesheet">
+    <link href="../css/popup.css" type="text/css" rel="stylesheet">
+
+
+    <script src="../js/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="../js/popup/popup.js" type="text/javascript"></script>
+    <script src="../js/global.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/JScalendar.js"></script>
+    <script type="text/javascript" src="../js/util.js"></script>
+    <script type="text/javascript" src="../layDate-v5.0.9//laydate/laydate.js"></script>
+    <script type="text/javascript" src="../js/userInfo/userInfo.js"></script>
+    <style>
+        .info table tr {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .info table tr td:first-child {
+            text-align: right;
+            width: 100px;
+            margin-right: 15px;
+        }
+
+        .info table tr td:last-child {
+            border: 1px solid #ccc;
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body class="x-body x-webkit x-chrome x-mac f-body f-theme-neptune" id="ext-gen1018">
+<div id="ContainerPanel" style="display:none;">
+    <div id="calendarPanel"
+         style="position: absolute;display: none;z-index: 9999;background-color: #FFFFFF;border: 1px solid #CCCCCC;width:175px;font-size:12px;margin-left:25px;"></div>
+</div>
+
+<div>
+
+    <div>
+        <table class="daohang">
+            <tbody>
+            <tr>
+                <td align="left" style="width: 65%">&nbsp;
+                    <a href="/home.html">返回首页</a>
+                </td>
+                <td style="width: 18%"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="register">
+        <div id="ctl00_ContentPlaceHolder1_Form1_wrapper">
+            <div class="x-panel register x-panel-default x-border-box" style="width: 650px; height: 369px;"
+                 id="ctl00_ContentPlaceHolder1_Form1">
+                <div class="x-panel-header x-header x-header-horizontal x-docked x-unselectable x-panel-header-default x-horizontal x-panel-header-horizontal x-panel-header-default-horizontal x-top x-panel-header-top x-panel-header-default-top x-docked-top x-panel-header-docked-top x-panel-header-default-docked-top x-panel-default-outer-border-trl"
+                     id="ctl00_ContentPlaceHolder1_Form1_header"
+                     style="width: 650px; right: auto; left: 0px; top: 15px;">
+                    <div id="ctl00_ContentPlaceHolder1_Form1_header-body"
+                         class="x-header-body x-panel-header-body x-panel-header-body-default x-panel-header-body-horizontal x-panel-header-body-default-horizontal x-panel-header-body-top x-panel-header-body-default-top x-panel-header-body-docked-top x-panel-header-body-default-docked-top x-box-layout-ct x-panel-header-body-default-horizontal x-panel-header-body-default-top x-panel-header-body-default-docked-top"
+                         style="width: 630px;">
+                        <div id="ctl00_ContentPlaceHolder1_Form1_header-innerCt" class="x-box-inner "
+                             role="presentation" style="width: 630px; height: 16px;">
+                            <div id="ctl00_ContentPlaceHolder1_Form1_header-targetEl" class="x-box-target"
+                                 style="width: 630px;">
+                                <div class="x-component x-header-text-container x-panel-header-text-container x-panel-header-text-container-default x-box-item x-component-default"
+                                     id="ctl00_ContentPlaceHolder1_Form1_header_hd"
+                                     style="right: auto; left: 0px; top: 0px; margin: 0px; width: 630px;"><span
+                                        id="ctl00_ContentPlaceHolder1_Form1_header_hd-textEl"
+                                        class="x-header-text x-panel-header-text x-panel-header-text-default"
+                                        >个人信息</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="ctl00_ContentPlaceHolder1_Form1-body"
+                     class="x-panel-body x-panel-body-default x-panel-body-default x-noborder-tb x-panel-default-outer-border-rl"
+                     style="padding: 5px; width: 650px; left: 0px; top: 36px; height: 280px;">
+                    <div class="info">
+                        <table>
+                            <tr>
+                                <td colspan="4">姓名：</td>
+                                <td colspan="6">
+                                    <input style="width: 150px" id="userName" size="1"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">性别：</td>
+                                <td colspan="6">
+                                    <select name="gender" style="width: 150px;height: 22px">
+                                        <option value="0">男</option>
+                                        <option value="1">女</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">出生日期：</td>
+                                <td colspan="6">
+                                    <input style="width: 150px" size="1" id="birthTime"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">身份证号：</td>
+                                <td colspan="6">
+                                    <input style="width: 150px" size="1" id="identityCard"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">毕业院校：</td>
+                                <td colspan="6">
+                                    <input style="width: 150px" size="1" id="graduatedSchool"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">联系电话：</td>
+                                <td colspan="6">
+                                    <input style="width: 150px" size="1" id="userPhone"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">电子邮箱：</td>
+                                <td colspan="6">
+                                    <input style="width: 150px" size="1" id="email"></input>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="x-toolbar x-docked x-toolbar-default x-docked-bottom x-toolbar-docked-bottom x-toolbar-default-docked-bottom x-box-layout-ct x-panel-default-outer-border-rbl"
+                     id="ctl00_ContentPlaceHolder1_Form1_Toolbar1"
+                     style="width: 650px; right: auto; left: 0px; top: 331px;">
+                    <div id="ctl00_ContentPlaceHolder1_Form1_Toolbar1-innerCt" class="x-box-inner " role="presentation"
+                         style="width: 640px; height: 24px;">
+                        <div id="ctl00_ContentPlaceHolder1_Form1_Toolbar1-targetEl" class="x-box-target"
+                             style="width: 640px;">
+                            <a href="/findSignUpInfo.html"
+                               class="x-btn x-unselectable x-btn-toolbar x-box-item x-toolbar-item x-btn-default-toolbar-small x-noicon x-btn-noicon x-btn-default-toolbar-small-noicon"
+                               role="button" hidefocus="on" unselectable="on" tabindex="0"
+                               id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnRegister"
+                               style="right: auto; left: 166px; top: 0px; margin: 0px;"><span
+                                    id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnRegister-btnWrap" class="x-btn-wrap"
+                                    unselectable="on"><span
+                                    id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnRegister-btnEl"
+                                    class="x-btn-button"><span
+                                    id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnRegister-btnInnerEl"
+                                    class="x-btn-inner x-btn-inner-center" unselectable="on">已申请职位</span>
+										<span role="img"
+                                              id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnRegister-btnIconEl"
+                                              class="x-btn-icon-el" unselectable="on" style=""></span></span>
+										</span>
+                            </a>
+
+                            <a href="javascript:void(0)"
+                               class="x-btn x-unselectable x-btn-toolbar x-box-item x-toolbar-item x-btn-default-toolbar-small x-noicon x-btn-noicon x-btn-default-toolbar-small-noicon"
+                               role="button" hidefocus="on" unselectable="on" tabindex="0"
+                               style="right: auto; left: 264px; top: 0px; margin: 0px;"><span class="x-btn-wrap" unselectable="on"><span class="x-btn-button"><span
+                                    class="x-btn-inner x-btn-inner-center" >保存个人信息</span>
+										<span role="img" class="x-btn-icon-el" onclick="saveUserInfo()" style=""></span></span>
+										</span>
+                            </a>
+
+
+                            <a href="/home.html"
+                               class="x-btn x-unselectable x-btn-toolbar x-box-item x-toolbar-item x-btn-default-toolbar-small x-noicon x-btn-noicon x-btn-default-toolbar-small-noicon"
+                               style="margin: 0px; right: auto; left: 374px; top: 0px;" role="button" hidefocus="on"
+                               unselectable="on" tabindex="0"
+                               id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnCancel"><span
+                                    id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnCancel-btnWrap" class="x-btn-wrap"
+                                    unselectable="on"><span
+                                    id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnCancel-btnEl"
+                                    class="x-btn-button"><span
+                                    id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnCancel-btnInnerEl"
+                                    class="x-btn-inner x-btn-inner-center" unselectable="on">取消</span><span role="img"
+                                                                                                            id="ctl00_ContentPlaceHolder1_Form1_Toolbar1_btnCancel-btnIconEl"
+                                                                                                            class="x-btn-icon-el  "
+                                                                                                            unselectable="on"
+                                                                                                            style=""></span></span>
+										</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="f_ajax_loading" class="f-ajax-loading">正在加载...</div>
+
+<div class="botton">版权所有 © 和臣 - 行动企<br> 备案号 ： 粤ICP备19159726号-1</div>
+</div>
+
+</body>
+
+</html>

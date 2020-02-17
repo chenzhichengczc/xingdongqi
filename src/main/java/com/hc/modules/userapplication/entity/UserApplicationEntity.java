@@ -51,7 +51,7 @@ public class UserApplicationEntity implements Serializable {
     /**
      * 支付id
      */
-    private Integer wechatPayId;
+    private String wechatPayId;
     /**
      * 审批结果 0.审批中 1.审批通过 2.审批不通过
      */

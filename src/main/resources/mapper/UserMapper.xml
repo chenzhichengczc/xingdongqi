@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hc.modules.user.mapper.UserMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.hc.modules.user.entity.UserEntity" id="userResultMap">
+                    <result property="id" column="id"/>
+                    <result property="userPhone" column="user_phone"/>
+                    <result property="userAcountPassword" column="user_acount_password"/>
+                    <result property="createTime" column="create_time"/>
+                    <result property="userAcountName" column="user_acount_name"/>
+                    <result property="userName" column="user_name"/>
+                    <result property="userEmail" column="user_email"/>
+                    <result property="gender" column="gender"/>
+                    <result property="birthTime" column="birth_time"/>
+                    <result property="identityCard" column="identity_card"/>
+                    <result property="graduatedSchool" column="graduated_school"/>
+            </resultMap>
+
+
+    <!--<select id="getUserList" resultMap="userResultMap">
+        SELECT
+                    a.id,
+                    a.user_phone,
+                    a.user_acount_password,
+                    a.create_time,
+                    a.user_acount_name,
+                    a.user_name,
+                    a.user_email,
+                    a.gender,
+                    a.birth_time,
+                    a.identity_card,
+                    a.graduated_school
+                FROM user a
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO user(
+                    id,
+                    user_phone,
+                    user_acount_password,
+                    create_time,
+                    user_acount_name,
+                    user_name,
+                    user_email,
+                    gender,
+                    birth_time,
+                    identity_card,
+                    graduated_school
+        )
+        VALUES (
+                    #{id},
+                    #{userPhone},
+                    #{userAcountPassword},
+                    #{createTime},
+                    #{userAcountName},
+                    #{userName},
+                    #{userEmail},
+                    #{gender},
+                    #{birthTime},
+                    #{identityCard},
+                    #{graduatedSchool}
+                )
+    </insert>
+
+
+
+
+    <select id="getUserById" resultType="com.hc.modules.user.entity.UserEntity">
+        SELECT
+                    id,
+                    user_phone,
+                    user_acount_password,
+                    create_time,
+                    user_acount_name,
+                    user_name,
+                    user_email,
+                    gender,
+                    birth_time,
+                    identity_card,
+                    graduated_school
+        )
+        FROM user WHERE id=#{userId}
+    </select>
+
+
+    <delete id="removeUserById">
+        DELETE FROM user WHERE id=#{userId}
+    </delete>-->
+
+    <select id="getUser" parameterType="String" resultType="com.hc.modules.user.entity.UserEntity">
+        SELECT *
+        FROM user
+        WHERE user_acount_name = #{username}
+    </select>
+
+    <select id="findByUname" resultType="Integer">
+        SELECT COUNT(*) FROM user WHERE user_acount_name = #{uname}
+    </select>
+
+</mapper>

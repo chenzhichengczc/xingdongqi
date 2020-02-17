@@ -33,7 +33,6 @@ public class LoginInterceptorConfigurer
                 excludePatterns.add("/fonts/**");
                 excludePatterns.add("/img/**");
                 excludePatterns.add("/images/**");
-                excludePatterns.add("/login");
                 excludePatterns.add("/home.html");
                 excludePatterns.add("/show.html");
                 excludePatterns.add("/reg/user");
@@ -41,11 +40,12 @@ public class LoginInterceptorConfigurer
                 excludePatterns.add("/layDate-v5.0.9/**");
                 excludePatterns.add("/favicon.ico");
                 excludePatterns.add("/check/status");
+                excludePatterns.add("/user/login");
                 excludePatterns.add("/information/getById");
                 excludePatterns.add("/pay/alipay/notifyUrl/alipay/notify/back/Hmc");
                 excludePatterns.add("/pay/alipay/notifyUrlPage");
                 excludePatterns.add("/CRT/**");
-
+                excludePatterns.add("/wechatPay/nativePay/notifyPay");
                 registry
                         .addInterceptor(loginInterceptor)
                         .addPathPatterns(patterns)

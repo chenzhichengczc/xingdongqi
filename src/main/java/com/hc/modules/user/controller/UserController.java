@@ -40,7 +40,7 @@ public class UserController {
     private JwtConfig jwtConfig;
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public ResponseUtil login(@RequestParam(value = "username") String username,
                            @RequestParam(value = "password") String password,
                            HttpServletRequest request) {

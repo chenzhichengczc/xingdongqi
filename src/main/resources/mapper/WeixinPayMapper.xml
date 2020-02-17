@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hc.modules.weixinpay.mapper.WeixinPayMapper">
+
+    <insert id="createPayMessage" parameterType="com.hc.modules.weixinpay.entity.PayReultEntity" useGeneratedKeys="true" keyProperty="transactionId">
+         INSERT INTO wechat_pay(transaction_id,nonce_str,bank_type,openid,sign,fee_type,mch_id,cash_fee,
+        out_trade_no,appid,total_fee,trade_type,result_code,time_end,is_subscribe,return_code,product_id)
+        VALUES(#{transactionId},#{nonceStr},#{bankType},#{openid},#{sign},#{feeType},#{mchId},
+        #{cashFee},#{outTradeNo},#{appid},#{totalFee},#{tradeType},#{resultCode},#{timeEnd},
+        #{isSubscribe},#{returnCode},#{productId})
+    </insert>
+
+    <update id="updateApplication">
+        UPDATE user_application SET order_on = #{orderOn} WHERE id=#{userApplicationId}
+    </update>
+
+</mapper>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html class="x-strict">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        行动企 - 应聘工作首选
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="../css/all.css" rel="stylesheet" type="text/css">
+    <link href="../css/index.css" type="text/css" rel="stylesheet">
+    <link href="../css/popup.css" type="text/css" rel="stylesheet">
+
+
+    <script src="../js/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="../js/popup/popup.js" type="text/javascript"></script>
+    <script src="../js/global.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/JScalendar.js"></script>
+    <script type="text/javascript" src="../pager/kkpager.js"></script>
+    <script type="text/javascript" src="../js/util.js"></script>
+    <script type="text/javascript" src="../js/postInfoPage/postInfoPage.js"></script>
+    <link type="text/css" href="../pager/kkpager_blue.css">
+    <style>
+        #kkpager {
+            clear: both;
+            color: #999;
+            padding: 5px 0px 5px 0px;
+            font-size: 13px;
+        }
+
+        #kkpager a {
+            float: left;
+            border: 1px solid #ccc;
+            display: inline;
+            padding: 0px 10px;
+            line-height: 21px;
+            margin-right: 5px;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            cursor: pointer;
+            background: #fff;
+            text-decoration: none;
+            color: #999;
+        }
+
+        #kkpager span.disabled {
+            float: left;
+            display: inline;
+            padding: 3px 10px 3px 10px;
+            margin-right: 5px;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border: 1px solid #DFDFDF;
+            background-color: #FFF;
+            color: #DFDFDF;
+        }
+
+        #kkpager span.curr {
+            float: left;
+            border: 1px solid #31ACE2;
+            display: inline;
+            padding: 3px 10px 3px 10px;
+            margin-right: 5px;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            background: #F0FDFF;
+            color: #31ACE2;
+        }
+
+        #kkpager a:hover {
+            border: 1px solid #31ACE2;
+            background-color: #31ACE2;
+            color: #fff;
+        }
+
+        #kkpager span.normalsize {
+        }
+
+        #kkpager_gopage_wrap {
+            position: relative;
+            left: 0px;
+            top: 0px;
+        }
+
+        #kkpager_btn_go {
+            width: 44px;
+            height: 18px;
+            border: 0px;
+            overflow: hidden;
+            line-height: 140%;
+            padding: 0px;
+            margin: 0px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #31ACE2;
+            color: #FFF;
+            position: absolute;
+            left: 0px;
+            top: -2px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            display: none;
+        }
+
+        #kkpager_btn_go_input {
+            width: 36px;
+            height: 14px;
+            color: #999;
+            text-align: center;
+            margin-left: 1px;
+            margin-right: 1px;
+            border: 1px solid #DFDFDF;
+            position: relative;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            left: 0px;
+            top: 0px;
+            outline: none;
+        }
+
+        #kkpager_btn_go_input.focus {
+            border-color: #31ACE2;
+        }
+
+        #kkpager .pageBtnWrap {
+            float: left;
+        }
+
+        #kkpager .infoTextAndGoPageBtnWrap {
+            float: left;
+        }
+
+        #kkpager .spanDot {
+            float: left;
+            margin-right: 5px;
+        }
+
+        #kkpager .currPageNum {
+            color: #FD7F4D;
+        }
+
+        #kkpager .infoTextAndGoPageBtnWrap {
+            line-height: 23px;
+            padding: 0 5px;
+        }
+
+        #kkpager .totalRecords {
+            float: right;
+            margin-right: 5px;
+        }
+    </style>
+    <style>
+        .jobsearch select, input {
+            width: 150px;
+        }
+
+        .query {
+            width: 50px;
+        }
+
+        .x-grid-cell-inner {
+            text-align: center;
+            white-space: inherit;
+            font-weight: 200;
+        }
+
+        th {
+            width: 85px;
+            height: 35px;
+            border-right: 1px solid;
+            border-bottom: 1px solid;
+        }
+    </style>
+</head>
+<body class="x-body x-webkit x-chrome x-mac f-body f-theme-neptune" id="ext-gen1018">
+<div id="ContainerPanel" style="display:none;">
+    <div id="calendarPanel"
+         style="position: absolute;display: none;z-index: 9999;background-color: #FFFFFF;border: 1px solid #CCCCCC;width:175px;font-size:12px;margin-left:25px;"></div>
+</div>
+
+<div class="header">
+</div>
+<div>
+    <div>
+        <table class="daohang">
+            <tbody>
+            <tr>
+                <td align="left" style="width:47%">
+                    &nbsp;&nbsp;&nbsp;
+                    <div id="ctl00_ContentPlaceHolder1_lblInfo_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lblInfo" style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label id="ctl00_ContentPlaceHolder1_lblInfo-labelEl"
+                                                                      for="ctl00_ContentPlaceHolder1_lblInfo-inputEl"
+                                                                      class="x-form-item-label x-unselectable x-form-item-label-left"
+                                                                      style="width:100px;margin-right:5px;"
+                                                                      unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lblInfo-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lblInfo-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><span id="callSpan"></span>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lblInfo-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="ctl00_ContentPlaceHolder1_lnkLogout_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lnkLogout" style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label
+                                        id="ctl00_ContentPlaceHolder1_lnkLogout-labelEl"
+                                        for="ctl00_ContentPlaceHolder1_lnkLogout-inputEl"
+                                        class="x-form-item-label x-unselectable x-form-item-label-left"
+                                        style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lnkLogout-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lnkLogout-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><a
+                                            href="/logout">注销</a>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lnkLogout-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                <td align="center" style="width:18%">
+                    &nbsp;<a href="/home.html">返回首页</a></td>
+
+                <td align="center" style="width:18%">
+                    <div id="ctl00_ContentPlaceHolder1_lbtjobquery_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lbtjobquery"
+                               style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label
+                                        id="ctl00_ContentPlaceHolder1_lbtjobquery-labelEl"
+                                        for="ctl00_ContentPlaceHolder1_lbtjobquery-inputEl"
+                                        class="x-form-item-label x-unselectable x-form-item-label-left"
+                                        style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lbtjobquery-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lbtjobquery-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><a href="javascript:;"
+                                    >网上报名</a>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lbtjobquery-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                <td align="center" style="width:17%">
+                    <div id="ctl00_ContentPlaceHolder1_lblPersonInfo_wrapper" class="f-inline-block">
+                        <table class="x-field x-table-plain x-form-item x-form-readonly x-form-type-text x-field-default x-border-box"
+                               cellpadding="0" id="ctl00_ContentPlaceHolder1_lblPersonInfo"
+                               style="table-layout: auto;">
+                            <tbody>
+                            <tr role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-inputRow"
+                                class="x-form-item-input-row">
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-labelCell"
+                                    style="display:none;" valign="top" halign="left" width="105"
+                                    class="x-field-label-cell"><label
+                                        id="ctl00_ContentPlaceHolder1_lblPersonInfo-labelEl"
+                                        for="ctl00_ContentPlaceHolder1_lblPersonInfo-inputEl"
+                                        class="x-form-item-label x-unselectable x-form-item-label-left"
+                                        style="width:100px;margin-right:5px;" unselectable="on"></label></td>
+                                <td role="presentation" class="x-form-item-body x-form-display-field-body "
+                                    id="ctl00_ContentPlaceHolder1_lblPersonInfo-bodyEl" colspan="3">
+                                    <div id="ctl00_ContentPlaceHolder1_lblPersonInfo-inputEl" role="input"
+                                         class="x-form-display-field" aria-invalid="false"><a
+                                            href="/getUserInfo.html">个人信息</a>
+                                    </div>
+                                </td>
+                                <td role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-sideErrorCell"
+                                    valign="middle" style="display: none;" width="21">
+                                    <div role="presentation" id="ctl00_ContentPlaceHolder1_lblPersonInfo-errorEl"
+                                         class="x-form-error-msg x-form-invalid-icon" style="display:none"
+                                         data-errorqtip=""></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="jobsearch">
+        <fieldset style="width:976px;">
+            <legend>岗位筛选</legend>
+            <table cellpadding="2" cellspacing="1" class="jobsearch" style="width:970px">
+                <form id="postInfoForm">
+                    <input name="pageNo" id="pageNo" type="hidden" value="1">
+                    <input name="pageSize" id="pageSize" type="hidden" value="10">
+                    <tbody>
+                    <tr>
+                        <td style="width: 120px" align="right">
+                            岗位名称：
+                        </td>
+                        <td style="width: 150px" align="left">
+
+                            <select name="postName" class="s_width" id="postName">
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
+                        <td style="width: 120px" align="right">
+                            招聘单位：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <select name="hireDepartment" id="hireDepartment">
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
+                        <td style="width: 120px" align="right">
+                            岗位对象：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <select name="recruitment" id="recruitment">
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
+                        <td rowspan="2" align="center">
+                            <div class="f-inline-block" onclick="queryCriteria()">
+                                <input type="button" value="查询" class="query">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 120px" align="right">
+                            学历：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <select name="educationRequirement" id="educationRequirement">
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
+
+                        <td style="width: 120px" align="right">
+                            专业：
+                        </td>
+                        <td style="width: 150px" align="left">
+                            <select name="major" id="major">
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </form>
+            </table>
+        </fieldset>
+    </div>
+    <div class="showdata">
+        <div id="ctl00_ContentPlaceHolder1_Grid1_wrapper" style="
+    width: 1000px;">
+            <div class="x-panel x-grid-with-row-lines x-panel-default x-grid x-border-box"
+                 style="width:1000px;height:395px;" id="ctl00_ContentPlaceHolder1_Grid1">
+                <div class="x-panel-header x-header x-header-horizontal x-docked x-unselectable x-panel-header-default x-horizontal x-panel-header-horizontal x-panel-header-default-horizontal x-top x-panel-header-top x-panel-header-default-top x-docked-top x-panel-header-docked-top x-panel-header-default-docked-top x-panel-default-outer-border-trl"
+                     id="ctl00_ContentPlaceHolder1_Grid1_header"
+                     style="right: auto; left: 0px; top: 0px; width: 1000px;">
+                    <div id="ctl00_ContentPlaceHolder1_Grid1_header-body"
+                         class="x-header-body x-panel-header-body x-panel-header-body-default x-panel-header-body-horizontal x-panel-header-body-default-horizontal x-panel-header-body-top x-panel-header-body-default-top x-panel-header-body-docked-top x-panel-header-body-default-docked-top x-box-layout-ct x-panel-header-body-default-horizontal x-panel-header-body-default-top x-panel-header-body-default-docked-top"
+                         style="width: 1000px;">
+                        <div id="ctl00_ContentPlaceHolder1_Grid1_header-innerCt" class="x-box-inner "
+                             role="presentation" style="width: 1000px; height: 16px;">
+                            <div id="ctl00_ContentPlaceHolder1_Grid1_header-targetEl" class="x-box-target"
+                                 style="width: 1000px;">
+                                <div class="x-component x-header-text-container x-panel-header-text-container x-panel-header-text-container-default x-box-item x-component-default"
+                                     unselectable="on" id="ctl00_ContentPlaceHolder1_Grid1_header_hd"
+                                     style="right: auto; left: 0px; top: 0px; margin: 0px; width: 1000px;"><span
+                                        id="ctl00_ContentPlaceHolder1_Grid1_header_hd-textEl"
+                                        class="x-header-text x-panel-header-text x-panel-header-text-default"
+                                        unselectable="on">岗位列表</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--列表数据-->
+                <div id="ctl00_ContentPlaceHolder1_Grid1-body"
+                     class="x-panel-body x-grid-body x-panel-body-default x-layout-fit x-panel-body-default x-panel-default-outer-border-rl"
+                     style="width: 1000px; height: 290px; left: 0px;     top: 36px;">
+                    <div class="x-grid-view x-fit-item x-grid-view-default x-unselectable" id="gridview-1024"
+                         tabindex="-1" style="overflow: auto; width: 1000px; height: 288px; margin: 0px;">
+
+                        <table role="presentation" id="gridview-1024-table"
+                               class="x-gridview-1024-table x-grid-table x-grid-with-row-lines"
+                               cellspacing="0" cellpadding="0" tabindex="-1">
+                            <tr style="color: #6a6b6b;">
+                                <th>
+                                    岗位编码
+                                </th>
+                                <th>
+                                    岗位名称
+                                </th>
+                                <th>
+                                    招聘单位
+                                </th>
+                                <th style="width: 100px;">
+                                    截止时间
+                                </th>
+                                <th>
+                                    岗位职责
+                                </th>
+
+                                <th style="width: 40px;">
+                                    人数
+                                </th>
+                                <th>
+                                    专业
+                                </th>
+                                <th>
+                                    学历要求
+                                </th>
+                                <th>
+                                    年龄
+                                </th>
+                                <th>
+                                    招聘对象
+                                </th>
+                                <th>
+                                    招聘条件
+                                </th>
+                                <th>
+                                    申请
+                                </th>
+                            </tr>
+                            <tbody id="gridview-1024-body">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+
+                <!--分页-->
+                <div class="x-toolbar x-toolbar-paging x-docked x-toolbar-default x-docked-bottom x-toolbar-docked-bottom x-toolbar-default-docked-bottom x-box-layout-ct x-panel-default-outer-border-rbl"
+                     id="ext-comp-1011" style="right: auto; left: 0px; top: 326px; width: 1000px;">
+                    <div id="kkpager"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="f_ajax_loading" class="f-ajax-loading" style="visibility: hidden; display: block;">正在加载...</div>
+
+<div class="botton">版权所有 © 和臣 - 行动企<br> 备案号 ： 粤ICP备19159726号-1</div>
+
+
+</body>
+</html>
