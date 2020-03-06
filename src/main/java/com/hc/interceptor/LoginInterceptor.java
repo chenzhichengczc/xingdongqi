@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println("session.getAttribute(\"username\") = " + session.getAttribute("username"));
         if (session.getAttribute("username") == null) {
             System.out.println("session = " + session);
-            response.sendRedirect("http://localhost:8080/home.html");
+            response.sendRedirect("https://www.xingdongqi.com/home.html");
             return false;
         }
 

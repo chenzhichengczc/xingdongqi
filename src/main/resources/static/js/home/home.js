@@ -14,7 +14,7 @@ $(function () {
     if (tokenStatus) {
         //检查是否登录状态
         $.ajax({
-            url: 'http://localhost:8080/check/status',
+            url: 'https://www.xingdongqi.com/check/status',
             type: 'get', //GET
             async: true,    //或false,是否异步
             data: {
@@ -48,7 +48,7 @@ $(function () {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/information/list',
+        url: 'https://www.xingdongqi.com/information/list',
         type: 'get', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -120,7 +120,7 @@ function kp(pageNo, totalPage, totalRecords) {
 
             $("#gridview-1024-body").empty();
             $.ajax({
-                url: "http://localhost:8080/information/list",
+                url: "https://www.xingdongqi.com/information/list",
                 data: {
                     pageNo: n,
                     pageSize: 10
@@ -185,7 +185,7 @@ function toLogin() {
 
 
     $.ajax({
-        url: 'http://localhost:8080/user/login',
+        url: 'https://www.xingdongqi.com/user/login',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {},
@@ -201,7 +201,7 @@ function toLogin() {
                 popup.alert("账号错误",data.msg)
             } else if (data.code == 0) {
                 setCookie("token", data.data.token)
-                sessionStorage.setItem("user",JSON.stringify(data.data.user))
+                localStorage.setItem("user",JSON.stringify(data.data.user))
                 popup.alert("登录告示","登录成功，请继续使用网站！")
                 setTimeout(function () {
                     window.location.reload();

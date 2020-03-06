@@ -10,7 +10,7 @@ function getParameter(name) {
 //init
 $(function () {
 
-        var user = JSON.parse(sessionStorage.getItem("user"));
+        var user = JSON.parse(localStorage.getItem("user"));
 
 
         $("#callSpan").html(user == null ? "" : user.userName + ',' + getQuantum())
@@ -28,7 +28,7 @@ $(function () {
 
 
         $.ajax({
-            url: 'http://localhost:8080/api/postApplication/list',
+            url: 'https://www.xingdongqi.com/api/postApplication/list',
             type: 'get', //GET
             async: false,    //或false,是否异步
             headers: {
@@ -167,7 +167,7 @@ function kp(pageNo, totalPage, totalRecords) {
             var major = $("#major" +
                 "").val();
             $.ajax({
-                url: "http://localhost:8080/api/postApplication/list",
+                url: "https://www.xingdongqi.com/api/postApplication/list",
                 data: {
                     pageNo: n, pageSize: 10, postName: postName,
                     hireDepartment: hireDepartment, recruitment: recruitment,
@@ -283,7 +283,7 @@ function queryCriteria() {
     var educationRequirement = $("#educationRequirement").val();
     var major = $("#major").val();
     $.ajax({
-        url: "http://localhost:8080/api/postApplication/list",
+        url: "https://www.xingdongqi.com/api/postApplication/list",
         data: {
             pageNo: 1, pageSize: 10, postName: postName,
             hireDepartment: hireDepartment, recruitment: recruitment,
@@ -376,7 +376,7 @@ function initSelect() {
     
     console.log("token:" + getCookie("token"))
     $.ajax({
-        url: 'http://localhost:8080/api/postApplication/getSelect',
+        url: 'https://www.xingdongqi.com/api/postApplication/getSelect',
         type: 'get', //GET
         async: false,    //或false,是否异步
         headers: {

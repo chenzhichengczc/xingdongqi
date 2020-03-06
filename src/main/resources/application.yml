@@ -1,4 +1,4 @@
-server:
+.server:
   tomcat:
     uri-encoding: UTF-8
     max-threads: 1000
@@ -15,7 +15,7 @@ spring:
   # 环境 dev|test|prod 开发/测试/上线
   profiles:
     #    active: test
-    active: test
+    active: prod
 
 
   # 热部署
@@ -24,8 +24,6 @@ spring:
       enabled: true
   freemarker:
     cache: false
-
-
 
 
 #    spring.thymeleaf.prefix=classpath:/templates/

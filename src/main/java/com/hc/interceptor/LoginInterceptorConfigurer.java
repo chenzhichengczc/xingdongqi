@@ -35,6 +35,7 @@ public class LoginInterceptorConfigurer
                 excludePatterns.add("/images/**");
                 excludePatterns.add("/home.html");
                 excludePatterns.add("/show.html");
+                excludePatterns.add("/toRegister.html");
                 excludePatterns.add("/reg/user");
                 excludePatterns.add("/information/list");
                 excludePatterns.add("/layDate-v5.0.9/**");

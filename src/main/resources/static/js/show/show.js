@@ -1,7 +1,7 @@
 //init
 $(function() {
   $.ajax({
-      url: 'http://localhost:8080/information/getById',
+      url: 'https://www.xingdongqi.com/information/getById',
       type: 'get', //GET
       async: true,    //或false,是否异步
       data: {

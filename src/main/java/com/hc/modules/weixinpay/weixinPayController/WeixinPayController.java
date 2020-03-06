@@ -63,7 +63,7 @@ public class WeixinPayController {
         return ResponseUtil.success(map);
     }
 
-    @RequestMapping(value = "/api/wx/pay/orderquery'", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/wx/pay/orderquery", method = RequestMethod.POST)
     public ResponseUtil checkOrder(HttpServletRequest httpServletRequest,String orderOn) throws Exception{
 
         Boolean result =  weixinPayService.checkOrder(httpServletRequest, orderOn);

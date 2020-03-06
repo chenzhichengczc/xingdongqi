@@ -41,7 +41,7 @@ function fileSelected() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "identityCardImage",//文件选择框的id属性
@@ -95,7 +95,7 @@ function fileSelected1() {
     $.ajaxFileUpload({
         type: "POST",
         
-        url: "http://localhost:8080/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
    
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
@@ -140,7 +140,7 @@ function fileSelected2() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
        
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
@@ -187,7 +187,7 @@ function fileSelected3() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
        
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
@@ -251,7 +251,7 @@ function initField() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/api/postApplication/getById',
+        url: 'https://www.xingdongqi.com/api/postApplication/getById',
         type: 'get', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -276,7 +276,7 @@ function initField() {
     })
 
 
-    var user = JSON.parse(sessionStorage.getItem("user"))
+    var user = JSON.parse(localStorage.getItem("user"))
 
     if (user == null || user == undefined || user == "") {
         popup.alert("错误提醒", "无法获取用户信息")
@@ -324,7 +324,7 @@ function saveForm() {
     var applicantDiplomaSrc = $("#diplomaImageArea img").data() == null ? "" : $("#diplomaImageArea img").data().url
     var applicantSignName = $("#userName").html()
     var applicantSignTime = $("#year").html() + "年" + $("#mouth").html() + "月" + $("#day").html() + "日"
-    var userId = JSON.parse(sessionStorage.getItem("user")) == null ? "" : JSON.parse(sessionStorage.getItem("user")).id
+    var userId = JSON.parse(localStorage.getItem("user")) == null ? "" : JSON.parse(localStorage.getItem("user")).id
     var postApplicationId = getParameter("id")
 
 
@@ -341,7 +341,7 @@ function saveForm() {
 
 
     $.ajax({
-        url: 'http://localhost:8080/api/userApplication/insertUserApplication',
+        url: 'https://www.xingdongqi.com/api/userApplication/insertUserApplication',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {

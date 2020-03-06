@@ -24,7 +24,7 @@ $(function () {
 
 
     $.ajax({
-        url: 'http://localhost:8080/api/userApplication/getApplication',
+        url: 'https://www.xingdongqi.com/api/userApplication/getApplication',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -130,7 +130,7 @@ function fileSelected1() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
       
@@ -173,7 +173,7 @@ function fileSelected2() {
 		
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "peronImage",//文件选择框的id属性
@@ -218,7 +218,7 @@ function fileSelected3() {
 
     $.ajaxFileUpload({
         type: "POST",
-        url: "http://localhost:8080/api/file/userApplication/uploadFile",
+        url: "https://www.xingdongqi.com/api/file/userApplication/uploadFile",
         data: {"fileName": file.name},//要传到后台的参数，没有可以不写
         secureuri: false,//是否启用安全提交，默认为false
         fileElementId: "identityCardImageReverse",//文件选择框的id属性
@@ -274,7 +274,7 @@ function saveForm() {
     var applicantDiplomaSrc = $("#diplomaImageArea img").data() == null ? "" : $("#diplomaImageArea img").data().url
     var applicantSignName = $("#userName").html()
     var applicantSignTime = $("#year").html() + "年" + $("#mouth").html() + "月" + $("#day").html() + "日"
-    var userId = JSON.parse(sessionStorage.getItem("user")) == null ? "" : JSON.parse(sessionStorage.getItem("user")).id
+    var userId = JSON.parse(localStorage.getItem("user")) == null ? "" : JSON.parse(localStorage.getItem("user")).id
     var postApplicationId = getParameter("id")
 
 
@@ -291,7 +291,7 @@ function saveForm() {
 
 
     $.ajax({
-        url: 'http://localhost:8080/api/userApplication/updateApplication',
+        url: 'https://www.xingdongqi.com/api/userApplication/updateApplication',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {

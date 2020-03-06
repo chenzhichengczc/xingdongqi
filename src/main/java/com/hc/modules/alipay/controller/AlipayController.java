@@ -56,7 +56,7 @@ public class AlipayController {
      */
     @GetMapping("/pay/alipay/notifyUrlPage")
     public String notifyMessage(){
-        return "redirect:http://localhost:8080/home.html";
+        return "redirect:https://www.xingdongqi.com/home.html";
     }
 
     @PostMapping("/pay/alipay/notifyUrl/alipay/notify/back/Hmc")

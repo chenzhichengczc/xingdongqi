@@ -16,7 +16,7 @@ function alipay() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/api/alipay/goAlipay',
+        url: 'https://www.xingdongqi.com/api/alipay/goAlipay',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -48,7 +48,7 @@ function alipay() {
 
 function load(options) {
     $.ajax({
-        url: "http://localhost:8080/api/wx/pay/orderquery'",
+        url: "https://www.xingdongqi.com/api/wx/pay/orderquery",
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {
@@ -65,7 +65,7 @@ function load(options) {
                     clearInterval(payInterval);
                     popup.alert("支付告示","支付成功");
                     setTimeout(function () {
-                        window.location.href = "http://localhost:8080/home.html";
+                        window.location.href = "https://www.xingdongqi.com/home.html";
                     },5000)
                 }
             }
@@ -94,7 +94,7 @@ function weixinpay() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/api/wx/pay',
+        url: 'https://www.xingdongqi.com/api/wx/pay',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {

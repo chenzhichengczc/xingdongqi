@@ -92,7 +92,7 @@ public class WeixinPayServiceImpl implements WeixinPayService {
         paramMap.put("out_trade_no",  orderOn);  //商户订单号
         paramMap.put("product_id", orderOn); // 商户根据自己业务传递的参数 当trade_type=NATIVE时必填
         paramMap.put("spbill_create_ip", HttpRequest.getIpAddr(httpServletRequest)); //本机的Ip
-        paramMap.put("total_fee", "1"); //金额必须为整数  单位为分
+        paramMap.put("total_fee", "2000"); //金额必须为整数  单位为分
         paramMap.put("trade_type", WechatConfig.TRADETYPE); //交易类型
 
         String prestr = PayUtil.createLinkString(paramMap); // 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串

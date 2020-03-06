@@ -12,14 +12,14 @@ $(function () {
 
 
     $.ajax({
-        url: 'http://localhost:8080/api/user/getUserById',
+        url: 'https://www.xingdongqi.com/api/user/getUserById',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {
             "token": getCookie("token")
         },
         data: {
-            id: JSON.parse(sessionStorage.getItem("user")) == null ? "" : JSON.parse(sessionStorage.getItem("user")).id
+            id: JSON.parse(localStorage.getItem("user")) == null ? "" : JSON.parse(localStorage.getItem("user")).id
         },
         timeout: 50000,    //超时时间
         dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
@@ -27,7 +27,9 @@ $(function () {
             if (data.code == 0) {
                 $("#userName").val(data.data.userName)
                 $("select[name=gender]").val(data.data.gender)
-                $("#birthTime").val(data.data.birthTime.split(" ")[0])
+                if(data.data.birthTime != null && data.data.birthTime != ''){
+                    $("#birthTime").val(data.data.birthTime.split(" ")[0])
+                }
                 $("#identityCard").val(data.data.identityCard)
                 $("#graduatedSchool").val(data.data.graduatedSchool)
                 $("#userPhone").val(data.data.userPhone)
@@ -76,14 +78,14 @@ function saveUserInfo() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/api/user/update',
+        url: 'https://www.xingdongqi.com/api/user/update',
         type: 'POST', //GET
         async: true,    //或false,是否异步
         headers: {
             "token": getCookie("token")
         },
         data: {
-            id: JSON.parse(sessionStorage.getItem("user")).id,
+            id: JSON.parse(localStorage.getItem("user")).id,
             userPhone: $("#userPhone").val(),
             userName: $("#userName").val(),
             userEmail: $("#userEmail").val(),
